@@ -1,0 +1,16 @@
+{
+    "cortex-debug.armToolchainPath": "/opt/gcc-arm/bin",
+    "cortex-debug.openocdPath": "/usr/bin/openocd",
+    "files.associations": {
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "error_handling.h": "c",
+        "stm32f4xx_hal.h": "c",
+        "stm32f4xx.h": "c",
+        "freertos.h": "c",
+        "core_cm4.h": "c",
+        "portmacro.h": "c",
+        "cmsis_os.h": "c"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "STM32",
+            "includePath": [
+                "${workspaceFolder}/f429-RMSv3-autogen/Core/Inc",
+                "${workspaceFolder}/f429-RMSv3-autogen/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                "${workspaceFolder}/f429-RMSv3-autogen/Drivers/CMSIS/Include",
+                "${workspaceFolder}/f429-RMSv3-autogen/Drivers/STM32F4xx_HAL_Driver/Inc",
+                "${workspaceFolder}/f429-RMSv3-autogen/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"
+            ],
+            "defines": [
+                "STM32F429xx",
+                "USE_HAL_DRIVER"
+            ],
+            "compilerPath": "/opt/gcc-arm/bin/arm-none-eabi-gcc",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}
