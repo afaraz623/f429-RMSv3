@@ -36,7 +36,7 @@ build/rms_freertos.o: ../RMS-source/src/rms_freertos.c \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h \
  Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- ../RMS-source/inc/microros.h \
+ ../RMS-source/inc/rms-microros.h \
  micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/rcl.h \
  micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/init.h \
  micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/allocator.h \
@@ -176,7 +176,7 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
 Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
-../RMS-source/inc/microros.h:
+../RMS-source/inc/rms-microros.h:
 micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/rcl.h:
 micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/init.h:
 micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/allocator.h:

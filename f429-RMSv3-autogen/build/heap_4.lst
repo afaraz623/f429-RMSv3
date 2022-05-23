@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccPoEsWm.s 			page 1
+ARM GAS  /tmp/ccR34PPW.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
   29:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c ****  * A sample implementation of pvPortMalloc() and vPortFree() that combines
   30:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c ****  * (coalescences) adjacent memory blocks as they are freed, and in so doing
   31:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c ****  * limits memory fragmentation.
-ARM GAS  /tmp/ccPoEsWm.s 			page 2
+ARM GAS  /tmp/ccR34PPW.s 			page 2
 
 
   32:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c ****  *
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
   86:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c ****  * Called automatically to setup the required heap structures the first time
   87:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c ****  * pvPortMalloc() is called.
   88:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c ****  */
-ARM GAS  /tmp/ccPoEsWm.s 			page 3
+ARM GAS  /tmp/ccR34PPW.s 			page 3
 
 
   89:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** static void prvHeapInit( void );
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  143:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 				xWantedSize += xHeapStructSize;
  144:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 
  145:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 				/* Ensure that blocks are always aligned to the required number
-ARM GAS  /tmp/ccPoEsWm.s 			page 4
+ARM GAS  /tmp/ccR34PPW.s 			page 4
 
 
  146:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 				of bytes. */
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  200:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 						pxNewBlockLink->xBlockSize = pxBlock->xBlockSize - xWantedSize;
  201:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 						pxBlock->xBlockSize = xWantedSize;
  202:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 
-ARM GAS  /tmp/ccPoEsWm.s 			page 5
+ARM GAS  /tmp/ccR34PPW.s 			page 5
 
 
  203:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 						/* Insert the new block into the list of free blocks. */
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  257:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 		}
  258:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 	}
  259:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 	#endif
-ARM GAS  /tmp/ccPoEsWm.s 			page 6
+ARM GAS  /tmp/ccR34PPW.s 			page 6
 
 
  260:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  314:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 
  315:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** size_t xPortGetFreeHeapSize( void )
  316:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** {
-ARM GAS  /tmp/ccPoEsWm.s 			page 7
+ARM GAS  /tmp/ccR34PPW.s 			page 7
 
 
  317:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 	return xFreeBytesRemaining;
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
   52 000a 21F00701 		bic	r1, r1, #7
   53              	.LVL3:
  347:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 		xTotalHeapSize -= uxAddress - ( size_t ) ucHeap;
-ARM GAS  /tmp/ccPoEsWm.s 			page 8
+ARM GAS  /tmp/ccR34PPW.s 			page 8
 
 
   54              		.loc 1 347 3 is_stmt 1 view .LVU13
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  364:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 	pxEnd->pxNextFreeBlock = NULL;
   91              		.loc 1 364 2 is_stmt 1 view .LVU31
   92              		.loc 1 364 25 is_stmt 0 view .LVU32
-ARM GAS  /tmp/ccPoEsWm.s 			page 9
+ARM GAS  /tmp/ccR34PPW.s 			page 9
 
 
   93 002c 1960     		str	r1, [r3]
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  132 0050 00000000 		.word	.LANCHOR0
  133 0054 00000000 		.word	.LANCHOR1
  134 0058 00000000 		.word	.LANCHOR2
-ARM GAS  /tmp/ccPoEsWm.s 			page 10
+ARM GAS  /tmp/ccR34PPW.s 			page 10
 
 
  135 005c 00000000 		.word	.LANCHOR3
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  173 000a 5168     		ldr	r1, [r2, #4]
  174              		.loc 1 396 12 view .LVU60
  175 000c 02EB010C 		add	ip, r2, r1
-ARM GAS  /tmp/ccPoEsWm.s 			page 11
+ARM GAS  /tmp/ccR34PPW.s 			page 11
 
 
  176              		.loc 1 396 4 view .LVU61
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  195              		.loc 1 431 4 is_stmt 0 view .LVU71
  196 0020 9042     		cmp	r0, r2
  197 0022 19D0     		beq	.L16
-ARM GAS  /tmp/ccPoEsWm.s 			page 12
+ARM GAS  /tmp/ccR34PPW.s 			page 12
 
 
  432:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 	{
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  234              		.loc 1 414 32 view .LVU86
  235 003e 1944     		add	r1, r1, r3
  236 0040 4160     		str	r1, [r0, #4]
-ARM GAS  /tmp/ccPoEsWm.s 			page 13
+ARM GAS  /tmp/ccR34PPW.s 			page 13
 
 
  415:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 		}
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  278 0060 00000000 		.word	.LANCHOR1
  279              		.cfi_endproc
  280              	.LFE10:
-ARM GAS  /tmp/ccPoEsWm.s 			page 14
+ARM GAS  /tmp/ccR34PPW.s 			page 14
 
 
  282              		.section	.text.pvPortMalloc,"ax",%progbits
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  325 0014 4ED1     		bne	.L35
  141:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 			{
  326              		.loc 1 141 4 is_stmt 1 view .LVU112
-ARM GAS  /tmp/ccPoEsWm.s 			page 15
+ARM GAS  /tmp/ccR34PPW.s 			page 15
 
 
  141:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 			{
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  169:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 				{
  364              		.loc 1 169 5 is_stmt 1 view .LVU130
  169:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 				{
-ARM GAS  /tmp/ccPoEsWm.s 			page 16
+ARM GAS  /tmp/ccR34PPW.s 			page 16
 
 
  365              		.loc 1 169 10 is_stmt 0 view .LVU131
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  405 0058 0836     		adds	r6, r6, #8
  406              	.LVL35:
  185:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 
-ARM GAS  /tmp/ccPoEsWm.s 			page 17
+ARM GAS  /tmp/ccR34PPW.s 			page 17
 
 
  407              		.loc 1 185 6 is_stmt 1 view .LVU146
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
   21:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  *
   22:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  * http://www.FreeRTOS.org
   23:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  * http://aws.amazon.com/freertos
-ARM GAS  /tmp/ccPoEsWm.s 			page 18
+ARM GAS  /tmp/ccR34PPW.s 			page 18
 
 
   24:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  *
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
   78:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** /* Scheduler utilities. */
   79:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** #define portYIELD() 															\
   80:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** {																				\
-ARM GAS  /tmp/ccPoEsWm.s 			page 19
+ARM GAS  /tmp/ccR34PPW.s 			page 19
 
 
   81:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	/* Set a PendSV to request a context switch. */								\
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  135:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 		return ucReturn;
  136:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	}
  137:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
-ARM GAS  /tmp/ccPoEsWm.s 			page 20
+ARM GAS  /tmp/ccR34PPW.s 			page 20
 
 
  138:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	/* Check the configuration. */
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  431              		.loc 2 191 30 view .LVU157
  432              	.LBB13:
  192:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** {
-ARM GAS  /tmp/ccPoEsWm.s 			page 21
+ARM GAS  /tmp/ccR34PPW.s 			page 21
 
 
  193:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** uint32_t ulNewBASEPRI;
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  472 008e 9B1A     		subs	r3, r3, r2
  473 0090 0B60     		str	r3, [r1]
  213:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 					{
-ARM GAS  /tmp/ccPoEsWm.s 			page 22
+ARM GAS  /tmp/ccR34PPW.s 			page 22
 
 
  474              		.loc 1 213 6 is_stmt 1 view .LVU173
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  514              		.loc 1 240 28 is_stmt 1 view .LVU187
  243:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 	}
  515              		.loc 1 243 39 view .LVU188
-ARM GAS  /tmp/ccPoEsWm.s 			page 23
+ARM GAS  /tmp/ccR34PPW.s 			page 23
 
 
  245:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  263:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** /*-----------------------------------------------------------*/
  560              		.loc 1 263 1 view .LVU201
  561 00de 3046     		mov	r0, r6
-ARM GAS  /tmp/ccPoEsWm.s 			page 24
+ARM GAS  /tmp/ccR34PPW.s 			page 24
 
 
  562 00e0 70BD     		pop	{r4, r5, r6, pc}
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  609              	.LVL48:
  278:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 
  610              		.loc 1 278 3 is_stmt 1 view .LVU211
-ARM GAS  /tmp/ccPoEsWm.s 			page 25
+ARM GAS  /tmp/ccR34PPW.s 			page 25
 
 
  281:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 		configASSERT( pxLink->pxNextFreeBlock == NULL );
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  654              		.syntax unified
  655              	@ 195 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" 1
  656 0030 4FF05003 			mov r3, #80												
-ARM GAS  /tmp/ccPoEsWm.s 			page 26
+ARM GAS  /tmp/ccR34PPW.s 			page 26
 
 
  657 0034 83F31188 		msr basepri, r3											
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  298:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 				}
  697              		.loc 1 298 30 is_stmt 0 view .LVU241
  698 0060 054A     		ldr	r2, .L54+8
-ARM GAS  /tmp/ccPoEsWm.s 			page 27
+ARM GAS  /tmp/ccR34PPW.s 			page 27
 
 
  699 0062 1368     		ldr	r3, [r2]
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  747              	.L58:
  748 0006 00BF     		.align	2
  749              	.L57:
-ARM GAS  /tmp/ccPoEsWm.s 			page 28
+ARM GAS  /tmp/ccR34PPW.s 			page 28
 
 
  750 0008 00000000 		.word	.LANCHOR3
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  804              		.thumb_func
  806              	vPortGetHeapStats:
  807              	.LVL55:
-ARM GAS  /tmp/ccPoEsWm.s 			page 29
+ARM GAS  /tmp/ccR34PPW.s 			page 29
 
 
  808              	.LFB11:
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  845              	.LVL59:
  846              	.L66:
  454:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 		{
-ARM GAS  /tmp/ccPoEsWm.s 			page 30
+ARM GAS  /tmp/ccR34PPW.s 			page 30
 
 
  455:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 			do
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  873              		.loc 1 466 5 is_stmt 1 view .LVU277
  466:Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c **** 				{
  874              		.loc 1 466 7 is_stmt 0 view .LVU278
-ARM GAS  /tmp/ccPoEsWm.s 			page 31
+ARM GAS  /tmp/ccR34PPW.s 			page 31
 
 
  875 002c B242     		cmp	r2, r6
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  912              		.loc 1 486 3 is_stmt 1 view .LVU294
  913              		.loc 1 486 47 is_stmt 0 view .LVU295
  914 0050 084B     		ldr	r3, .L72+12
-ARM GAS  /tmp/ccPoEsWm.s 			page 32
+ARM GAS  /tmp/ccR34PPW.s 			page 32
 
 
  915 0052 1B68     		ldr	r3, [r3]
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  967              		.align	2
  968              		.set	.LANCHOR3,. + 0
  971              	xFreeBytesRemaining:
-ARM GAS  /tmp/ccPoEsWm.s 			page 33
+ARM GAS  /tmp/ccR34PPW.s 			page 33
 
 
  972 0000 00000000 		.space	4
@@ -1950,50 +1950,50 @@ ARM GAS  /tmp/ccPoEsWm.s 			page 1
  1005              		.file 5 "/opt/gcc-arm/arm-none-eabi/include/sys/_stdint.h"
  1006              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/include/portable.h"
  1007              		.file 7 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
-ARM GAS  /tmp/ccPoEsWm.s 			page 34
+ARM GAS  /tmp/ccR34PPW.s 			page 34
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 heap_4.c
-     /tmp/ccPoEsWm.s:20     .text.prvHeapInit:0000000000000000 $t
-     /tmp/ccPoEsWm.s:25     .text.prvHeapInit:0000000000000000 prvHeapInit
-     /tmp/ccPoEsWm.s:131    .text.prvHeapInit:000000000000004c $d
-     /tmp/ccPoEsWm.s:957    .bss.ucHeap:0000000000000000 ucHeap
-     /tmp/ccPoEsWm.s:141    .text.prvInsertBlockIntoFreeList:0000000000000000 $t
-     /tmp/ccPoEsWm.s:146    .text.prvInsertBlockIntoFreeList:0000000000000000 prvInsertBlockIntoFreeList
-     /tmp/ccPoEsWm.s:277    .text.prvInsertBlockIntoFreeList:000000000000005c $d
-     /tmp/ccPoEsWm.s:283    .text.pvPortMalloc:0000000000000000 $t
-     /tmp/ccPoEsWm.s:289    .text.pvPortMalloc:0000000000000000 pvPortMalloc
-     /tmp/ccPoEsWm.s:568    .text.pvPortMalloc:00000000000000e4 $d
-     /tmp/ccPoEsWm.s:578    .text.vPortFree:0000000000000000 $t
-     /tmp/ccPoEsWm.s:584    .text.vPortFree:0000000000000000 vPortFree
-     /tmp/ccPoEsWm.s:722    .text.vPortFree:0000000000000070 $d
-     /tmp/ccPoEsWm.s:729    .text.xPortGetFreeHeapSize:0000000000000000 $t
-     /tmp/ccPoEsWm.s:735    .text.xPortGetFreeHeapSize:0000000000000000 xPortGetFreeHeapSize
-     /tmp/ccPoEsWm.s:750    .text.xPortGetFreeHeapSize:0000000000000008 $d
-     /tmp/ccPoEsWm.s:755    .text.xPortGetMinimumEverFreeHeapSize:0000000000000000 $t
-     /tmp/ccPoEsWm.s:761    .text.xPortGetMinimumEverFreeHeapSize:0000000000000000 xPortGetMinimumEverFreeHeapSize
-     /tmp/ccPoEsWm.s:776    .text.xPortGetMinimumEverFreeHeapSize:0000000000000008 $d
-     /tmp/ccPoEsWm.s:781    .text.vPortInitialiseBlocks:0000000000000000 $t
-     /tmp/ccPoEsWm.s:787    .text.vPortInitialiseBlocks:0000000000000000 vPortInitialiseBlocks
-     /tmp/ccPoEsWm.s:800    .text.vPortGetHeapStats:0000000000000000 $t
-     /tmp/ccPoEsWm.s:806    .text.vPortGetHeapStats:0000000000000000 vPortGetHeapStats
-     /tmp/ccPoEsWm.s:937    .text.vPortGetHeapStats:0000000000000068 $d
-     /tmp/ccPoEsWm.s:947    .bss.pxEnd:0000000000000000 $d
-     /tmp/ccPoEsWm.s:951    .bss.pxEnd:0000000000000000 pxEnd
-     /tmp/ccPoEsWm.s:954    .bss.ucHeap:0000000000000000 $d
-     /tmp/ccPoEsWm.s:960    .bss.xBlockAllocatedBit:0000000000000000 $d
-     /tmp/ccPoEsWm.s:964    .bss.xBlockAllocatedBit:0000000000000000 xBlockAllocatedBit
-     /tmp/ccPoEsWm.s:967    .bss.xFreeBytesRemaining:0000000000000000 $d
-     /tmp/ccPoEsWm.s:971    .bss.xFreeBytesRemaining:0000000000000000 xFreeBytesRemaining
-     /tmp/ccPoEsWm.s:974    .bss.xMinimumEverFreeBytesRemaining:0000000000000000 $d
-     /tmp/ccPoEsWm.s:978    .bss.xMinimumEverFreeBytesRemaining:0000000000000000 xMinimumEverFreeBytesRemaining
-     /tmp/ccPoEsWm.s:981    .bss.xNumberOfSuccessfulAllocations:0000000000000000 $d
-     /tmp/ccPoEsWm.s:985    .bss.xNumberOfSuccessfulAllocations:0000000000000000 xNumberOfSuccessfulAllocations
-     /tmp/ccPoEsWm.s:988    .bss.xNumberOfSuccessfulFrees:0000000000000000 $d
-     /tmp/ccPoEsWm.s:992    .bss.xNumberOfSuccessfulFrees:0000000000000000 xNumberOfSuccessfulFrees
-     /tmp/ccPoEsWm.s:995    .bss.xStart:0000000000000000 $d
-     /tmp/ccPoEsWm.s:999    .bss.xStart:0000000000000000 xStart
+     /tmp/ccR34PPW.s:20     .text.prvHeapInit:0000000000000000 $t
+     /tmp/ccR34PPW.s:25     .text.prvHeapInit:0000000000000000 prvHeapInit
+     /tmp/ccR34PPW.s:131    .text.prvHeapInit:000000000000004c $d
+     /tmp/ccR34PPW.s:957    .bss.ucHeap:0000000000000000 ucHeap
+     /tmp/ccR34PPW.s:141    .text.prvInsertBlockIntoFreeList:0000000000000000 $t
+     /tmp/ccR34PPW.s:146    .text.prvInsertBlockIntoFreeList:0000000000000000 prvInsertBlockIntoFreeList
+     /tmp/ccR34PPW.s:277    .text.prvInsertBlockIntoFreeList:000000000000005c $d
+     /tmp/ccR34PPW.s:283    .text.pvPortMalloc:0000000000000000 $t
+     /tmp/ccR34PPW.s:289    .text.pvPortMalloc:0000000000000000 pvPortMalloc
+     /tmp/ccR34PPW.s:568    .text.pvPortMalloc:00000000000000e4 $d
+     /tmp/ccR34PPW.s:578    .text.vPortFree:0000000000000000 $t
+     /tmp/ccR34PPW.s:584    .text.vPortFree:0000000000000000 vPortFree
+     /tmp/ccR34PPW.s:722    .text.vPortFree:0000000000000070 $d
+     /tmp/ccR34PPW.s:729    .text.xPortGetFreeHeapSize:0000000000000000 $t
+     /tmp/ccR34PPW.s:735    .text.xPortGetFreeHeapSize:0000000000000000 xPortGetFreeHeapSize
+     /tmp/ccR34PPW.s:750    .text.xPortGetFreeHeapSize:0000000000000008 $d
+     /tmp/ccR34PPW.s:755    .text.xPortGetMinimumEverFreeHeapSize:0000000000000000 $t
+     /tmp/ccR34PPW.s:761    .text.xPortGetMinimumEverFreeHeapSize:0000000000000000 xPortGetMinimumEverFreeHeapSize
+     /tmp/ccR34PPW.s:776    .text.xPortGetMinimumEverFreeHeapSize:0000000000000008 $d
+     /tmp/ccR34PPW.s:781    .text.vPortInitialiseBlocks:0000000000000000 $t
+     /tmp/ccR34PPW.s:787    .text.vPortInitialiseBlocks:0000000000000000 vPortInitialiseBlocks
+     /tmp/ccR34PPW.s:800    .text.vPortGetHeapStats:0000000000000000 $t
+     /tmp/ccR34PPW.s:806    .text.vPortGetHeapStats:0000000000000000 vPortGetHeapStats
+     /tmp/ccR34PPW.s:937    .text.vPortGetHeapStats:0000000000000068 $d
+     /tmp/ccR34PPW.s:947    .bss.pxEnd:0000000000000000 $d
+     /tmp/ccR34PPW.s:951    .bss.pxEnd:0000000000000000 pxEnd
+     /tmp/ccR34PPW.s:954    .bss.ucHeap:0000000000000000 $d
+     /tmp/ccR34PPW.s:960    .bss.xBlockAllocatedBit:0000000000000000 $d
+     /tmp/ccR34PPW.s:964    .bss.xBlockAllocatedBit:0000000000000000 xBlockAllocatedBit
+     /tmp/ccR34PPW.s:967    .bss.xFreeBytesRemaining:0000000000000000 $d
+     /tmp/ccR34PPW.s:971    .bss.xFreeBytesRemaining:0000000000000000 xFreeBytesRemaining
+     /tmp/ccR34PPW.s:974    .bss.xMinimumEverFreeBytesRemaining:0000000000000000 $d
+     /tmp/ccR34PPW.s:978    .bss.xMinimumEverFreeBytesRemaining:0000000000000000 xMinimumEverFreeBytesRemaining
+     /tmp/ccR34PPW.s:981    .bss.xNumberOfSuccessfulAllocations:0000000000000000 $d
+     /tmp/ccR34PPW.s:985    .bss.xNumberOfSuccessfulAllocations:0000000000000000 xNumberOfSuccessfulAllocations
+     /tmp/ccR34PPW.s:988    .bss.xNumberOfSuccessfulFrees:0000000000000000 $d
+     /tmp/ccR34PPW.s:992    .bss.xNumberOfSuccessfulFrees:0000000000000000 xNumberOfSuccessfulFrees
+     /tmp/ccR34PPW.s:995    .bss.xStart:0000000000000000 $d
+     /tmp/ccR34PPW.s:999    .bss.xStart:0000000000000000 xStart
 
 UNDEFINED SYMBOLS
 vTaskSuspendAll
