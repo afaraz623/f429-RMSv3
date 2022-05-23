@@ -56,8 +56,7 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
 Core/Src/system_stm32f4xx.c  \
-# User written C sources
-../RMS-source/src/rms_main.c
+../RMS-source/src/rms_main.c # User written C sources
 
 # ASM sources
 ASM_SOURCES =  \
@@ -119,8 +118,7 @@ C_INCLUDES =  \
 -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
 -IDrivers/CMSIS/Include \
-# User written C includes
--I../RMS-source/inc
+-I../RMS-source/inc # User written C includes
 
 
 # compile gcc flags
