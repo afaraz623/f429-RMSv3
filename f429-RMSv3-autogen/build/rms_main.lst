@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccb0ETFe.s 			page 1
+ARM GAS  /tmp/ccWJkAvU.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -26,97 +26,101 @@ ARM GAS  /tmp/ccb0ETFe.s 			page 1
   23              		.thumb
   24              		.thumb_func
   26              	main:
-  27              	.LFB130:
+  27              	.LFB134:
   28              		.file 1 "../RMS-source/src/rms_main.c"
-   1:../RMS-source/src/rms_main.c **** #include <../../../f429-RMSv3-autogen/Core/Inc/main.h>
-   2:../RMS-source/src/rms_main.c **** #include <../../../f429-RMSv3-autogen/Core/Inc/gpio.h>
-   3:../RMS-source/src/rms_main.c **** 
-   4:../RMS-source/src/rms_main.c **** extern void SystemClock_Config(void);
-   5:../RMS-source/src/rms_main.c **** 
-   6:../RMS-source/src/rms_main.c **** int main(void)
-   7:../RMS-source/src/rms_main.c **** {
-  29              		.loc 1 7 1 view -0
+   1:../RMS-source/src/rms_main.c **** #include "main.h"
+   2:../RMS-source/src/rms_main.c **** #include "gpio.h"
+   3:../RMS-source/src/rms_main.c **** #include "cmsis_os.h"
+   4:../RMS-source/src/rms_main.c **** #include "dma.h"
+   5:../RMS-source/src/rms_main.c **** #include "usart.h"
+   6:../RMS-source/src/rms_main.c **** 
+   7:../RMS-source/src/rms_main.c **** // Prototypes
+   8:../RMS-source/src/rms_main.c **** extern void SystemClock_Config(void);
+   9:../RMS-source/src/rms_main.c **** extern void MX_FREERTOS_Init(void);
+  10:../RMS-source/src/rms_main.c **** 
+  11:../RMS-source/src/rms_main.c **** int main(void)
+  12:../RMS-source/src/rms_main.c **** {
+  29              		.loc 1 12 1 view -0
   30              		.cfi_startproc
-  31              		@ Volatile: function does not return.
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34 0000 08B5     		push	{r3, lr}
-  35              	.LCFI0:
-  36              		.cfi_def_cfa_offset 8
-  37              		.cfi_offset 3, -8
-  38              		.cfi_offset 14, -4
-   8:../RMS-source/src/rms_main.c ****     HAL_Init();
-  39              		.loc 1 8 5 view .LVU1
-  40 0002 FFF7FEFF 		bl	HAL_Init
-  41              	.LVL0:
-   9:../RMS-source/src/rms_main.c ****     SystemClock_Config();
-  42              		.loc 1 9 5 view .LVU2
-  43 0006 FFF7FEFF 		bl	SystemClock_Config
-  44              	.LVL1:
-  10:../RMS-source/src/rms_main.c ****     MX_GPIO_Init();
-  45              		.loc 1 10 5 view .LVU3
-  46 000a FFF7FEFF 		bl	MX_GPIO_Init
-  47              	.LVL2:
-  48              	.L2:
-ARM GAS  /tmp/ccb0ETFe.s 			page 2
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  13:../RMS-source/src/rms_main.c ****     // Reset of all peripherals, Initializes the Flash interface and the Systick
+  14:../RMS-source/src/rms_main.c ****     HAL_Init();
+  38              		.loc 1 14 5 view .LVU1
+  39 0002 FFF7FEFF 		bl	HAL_Init
+  40              	.LVL0:
+  15:../RMS-source/src/rms_main.c **** 
+  16:../RMS-source/src/rms_main.c ****     // Configure the system clock
+  17:../RMS-source/src/rms_main.c ****     SystemClock_Config();
+  41              		.loc 1 17 5 view .LVU2
+ARM GAS  /tmp/ccWJkAvU.s 			page 2
 
 
-  11:../RMS-source/src/rms_main.c ****     while (1)
-  49              		.loc 1 11 5 discriminator 1 view .LVU4
-  12:../RMS-source/src/rms_main.c ****     {
-  13:../RMS-source/src/rms_main.c ****         HAL_GPIO_TogglePin(led_1_GPIO_Port, led_1_Pin);
-  50              		.loc 1 13 9 discriminator 1 view .LVU5
-  51 000e 0A4C     		ldr	r4, .L4
-  52 0010 4FF48041 		mov	r1, #16384
-  53 0014 2046     		mov	r0, r4
-  54 0016 FFF7FEFF 		bl	HAL_GPIO_TogglePin
-  55              	.LVL3:
-  14:../RMS-source/src/rms_main.c ****         HAL_Delay(2000);
-  56              		.loc 1 14 9 discriminator 1 view .LVU6
-  57 001a 4FF4FA60 		mov	r0, #2000
-  58 001e FFF7FEFF 		bl	HAL_Delay
-  59              	.LVL4:
-  15:../RMS-source/src/rms_main.c ****         HAL_GPIO_TogglePin(led_2_GPIO_Port, led_2_Pin);
-  60              		.loc 1 15 9 discriminator 1 view .LVU7
-  61 0022 4FF40051 		mov	r1, #8192
-  62 0026 2046     		mov	r0, r4
-  63 0028 FFF7FEFF 		bl	HAL_GPIO_TogglePin
-  64              	.LVL5:
-  16:../RMS-source/src/rms_main.c ****         HAL_Delay(2000);
-  65              		.loc 1 16 9 discriminator 1 view .LVU8
-  66 002c 4FF4FA60 		mov	r0, #2000
-  67 0030 FFF7FEFF 		bl	HAL_Delay
-  68              	.LVL6:
-  11:../RMS-source/src/rms_main.c ****     {
-  69              		.loc 1 11 11 discriminator 1 view .LVU9
-  70 0034 EBE7     		b	.L2
-  71              	.L5:
-  72 0036 00BF     		.align	2
-  73              	.L4:
-  74 0038 00180240 		.word	1073879040
-  75              		.cfi_endproc
-  76              	.LFE130:
-  78              		.text
-  79              	.Letext0:
-  80              		.file 2 "/opt/gcc-arm/arm-none-eabi/include/machine/_default_types.h"
-  81              		.file 3 "/opt/gcc-arm/arm-none-eabi/include/sys/_stdint.h"
-  82              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
-  83              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
-  84              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-  85              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
-  86              		.file 8 "Core/Inc/../../../f429-RMSv3-autogen/Core/Inc/gpio.h"
-ARM GAS  /tmp/ccb0ETFe.s 			page 3
+  42 0006 FFF7FEFF 		bl	SystemClock_Config
+  43              	.LVL1:
+  18:../RMS-source/src/rms_main.c **** 
+  19:../RMS-source/src/rms_main.c ****     // Initialize all configured peripherals
+  20:../RMS-source/src/rms_main.c ****     MX_GPIO_Init();
+  44              		.loc 1 20 5 view .LVU3
+  45 000a FFF7FEFF 		bl	MX_GPIO_Init
+  46              	.LVL2:
+  21:../RMS-source/src/rms_main.c ****     MX_DMA_Init();
+  47              		.loc 1 21 5 view .LVU4
+  48 000e FFF7FEFF 		bl	MX_DMA_Init
+  49              	.LVL3:
+  22:../RMS-source/src/rms_main.c ****     MX_USART3_UART_Init();
+  50              		.loc 1 22 5 view .LVU5
+  51 0012 FFF7FEFF 		bl	MX_USART3_UART_Init
+  52              	.LVL4:
+  23:../RMS-source/src/rms_main.c **** 
+  24:../RMS-source/src/rms_main.c ****     // Call init function for freertos objects (in freertos.c)
+  25:../RMS-source/src/rms_main.c ****     osKernelInitialize();  
+  53              		.loc 1 25 5 view .LVU6
+  54 0016 FFF7FEFF 		bl	osKernelInitialize
+  55              	.LVL5:
+  26:../RMS-source/src/rms_main.c ****     MX_FREERTOS_Init();
+  56              		.loc 1 26 5 view .LVU7
+  57 001a FFF7FEFF 		bl	MX_FREERTOS_Init
+  58              	.LVL6:
+  27:../RMS-source/src/rms_main.c **** 
+  28:../RMS-source/src/rms_main.c ****     //Start scheduler
+  29:../RMS-source/src/rms_main.c ****     osKernelStart();    
+  59              		.loc 1 29 5 view .LVU8
+  60 001e FFF7FEFF 		bl	osKernelStart
+  61              	.LVL7:
+  30:../RMS-source/src/rms_main.c **** }...
+  62              		.loc 1 30 1 is_stmt 0 view .LVU9
+  63 0022 0020     		movs	r0, #0
+  64 0024 08BD     		pop	{r3, pc}
+  65              		.cfi_endproc
+  66              	.LFE134:
+  68              		.text
+  69              	.Letext0:
+  70              		.file 2 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+  71              		.file 3 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+  72              		.file 4 "Core/Inc/usart.h"
+  73              		.file 5 "Core/Inc/dma.h"
+  74              		.file 6 "Core/Inc/gpio.h"
+  75              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  /tmp/ccWJkAvU.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 rms_main.c
-     /tmp/ccb0ETFe.s:20     .text.main:0000000000000000 $t
-     /tmp/ccb0ETFe.s:26     .text.main:0000000000000000 main
-     /tmp/ccb0ETFe.s:74     .text.main:0000000000000038 $d
+     /tmp/ccWJkAvU.s:20     .text.main:0000000000000000 $t
+     /tmp/ccWJkAvU.s:26     .text.main:0000000000000000 main
 
 UNDEFINED SYMBOLS
 HAL_Init
 SystemClock_Config
 MX_GPIO_Init
-HAL_GPIO_TogglePin
-HAL_Delay
+MX_DMA_Init
+MX_USART3_UART_Init
+osKernelInitialize
+MX_FREERTOS_Init
+osKernelStart
