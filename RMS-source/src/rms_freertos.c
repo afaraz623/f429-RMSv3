@@ -8,12 +8,12 @@
 #include <stdio.h>
 
 /******************************* Aliases **************************************/
-
+#define BUF_SIZE 256
 
 /****************************** Global Variables ******************************/
 
 
-/************************** Global RCL Variables ******************************/
+/***********************`*** Global RCL Variables ******************************/
 rcl_publisher_t my_pub_1;
 std_msgs__msg__String pub_msg_1;
 
@@ -42,7 +42,7 @@ void my_timer_callback(rcl_timer_t *timer, int64_t last_call_time)
     }
 }
 
-
+/* This task creates and handles the execution of node 'RMS' */ 
 void StartMicroRosTask(void *argument)
 {
     rmw_uros_set_custom_transport(true, (void *) &huart3, cubemx_transport_open, cubemx_transport_close, cubemx_transport_write, cubemx_transport_read);
@@ -53,24 +53,19 @@ void StartMicroRosTask(void *argument)
     freeRTOS_allocator.reallocate = microros_reallocate;
     freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
 
-
-    // Node main loop //
     rcl_allocator_t allocator = rcl_get_default_allocator();
     rclc_support_t support;
     rcl_ret_t rc;
     
-    //Create init_options
     rc = rclc_support_init(&support, 0, NULL, &allocator);
     if(rc != RCL_RET_OK)
             Error_Handler();
 
-    // Create node
     rcl_node_t my_node;
     rc = rclc_node_init_default(&my_node, "test_node", "RMS", &support);
     if(rc != RCL_RET_OK)
             Error_Handler();
 
-    // Create publisher 1
     const char *topic_name_1 = "topic_1";
     const rosidl_message_type_support_t *my_type_support = ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, String);
 
@@ -78,7 +73,6 @@ void StartMicroRosTask(void *argument)
     if(rc != RCL_RET_OK)
             Error_Handler();
 
-    // Create timer
     rcl_timer_t my_timer; 
     const unsigned int timer_timeout = 10; // in ms
     rc = rclc_timer_init_default( &my_timer, &support, RCL_MS_TO_NS(timer_timeout), my_timer_callback);
@@ -86,17 +80,14 @@ void StartMicroRosTask(void *argument)
             Error_Handler();
 
     // Assign message to publisher
-    std_msgs__msg__String__init(&pub_msg_1);
-    
-    const unsigned int PUB_MSG_CAPACITY = 256;
-    
-    pub_msg_1.data.data = malloc(PUB_MSG_CAPACITY);
-    pub_msg_1.data.capacity = PUB_MSG_CAPACITY;
+    std_msgs__msg__String__init(&pub_msg_1);    
+    const unsigned int PUB_MSG_BUFFER = BUF_SIZE;
+    pub_msg_1.data.data = malloc(PUB_MSG_BUFFER);
+    pub_msg_1.data.capacity = PUB_MSG_BUFFER;
 
-    // Create executor
     rclc_executor_t executor = rclc_executor_get_zero_initialized_executor();
     // total number of handles = #timers + #subscriptions
-    unsigned int num_handles = 1; // as this program is using a single timer and no subscriptions
+    unsigned int num_handles = 1; // as this program is using a single timer and no subscriptions at the moment
     rclc_executor_init(&executor, &support.context, num_handles, &allocator);
     rclc_executor_add_timer(&executor, &my_timer);
     if(rc != RCL_RET_OK)
