@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc2TaOQq.s 			page 1
+ARM GAS  /tmp/cczMLBbl.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -33,14 +33,15 @@ ARM GAS  /tmp/cc2TaOQq.s 			page 1
    3:../RMS-source/src/rms_main.c **** #include "cmsis_os.h"
    4:../RMS-source/src/rms_main.c **** #include "dma.h"
    5:../RMS-source/src/rms_main.c **** #include "usart.h"
-   6:../RMS-source/src/rms_main.c **** 
-   7:../RMS-source/src/rms_main.c **** // Prototypes
-   8:../RMS-source/src/rms_main.c **** extern void SystemClock_Config(void);
-   9:../RMS-source/src/rms_main.c **** extern void MX_FREERTOS_Init(void);
-  10:../RMS-source/src/rms_main.c **** 
-  11:../RMS-source/src/rms_main.c **** int main(void)
-  12:../RMS-source/src/rms_main.c **** {
-  29              		.loc 1 12 1 view -0
+   6:../RMS-source/src/rms_main.c **** #include "tim.h"
+   7:../RMS-source/src/rms_main.c **** 
+   8:../RMS-source/src/rms_main.c **** /***************************** Prototypes ****************************/
+   9:../RMS-source/src/rms_main.c **** extern void SystemClock_Config(void);
+  10:../RMS-source/src/rms_main.c **** extern void MX_FREERTOS_Init(void);
+  11:../RMS-source/src/rms_main.c **** 
+  12:../RMS-source/src/rms_main.c **** int main(void)
+  13:../RMS-source/src/rms_main.c **** {
+  29              		.loc 1 13 1 view -0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -49,71 +50,95 @@ ARM GAS  /tmp/cc2TaOQq.s 			page 1
   35              		.cfi_def_cfa_offset 8
   36              		.cfi_offset 3, -8
   37              		.cfi_offset 14, -4
-  13:../RMS-source/src/rms_main.c ****     // Reset of all peripherals, Initializes the Flash interface and the Systick
-  14:../RMS-source/src/rms_main.c ****     HAL_Init();
-  38              		.loc 1 14 5 view .LVU1
+  14:../RMS-source/src/rms_main.c ****     // Reset of all peripherals, Initializes the Flash interface and the Systick
+  15:../RMS-source/src/rms_main.c ****     HAL_Init();
+  38              		.loc 1 15 5 view .LVU1
   39 0002 FFF7FEFF 		bl	HAL_Init
   40              	.LVL0:
-  15:../RMS-source/src/rms_main.c **** 
-  16:../RMS-source/src/rms_main.c ****     // Configure the system clock
-  17:../RMS-source/src/rms_main.c ****     SystemClock_Config();
-  41              		.loc 1 17 5 view .LVU2
-ARM GAS  /tmp/cc2TaOQq.s 			page 2
+  16:../RMS-source/src/rms_main.c **** 
+  17:../RMS-source/src/rms_main.c ****     // Configure the system clock
+  18:../RMS-source/src/rms_main.c ****     SystemClock_Config();
+ARM GAS  /tmp/cczMLBbl.s 			page 2
 
 
+  41              		.loc 1 18 5 view .LVU2
   42 0006 FFF7FEFF 		bl	SystemClock_Config
   43              	.LVL1:
-  18:../RMS-source/src/rms_main.c **** 
-  19:../RMS-source/src/rms_main.c ****     // Initialize all configured peripherals
-  20:../RMS-source/src/rms_main.c ****     MX_GPIO_Init();
-  44              		.loc 1 20 5 view .LVU3
+  19:../RMS-source/src/rms_main.c **** 
+  20:../RMS-source/src/rms_main.c ****     // Initialize all configured peripherals
+  21:../RMS-source/src/rms_main.c ****     MX_GPIO_Init();
+  44              		.loc 1 21 5 view .LVU3
   45 000a FFF7FEFF 		bl	MX_GPIO_Init
   46              	.LVL2:
-  21:../RMS-source/src/rms_main.c ****     MX_DMA_Init();
-  47              		.loc 1 21 5 view .LVU4
+  22:../RMS-source/src/rms_main.c ****     MX_DMA_Init();
+  47              		.loc 1 22 5 view .LVU4
   48 000e FFF7FEFF 		bl	MX_DMA_Init
   49              	.LVL3:
-  22:../RMS-source/src/rms_main.c ****     MX_USART3_UART_Init();
-  50              		.loc 1 22 5 view .LVU5
+  23:../RMS-source/src/rms_main.c ****     MX_USART3_UART_Init();
+  50              		.loc 1 23 5 view .LVU5
   51 0012 FFF7FEFF 		bl	MX_USART3_UART_Init
   52              	.LVL4:
-  23:../RMS-source/src/rms_main.c **** 
-  24:../RMS-source/src/rms_main.c ****     // Call init function for freertos objects (in freertos.c)
-  25:../RMS-source/src/rms_main.c ****     osKernelInitialize();  
-  53              		.loc 1 25 5 view .LVU6
-  54 0016 FFF7FEFF 		bl	osKernelInitialize
+  24:../RMS-source/src/rms_main.c ****     MX_TIM3_Init();
+  53              		.loc 1 24 5 view .LVU6
+  54 0016 FFF7FEFF 		bl	MX_TIM3_Init
   55              	.LVL5:
-  26:../RMS-source/src/rms_main.c ****     MX_FREERTOS_Init();
-  56              		.loc 1 26 5 view .LVU7
-  57 001a FFF7FEFF 		bl	MX_FREERTOS_Init
-  58              	.LVL6:
-  27:../RMS-source/src/rms_main.c **** 
-  28:../RMS-source/src/rms_main.c ****     //Start scheduler
-  29:../RMS-source/src/rms_main.c ****     osKernelStart();    
-  59              		.loc 1 29 5 view .LVU8
-  60 001e FFF7FEFF 		bl	osKernelStart
-  61              	.LVL7:
-  30:../RMS-source/src/rms_main.c **** }...
-  62              		.loc 1 30 1 is_stmt 0 view .LVU9
-  63 0022 0020     		movs	r0, #0
-  64 0024 08BD     		pop	{r3, pc}
-  65              		.cfi_endproc
-  66              	.LFE134:
-  68              		.text
-  69              	.Letext0:
-  70              		.file 2 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
-  71              		.file 3 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
-  72              		.file 4 "Core/Inc/usart.h"
-  73              		.file 5 "Core/Inc/dma.h"
-  74              		.file 6 "Core/Inc/gpio.h"
-  75              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /tmp/cc2TaOQq.s 			page 3
+  25:../RMS-source/src/rms_main.c ****     HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
+  56              		.loc 1 25 5 view .LVU7
+  57 001a 3C21     		movs	r1, #60
+  58 001c 0548     		ldr	r0, .L3
+  59 001e FFF7FEFF 		bl	HAL_TIM_Encoder_Start
+  60              	.LVL6:
+  26:../RMS-source/src/rms_main.c **** 
+  27:../RMS-source/src/rms_main.c ****     // Call init function for freertos objects (in freertos.c)
+  28:../RMS-source/src/rms_main.c ****     osKernelInitialize();  
+  61              		.loc 1 28 5 view .LVU8
+  62 0022 FFF7FEFF 		bl	osKernelInitialize
+  63              	.LVL7:
+  29:../RMS-source/src/rms_main.c ****     MX_FREERTOS_Init();
+  64              		.loc 1 29 5 view .LVU9
+  65 0026 FFF7FEFF 		bl	MX_FREERTOS_Init
+  66              	.LVL8:
+  30:../RMS-source/src/rms_main.c **** 
+  31:../RMS-source/src/rms_main.c ****     //Start scheduler
+  32:../RMS-source/src/rms_main.c ****     osKernelStart();    
+  67              		.loc 1 32 5 view .LVU10
+  68 002a FFF7FEFF 		bl	osKernelStart
+  69              	.LVL9:
+  33:../RMS-source/src/rms_main.c **** }...
+  70              		.loc 1 33 1 is_stmt 0 view .LVU11
+  71 002e 0020     		movs	r0, #0
+  72 0030 08BD     		pop	{r3, pc}
+  73              	.L4:
+  74 0032 00BF     		.align	2
+  75              	.L3:
+  76 0034 00000000 		.word	htim3
+  77              		.cfi_endproc
+  78              	.LFE134:
+  80              		.text
+  81              	.Letext0:
+  82              		.file 2 "/opt/gcc-arm/arm-none-eabi/include/machine/_default_types.h"
+  83              		.file 3 "/opt/gcc-arm/arm-none-eabi/include/sys/_stdint.h"
+ARM GAS  /tmp/cczMLBbl.s 			page 3
+
+
+  84              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
+  85              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+  86              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+  87              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+  88              		.file 8 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+  89              		.file 9 "Core/Inc/tim.h"
+  90              		.file 10 "Core/Inc/usart.h"
+  91              		.file 11 "Core/Inc/dma.h"
+  92              		.file 12 "Core/Inc/gpio.h"
+  93              		.file 13 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  /tmp/cczMLBbl.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 rms_main.c
-     /tmp/cc2TaOQq.s:20     .text.main:0000000000000000 $t
-     /tmp/cc2TaOQq.s:26     .text.main:0000000000000000 main
+     /tmp/cczMLBbl.s:20     .text.main:0000000000000000 $t
+     /tmp/cczMLBbl.s:26     .text.main:0000000000000000 main
+     /tmp/cczMLBbl.s:76     .text.main:0000000000000034 $d
 
 UNDEFINED SYMBOLS
 HAL_Init
@@ -121,6 +146,9 @@ SystemClock_Config
 MX_GPIO_Init
 MX_DMA_Init
 MX_USART3_UART_Init
+MX_TIM3_Init
+HAL_TIM_Encoder_Start
 osKernelInitialize
 MX_FREERTOS_Init
 osKernelStart
+htim3

@@ -1,10 +1,11 @@
 #include "rms-microros.h"
-#include <cmsis_os.h>
+#include "cmsis_os.h"
+#include "main.h"
+#include "usart.h"
+#include "tim.h"
 #include <stdbool.h>
 #include <unistd.h>
-#include <usart.h>
 #include <stdio.h>
-#include <main.h>
 
 /******************************* Aliases **************************************/
 
@@ -13,8 +14,8 @@
 
 
 /************************** Global RCL Variables ******************************/
-rcl_publisher_t my_pub;
-std_msgs__msg__String pub_msg;
+rcl_publisher_t my_pub_1;
+std_msgs__msg__String pub_msg_1;
 
 /********************************* Prototypes ********************************/
 extern bool cubemx_transport_open(struct uxrCustomTransport * transport);
@@ -33,7 +34,9 @@ void my_timer_callback(rcl_timer_t *timer, int64_t last_call_time)
     UNUSED(last_call_time);
     if(timer != NULL)
     {
-        rc = rcl_publish(&my_pub, &pub_msg, NULL);
+        snprintf(pub_msg_1.data.data, pub_msg_1.data.capacity,"%d", (TIM3->CNT>>2));
+        pub_msg_1.data.size = strlen(pub_msg_1.data.data);
+        rc = rcl_publish(&my_pub_1, &pub_msg_1, NULL);
         if(rc != RCL_RET_OK)
             Error_Handler();
     }
@@ -63,32 +66,32 @@ void StartMicroRosTask(void *argument)
 
     // Create node
     rcl_node_t my_node;
-    rc = rclc_node_init_default(&my_node, "node_0", "executor_examples", &support);
+    rc = rclc_node_init_default(&my_node, "test_node", "RMS", &support);
     if(rc != RCL_RET_OK)
             Error_Handler();
 
-    // Create publisher
-    const char *topic_name = "topic_0";
+    // Create publisher 1
+    const char *topic_name_1 = "topic_1";
     const rosidl_message_type_support_t *my_type_support = ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, String);
 
-    rc = rclc_publisher_init_default(&my_pub, &my_node, my_type_support, topic_name);
+    rc = rclc_publisher_init_default(&my_pub_1, &my_node, my_type_support, topic_name_1);
     if(rc != RCL_RET_OK)
             Error_Handler();
 
     // Create timer
     rcl_timer_t my_timer; 
-    const unsigned int timer_timeout = 1000; // in ms
+    const unsigned int timer_timeout = 10; // in ms
     rc = rclc_timer_init_default( &my_timer, &support, RCL_MS_TO_NS(timer_timeout), my_timer_callback);
     if(rc != RCL_RET_OK)
             Error_Handler();
 
-    // assign message to publisher
-    std_msgs__msg__String__init(&pub_msg);
-    const unsigned int PUB_MSG_CAPACITY = 20;
-    pub_msg.data.data = malloc(PUB_MSG_CAPACITY);
-    pub_msg.data.capacity = PUB_MSG_CAPACITY;
-    snprintf(pub_msg.data.data, pub_msg.data.capacity, "Hello World!");
-    pub_msg.data.size = strlen(pub_msg.data.data);
+    // Assign message to publisher
+    std_msgs__msg__String__init(&pub_msg_1);
+    
+    const unsigned int PUB_MSG_CAPACITY = 256;
+    
+    pub_msg_1.data.data = malloc(PUB_MSG_CAPACITY);
+    pub_msg_1.data.capacity = PUB_MSG_CAPACITY;
 
     // Create executor
     rclc_executor_t executor = rclc_executor_get_zero_initialized_executor();
@@ -99,20 +102,15 @@ void StartMicroRosTask(void *argument)
     if(rc != RCL_RET_OK)
             Error_Handler();
 
-    // rclc_executor_spin(&executor);
-    for (unsigned int i = 0; i < 10; i++) 
-    {
-     // timeout specified in nanoseconds (here 1s)
-    rclc_executor_spin_some(&executor, 1000 * (1000 * 1000));
-    }
+    rclc_executor_spin(&executor);
 
     // cleaning up
     rc = rclc_executor_fini(&executor);
-    rc += rcl_publisher_fini(&my_pub, &my_node);
+    rc += rcl_publisher_fini(&my_pub_1, &my_node);
     rc += rcl_timer_fini(&my_timer);
     rc += rcl_node_fini(&my_node);
     rc += rclc_support_fini(&support);
-    std_msgs__msg__String__fini(&pub_msg);
+    std_msgs__msg__String__fini(&pub_msg_1);
 
     if(rc != RCL_RET_OK)
             Error_Handler();
