@@ -48,12 +48,12 @@ typedef StaticTask_t osStaticThreadDef_t;
 /* USER CODE BEGIN Variables */
 
 /* USER CODE END Variables */
-/* Definitions for microrosTask */
-osThreadId_t microrosTaskHandle;
+/* Definitions for uros_task */
+osThreadId_t uros_taskHandle;
 uint32_t defaultTaskBuffer[ 3000 ];
 osStaticThreadDef_t defaultTaskControlBlock;
-const osThreadAttr_t microrosTask_attributes = {
-  .name = "microrosTask",
+const osThreadAttr_t uros_task_attributes = {
+  .name = "uros_task",
   .cb_mem = &defaultTaskControlBlock,
   .cb_size = sizeof(defaultTaskControlBlock),
   .stack_mem = &defaultTaskBuffer[0],
@@ -66,7 +66,7 @@ const osThreadAttr_t microrosTask_attributes = {
 
 /* USER CODE END FunctionPrototypes */
 
-void StartMicroRosTask(void *argument);
+void start_uros_task(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -97,8 +97,8 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* creation of microrosTask */
-  microrosTaskHandle = osThreadNew(StartMicroRosTask, NULL, &microrosTask_attributes);
+  /* creation of uros_task */
+  uros_taskHandle = osThreadNew(start_uros_task, NULL, &uros_task_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -110,22 +110,22 @@ void MX_FREERTOS_Init(void) {
 
 }
 
-/* USER CODE BEGIN Header_StartMicroRosTask */
+/* USER CODE BEGIN Header_start_uros_task */
 /**
-  * @brief  Function implementing the microrosTask thread.
+  * @brief  Function implementing the uros_task thread.
   * @param  argument: Not used
   * @retval None
   */
-/* USER CODE END Header_StartMicroRosTask */
-__weak void StartMicroRosTask(void *argument)
+/* USER CODE END Header_start_uros_task */
+__weak void start_uros_task(void *argument)
 {
-  /* USER CODE BEGIN StartMicroRosTask */
+  /* USER CODE BEGIN start_uros_task */
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
   }
-  /* USER CODE END StartMicroRosTask */
+  /* USER CODE END start_uros_task */
 }
 
 /* Private application code --------------------------------------------------*/

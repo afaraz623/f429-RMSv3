@@ -8,12 +8,20 @@
 #include <stdio.h>
 
 /******************************* Aliases **************************************/
+/* 
+ * 'ONE_PERIOD" is this val because im triggering both encoder inputs on both 
+ * rising and falling edges, for greater accuracy, so encoder val in  4x. 
+ * Thats my 65536 / 4 to get this 
+ */
+#define ONE_PERIOD 16384  
+#define HALF_PERIOD 8192
+#define ENC_VAL (TIM3->CNT>>2) // same reason as 'ONE_PERIOD', shifting the actual val by 2bits
 #define BUF_SIZE 256
 
 /****************************** Global Variables ******************************/
+int32_t encPrev = 0;
 
-
-/***********************`*** Global RCL Variables ******************************/
+/*************************** Global RCL Variables *****************************/
 rcl_publisher_t my_pub_1;
 std_msgs__msg__String pub_msg_1;
 
@@ -27,14 +35,17 @@ extern void * microros_allocate(size_t size, void * state);
 extern void * microros_reallocate(void * pointer, size_t size, void * state);
 extern void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element, void * state);
 
+int32_t unwrap_encoder(uint16_t in, int32_t * prev);
+
 /****************************** Callbacks ***********************************/
 void my_timer_callback(rcl_timer_t *timer, int64_t last_call_time)
 {
     rcl_ret_t rc;
-    UNUSED(last_call_time);
+    (void)last_call_time; // wtf?
     if(timer != NULL)
-    {
-        snprintf(pub_msg_1.data.data, pub_msg_1.data.capacity,"%d", (TIM3->CNT>>2));
+    {   
+		int32_t encUnwraped = unwrap_encoder(ENC_VAL, &encPrev);
+        snprintf(pub_msg_1.data.data, pub_msg_1.data.capacity, "%ld", encUnwraped);
         pub_msg_1.data.size = strlen(pub_msg_1.data.data);
         rc = rcl_publish(&my_pub_1, &pub_msg_1, NULL);
         if(rc != RCL_RET_OK)
@@ -43,7 +54,7 @@ void my_timer_callback(rcl_timer_t *timer, int64_t last_call_time)
 }
 
 /* This task creates and handles the execution of node 'RMS' */ 
-void StartMicroRosTask(void *argument)
+void start_uros_task(void *argument)
 {
     rmw_uros_set_custom_transport(true, (void *) &huart3, cubemx_transport_open, cubemx_transport_close, cubemx_transport_write, cubemx_transport_read);
 
@@ -86,7 +97,7 @@ void StartMicroRosTask(void *argument)
     pub_msg_1.data.capacity = PUB_MSG_BUFFER;
 
     rclc_executor_t executor = rclc_executor_get_zero_initialized_executor();
-    // total number of handles = #timers + #subscriptions
+    // Total number of handles = #timers + #subscriptions
     unsigned int num_handles = 1; // as this program is using a single timer and no subscriptions at the moment
     rclc_executor_init(&executor, &support.context, num_handles, &allocator);
     rclc_executor_add_timer(&executor, &my_timer);
@@ -95,7 +106,7 @@ void StartMicroRosTask(void *argument)
 
     rclc_executor_spin(&executor);
 
-    // cleaning up
+    // Cleaning up
     rc = rclc_executor_fini(&executor);
     rc += rcl_publisher_fini(&my_pub_1, &my_node);
     rc += rcl_timer_fini(&my_timer);
@@ -108,4 +119,20 @@ void StartMicroRosTask(void *argument)
 
     // Just in case the thread ends abruptly, this function makes sure the thread exits safely
     osThreadTerminate(NULL);
+}
+
+int32_t unwrap_encoder(uint16_t in, int32_t * prev)
+{
+    int32_t c32 = (int32_t)in - HALF_PERIOD; //remove half period to determine (+/-) sign of the wrap
+    int32_t dif = (c32-*prev); //core concept: prev + (current - prev) = current
+
+    //wrap difference from -HALF_PERIOD to HALF_PERIOD. modulo prevents differences after the wrap from having an incorrect result
+    int32_t mod_dif = ((dif + HALF_PERIOD) % ONE_PERIOD) - HALF_PERIOD;
+    if(dif < -HALF_PERIOD)
+        mod_dif += ONE_PERIOD; //account for mod of negative number behavior in C
+
+    int32_t unwrapped = *prev + mod_dif;
+    *prev = unwrapped; //load previous value
+
+    return unwrapped + HALF_PERIOD; //remove the shift we applied at the beginning, and return
 }

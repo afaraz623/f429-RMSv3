@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccHb0N0o.s 			page 1
+ARM GAS  /tmp/cc8GyYv0.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -19,13 +19,13 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
   16              		.text
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
-  19              		.section	.text.StartMicroRosTask,"ax",%progbits
+  19              		.section	.text.start_uros_task,"ax",%progbits
   20              		.align	1
-  21              		.weak	StartMicroRosTask
+  21              		.weak	start_uros_task
   22              		.syntax unified
   23              		.thumb
   24              		.thumb_func
-  26              	StartMicroRosTask:
+  26              	start_uros_task:
   27              	.LFB135:
   28              		.file 1 "Core/Src/freertos.c"
    1:Core/Src/freertos.c **** /* USER CODE BEGIN Header */
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
   28:Core/Src/freertos.c **** 
   29:Core/Src/freertos.c **** /* USER CODE END Includes */
   30:Core/Src/freertos.c **** 
-ARM GAS  /tmp/ccHb0N0o.s 			page 2
+ARM GAS  /tmp/cc8GyYv0.s 			page 2
 
 
   31:Core/Src/freertos.c **** /* Private typedef -----------------------------------------------------------*/
@@ -81,12 +81,12 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
   48:Core/Src/freertos.c **** /* USER CODE BEGIN Variables */
   49:Core/Src/freertos.c **** 
   50:Core/Src/freertos.c **** /* USER CODE END Variables */
-  51:Core/Src/freertos.c **** /* Definitions for microrosTask */
-  52:Core/Src/freertos.c **** osThreadId_t microrosTaskHandle;
+  51:Core/Src/freertos.c **** /* Definitions for uros_task */
+  52:Core/Src/freertos.c **** osThreadId_t uros_taskHandle;
   53:Core/Src/freertos.c **** uint32_t defaultTaskBuffer[ 3000 ];
   54:Core/Src/freertos.c **** osStaticThreadDef_t defaultTaskControlBlock;
-  55:Core/Src/freertos.c **** const osThreadAttr_t microrosTask_attributes = {
-  56:Core/Src/freertos.c ****   .name = "microrosTask",
+  55:Core/Src/freertos.c **** const osThreadAttr_t uros_task_attributes = {
+  56:Core/Src/freertos.c ****   .name = "uros_task",
   57:Core/Src/freertos.c ****   .cb_mem = &defaultTaskControlBlock,
   58:Core/Src/freertos.c ****   .cb_size = sizeof(defaultTaskControlBlock),
   59:Core/Src/freertos.c ****   .stack_mem = &defaultTaskBuffer[0],
@@ -99,7 +99,7 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
   66:Core/Src/freertos.c **** 
   67:Core/Src/freertos.c **** /* USER CODE END FunctionPrototypes */
   68:Core/Src/freertos.c **** 
-  69:Core/Src/freertos.c **** void StartMicroRosTask(void *argument);
+  69:Core/Src/freertos.c **** void start_uros_task(void *argument);
   70:Core/Src/freertos.c **** 
   71:Core/Src/freertos.c **** void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
   72:Core/Src/freertos.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
   85:Core/Src/freertos.c ****   /* USER CODE END RTOS_MUTEX */
   86:Core/Src/freertos.c **** 
   87:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_SEMAPHORES */
-ARM GAS  /tmp/ccHb0N0o.s 			page 3
+ARM GAS  /tmp/cc8GyYv0.s 			page 3
 
 
   88:Core/Src/freertos.c ****   /* add semaphores, ... */
@@ -133,8 +133,8 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
   97:Core/Src/freertos.c ****   /* USER CODE END RTOS_QUEUES */
   98:Core/Src/freertos.c **** 
   99:Core/Src/freertos.c ****   /* Create the thread(s) */
- 100:Core/Src/freertos.c ****   /* creation of microrosTask */
- 101:Core/Src/freertos.c ****   microrosTaskHandle = osThreadNew(StartMicroRosTask, NULL, &microrosTask_attributes);
+ 100:Core/Src/freertos.c ****   /* creation of uros_task */
+ 101:Core/Src/freertos.c ****   uros_taskHandle = osThreadNew(start_uros_task, NULL, &uros_task_attributes);
  102:Core/Src/freertos.c **** 
  103:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_THREADS */
  104:Core/Src/freertos.c ****   /* add threads, ... */
@@ -146,14 +146,14 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
  110:Core/Src/freertos.c **** 
  111:Core/Src/freertos.c **** }
  112:Core/Src/freertos.c **** 
- 113:Core/Src/freertos.c **** /* USER CODE BEGIN Header_StartMicroRosTask */
+ 113:Core/Src/freertos.c **** /* USER CODE BEGIN Header_start_uros_task */
  114:Core/Src/freertos.c **** /**
- 115:Core/Src/freertos.c ****   * @brief  Function implementing the microrosTask thread.
+ 115:Core/Src/freertos.c ****   * @brief  Function implementing the uros_task thread.
  116:Core/Src/freertos.c ****   * @param  argument: Not used
  117:Core/Src/freertos.c ****   * @retval None
  118:Core/Src/freertos.c ****   */
- 119:Core/Src/freertos.c **** /* USER CODE END Header_StartMicroRosTask */
- 120:Core/Src/freertos.c **** __weak void StartMicroRosTask(void *argument)
+ 119:Core/Src/freertos.c **** /* USER CODE END Header_start_uros_task */
+ 120:Core/Src/freertos.c **** __weak void start_uros_task(void *argument)
  121:Core/Src/freertos.c **** {
   29              		.loc 1 121 1 view -0
   30              		.cfi_startproc
@@ -168,7 +168,7 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
   39              		.cfi_offset 14, -4
   40              	.LVL1:
   41              	.L2:
- 122:Core/Src/freertos.c ****   /* USER CODE BEGIN StartMicroRosTask */
+ 122:Core/Src/freertos.c ****   /* USER CODE BEGIN start_uros_task */
  123:Core/Src/freertos.c ****   /* Infinite loop */
  124:Core/Src/freertos.c ****   for(;;)
   42              		.loc 1 124 3 is_stmt 1 discriminator 1 view .LVU2
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
   44 0002 0120     		movs	r0, #1
   45 0004 FFF7FEFF 		bl	osDelay
   46              	.LVL2:
-ARM GAS  /tmp/ccHb0N0o.s 			page 4
+ARM GAS  /tmp/cc8GyYv0.s 			page 4
 
 
  124:Core/Src/freertos.c ****   {
@@ -207,14 +207,14 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
  101:Core/Src/freertos.c **** 
   70              		.loc 1 101 3 view .LVU6
  101:Core/Src/freertos.c **** 
-  71              		.loc 1 101 24 is_stmt 0 view .LVU7
+  71              		.loc 1 101 21 is_stmt 0 view .LVU7
   72 0002 044A     		ldr	r2, .L6
   73 0004 0021     		movs	r1, #0
   74 0006 0448     		ldr	r0, .L6+4
   75 0008 FFF7FEFF 		bl	osThreadNew
   76              	.LVL3:
  101:Core/Src/freertos.c **** 
-  77              		.loc 1 101 22 view .LVU8
+  77              		.loc 1 101 19 view .LVU8
   78 000c 034B     		ldr	r3, .L6+8
   79 000e 1860     		str	r0, [r3]
  111:Core/Src/freertos.c **** 
@@ -224,24 +224,23 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
   83 0012 00BF     		.align	2
   84              	.L6:
   85 0014 00000000 		.word	.LANCHOR0
-  86 0018 00000000 		.word	StartMicroRosTask
+  86 0018 00000000 		.word	start_uros_task
   87 001c 00000000 		.word	.LANCHOR1
   88              		.cfi_endproc
   89              	.LFE134:
-  91              		.global	microrosTask_attributes
+  91              		.global	uros_task_attributes
   92              		.section	.rodata.str1.4,"aMS",%progbits,1
   93              		.align	2
   94              	.LC0:
-  95 0000 6D696372 		.ascii	"microrosTask\000"
-  95      6F726F73 
-  95      5461736B 
-  95      00
+  95 0000 75726F73 		.ascii	"uros_task\000"
+  95      5F746173 
+  95      6B00
   96              		.global	defaultTaskControlBlock
   97              		.global	defaultTaskBuffer
-ARM GAS  /tmp/ccHb0N0o.s 			page 5
+  98              		.global	uros_taskHandle
+ARM GAS  /tmp/cc8GyYv0.s 			page 5
 
 
-  98              		.global	microrosTaskHandle
   99              		.section	.bss.defaultTaskBuffer,"aw",%nobits
  100              		.align	2
  103              	defaultTaskBuffer:
@@ -258,15 +257,15 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
  110      00000000 
  110      00000000 
  110      00000000 
- 111              		.section	.bss.microrosTaskHandle,"aw",%nobits
+ 111              		.section	.bss.uros_taskHandle,"aw",%nobits
  112              		.align	2
  113              		.set	.LANCHOR1,. + 0
- 116              	microrosTaskHandle:
+ 116              	uros_taskHandle:
  117 0000 00000000 		.space	4
- 118              		.section	.rodata.microrosTask_attributes,"a"
+ 118              		.section	.rodata.uros_task_attributes,"a"
  119              		.align	2
  120              		.set	.LANCHOR0,. + 0
- 123              	microrosTask_attributes:
+ 123              	uros_task_attributes:
  124 0000 00000000 		.word	.LC0
  125 0004 00000000 		.space	4
  126 0008 00000000 		.word	defaultTaskControlBlock
@@ -283,25 +282,25 @@ ARM GAS  /tmp/ccHb0N0o.s 			page 1
  136              		.file 4 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h"
  137              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h"
  138              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
-ARM GAS  /tmp/ccHb0N0o.s 			page 6
+ARM GAS  /tmp/cc8GyYv0.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 freertos.c
-     /tmp/ccHb0N0o.s:20     .text.StartMicroRosTask:0000000000000000 $t
-     /tmp/ccHb0N0o.s:26     .text.StartMicroRosTask:0000000000000000 StartMicroRosTask
-     /tmp/ccHb0N0o.s:53     .text.MX_FREERTOS_Init:0000000000000000 $t
-     /tmp/ccHb0N0o.s:59     .text.MX_FREERTOS_Init:0000000000000000 MX_FREERTOS_Init
-     /tmp/ccHb0N0o.s:85     .text.MX_FREERTOS_Init:0000000000000014 $d
-     /tmp/ccHb0N0o.s:123    .rodata.microrosTask_attributes:0000000000000000 microrosTask_attributes
-     /tmp/ccHb0N0o.s:93     .rodata.str1.4:0000000000000000 $d
-     /tmp/ccHb0N0o.s:109    .bss.defaultTaskControlBlock:0000000000000000 defaultTaskControlBlock
-     /tmp/ccHb0N0o.s:103    .bss.defaultTaskBuffer:0000000000000000 defaultTaskBuffer
-     /tmp/ccHb0N0o.s:116    .bss.microrosTaskHandle:0000000000000000 microrosTaskHandle
-     /tmp/ccHb0N0o.s:100    .bss.defaultTaskBuffer:0000000000000000 $d
-     /tmp/ccHb0N0o.s:106    .bss.defaultTaskControlBlock:0000000000000000 $d
-     /tmp/ccHb0N0o.s:112    .bss.microrosTaskHandle:0000000000000000 $d
-     /tmp/ccHb0N0o.s:119    .rodata.microrosTask_attributes:0000000000000000 $d
+     /tmp/cc8GyYv0.s:20     .text.start_uros_task:0000000000000000 $t
+     /tmp/cc8GyYv0.s:26     .text.start_uros_task:0000000000000000 start_uros_task
+     /tmp/cc8GyYv0.s:53     .text.MX_FREERTOS_Init:0000000000000000 $t
+     /tmp/cc8GyYv0.s:59     .text.MX_FREERTOS_Init:0000000000000000 MX_FREERTOS_Init
+     /tmp/cc8GyYv0.s:85     .text.MX_FREERTOS_Init:0000000000000014 $d
+     /tmp/cc8GyYv0.s:123    .rodata.uros_task_attributes:0000000000000000 uros_task_attributes
+     /tmp/cc8GyYv0.s:93     .rodata.str1.4:0000000000000000 $d
+     /tmp/cc8GyYv0.s:109    .bss.defaultTaskControlBlock:0000000000000000 defaultTaskControlBlock
+     /tmp/cc8GyYv0.s:103    .bss.defaultTaskBuffer:0000000000000000 defaultTaskBuffer
+     /tmp/cc8GyYv0.s:116    .bss.uros_taskHandle:0000000000000000 uros_taskHandle
+     /tmp/cc8GyYv0.s:100    .bss.defaultTaskBuffer:0000000000000000 $d
+     /tmp/cc8GyYv0.s:106    .bss.defaultTaskControlBlock:0000000000000000 $d
+     /tmp/cc8GyYv0.s:112    .bss.uros_taskHandle:0000000000000000 $d
+     /tmp/cc8GyYv0.s:119    .rodata.uros_task_attributes:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 osDelay
