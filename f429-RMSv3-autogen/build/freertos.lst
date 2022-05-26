@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc8GyYv0.s 			page 1
+ARM GAS  /tmp/ccE1FtlN.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc8GyYv0.s 			page 1
   28:Core/Src/freertos.c **** 
   29:Core/Src/freertos.c **** /* USER CODE END Includes */
   30:Core/Src/freertos.c **** 
-ARM GAS  /tmp/cc8GyYv0.s 			page 2
+ARM GAS  /tmp/ccE1FtlN.s 			page 2
 
 
   31:Core/Src/freertos.c **** /* Private typedef -----------------------------------------------------------*/
@@ -83,224 +83,365 @@ ARM GAS  /tmp/cc8GyYv0.s 			page 1
   50:Core/Src/freertos.c **** /* USER CODE END Variables */
   51:Core/Src/freertos.c **** /* Definitions for uros_task */
   52:Core/Src/freertos.c **** osThreadId_t uros_taskHandle;
-  53:Core/Src/freertos.c **** uint32_t defaultTaskBuffer[ 3000 ];
+  53:Core/Src/freertos.c **** uint32_t uros_task_Buffer[ 3000 ];
   54:Core/Src/freertos.c **** osStaticThreadDef_t defaultTaskControlBlock;
   55:Core/Src/freertos.c **** const osThreadAttr_t uros_task_attributes = {
   56:Core/Src/freertos.c ****   .name = "uros_task",
   57:Core/Src/freertos.c ****   .cb_mem = &defaultTaskControlBlock,
   58:Core/Src/freertos.c ****   .cb_size = sizeof(defaultTaskControlBlock),
-  59:Core/Src/freertos.c ****   .stack_mem = &defaultTaskBuffer[0],
-  60:Core/Src/freertos.c ****   .stack_size = sizeof(defaultTaskBuffer),
-  61:Core/Src/freertos.c ****   .priority = (osPriority_t) osPriorityRealtime7,
+  59:Core/Src/freertos.c ****   .stack_mem = &uros_task_Buffer[0],
+  60:Core/Src/freertos.c ****   .stack_size = sizeof(uros_task_Buffer),
+  61:Core/Src/freertos.c ****   .priority = (osPriority_t) osPriorityNormal,
   62:Core/Src/freertos.c **** };
-  63:Core/Src/freertos.c **** 
-  64:Core/Src/freertos.c **** /* Private function prototypes -----------------------------------------------*/
-  65:Core/Src/freertos.c **** /* USER CODE BEGIN FunctionPrototypes */
-  66:Core/Src/freertos.c **** 
-  67:Core/Src/freertos.c **** /* USER CODE END FunctionPrototypes */
-  68:Core/Src/freertos.c **** 
-  69:Core/Src/freertos.c **** void start_uros_task(void *argument);
-  70:Core/Src/freertos.c **** 
-  71:Core/Src/freertos.c **** void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
-  72:Core/Src/freertos.c **** 
-  73:Core/Src/freertos.c **** /**
-  74:Core/Src/freertos.c ****   * @brief  FreeRTOS initialization
-  75:Core/Src/freertos.c ****   * @param  None
-  76:Core/Src/freertos.c ****   * @retval None
-  77:Core/Src/freertos.c ****   */
-  78:Core/Src/freertos.c **** void MX_FREERTOS_Init(void) {
-  79:Core/Src/freertos.c ****   /* USER CODE BEGIN Init */
+  63:Core/Src/freertos.c **** /* Definitions for motor_control */
+  64:Core/Src/freertos.c **** osThreadId_t motor_controlHandle;
+  65:Core/Src/freertos.c **** uint32_t motor_control_Buffer[ 128 ];
+  66:Core/Src/freertos.c **** osStaticThreadDef_t motor_control_tControlBlock;
+  67:Core/Src/freertos.c **** const osThreadAttr_t motor_control_attributes = {
+  68:Core/Src/freertos.c ****   .name = "motor_control",
+  69:Core/Src/freertos.c ****   .cb_mem = &motor_control_tControlBlock,
+  70:Core/Src/freertos.c ****   .cb_size = sizeof(motor_control_tControlBlock),
+  71:Core/Src/freertos.c ****   .stack_mem = &motor_control_Buffer[0],
+  72:Core/Src/freertos.c ****   .stack_size = sizeof(motor_control_Buffer),
+  73:Core/Src/freertos.c ****   .priority = (osPriority_t) osPriorityNormal1,
+  74:Core/Src/freertos.c **** };
+  75:Core/Src/freertos.c **** 
+  76:Core/Src/freertos.c **** /* Private function prototypes -----------------------------------------------*/
+  77:Core/Src/freertos.c **** /* USER CODE BEGIN FunctionPrototypes */
+  78:Core/Src/freertos.c **** 
+  79:Core/Src/freertos.c **** /* USER CODE END FunctionPrototypes */
   80:Core/Src/freertos.c **** 
-  81:Core/Src/freertos.c ****   /* USER CODE END Init */
-  82:Core/Src/freertos.c **** 
-  83:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_MUTEX */
-  84:Core/Src/freertos.c ****   /* add mutexes, ... */
-  85:Core/Src/freertos.c ****   /* USER CODE END RTOS_MUTEX */
-  86:Core/Src/freertos.c **** 
-  87:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_SEMAPHORES */
-ARM GAS  /tmp/cc8GyYv0.s 			page 3
+  81:Core/Src/freertos.c **** void start_uros_task(void *argument);
+  82:Core/Src/freertos.c **** void start_mtr_ctrl_task(void *argument);
+  83:Core/Src/freertos.c **** 
+  84:Core/Src/freertos.c **** void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
+  85:Core/Src/freertos.c **** 
+  86:Core/Src/freertos.c **** /**
+  87:Core/Src/freertos.c ****   * @brief  FreeRTOS initialization
+ARM GAS  /tmp/ccE1FtlN.s 			page 3
 
 
-  88:Core/Src/freertos.c ****   /* add semaphores, ... */
-  89:Core/Src/freertos.c ****   /* USER CODE END RTOS_SEMAPHORES */
-  90:Core/Src/freertos.c **** 
-  91:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_TIMERS */
-  92:Core/Src/freertos.c ****   /* start timers, add new ones, ... */
-  93:Core/Src/freertos.c ****   /* USER CODE END RTOS_TIMERS */
-  94:Core/Src/freertos.c **** 
-  95:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_QUEUES */
-  96:Core/Src/freertos.c ****   /* add queues, ... */
-  97:Core/Src/freertos.c ****   /* USER CODE END RTOS_QUEUES */
-  98:Core/Src/freertos.c **** 
-  99:Core/Src/freertos.c ****   /* Create the thread(s) */
- 100:Core/Src/freertos.c ****   /* creation of uros_task */
- 101:Core/Src/freertos.c ****   uros_taskHandle = osThreadNew(start_uros_task, NULL, &uros_task_attributes);
- 102:Core/Src/freertos.c **** 
- 103:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_THREADS */
- 104:Core/Src/freertos.c ****   /* add threads, ... */
- 105:Core/Src/freertos.c ****   /* USER CODE END RTOS_THREADS */
- 106:Core/Src/freertos.c **** 
- 107:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_EVENTS */
- 108:Core/Src/freertos.c ****   /* add events, ... */
- 109:Core/Src/freertos.c ****   /* USER CODE END RTOS_EVENTS */
- 110:Core/Src/freertos.c **** 
- 111:Core/Src/freertos.c **** }
- 112:Core/Src/freertos.c **** 
- 113:Core/Src/freertos.c **** /* USER CODE BEGIN Header_start_uros_task */
- 114:Core/Src/freertos.c **** /**
- 115:Core/Src/freertos.c ****   * @brief  Function implementing the uros_task thread.
- 116:Core/Src/freertos.c ****   * @param  argument: Not used
- 117:Core/Src/freertos.c ****   * @retval None
- 118:Core/Src/freertos.c ****   */
- 119:Core/Src/freertos.c **** /* USER CODE END Header_start_uros_task */
- 120:Core/Src/freertos.c **** __weak void start_uros_task(void *argument)
- 121:Core/Src/freertos.c **** {
-  29              		.loc 1 121 1 view -0
+  88:Core/Src/freertos.c ****   * @param  None
+  89:Core/Src/freertos.c ****   * @retval None
+  90:Core/Src/freertos.c ****   */
+  91:Core/Src/freertos.c **** void MX_FREERTOS_Init(void) {
+  92:Core/Src/freertos.c ****   /* USER CODE BEGIN Init */
+  93:Core/Src/freertos.c **** 
+  94:Core/Src/freertos.c ****   /* USER CODE END Init */
+  95:Core/Src/freertos.c **** 
+  96:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_MUTEX */
+  97:Core/Src/freertos.c ****   /* add mutexes, ... */
+  98:Core/Src/freertos.c ****   /* USER CODE END RTOS_MUTEX */
+  99:Core/Src/freertos.c **** 
+ 100:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_SEMAPHORES */
+ 101:Core/Src/freertos.c ****   /* add semaphores, ... */
+ 102:Core/Src/freertos.c ****   /* USER CODE END RTOS_SEMAPHORES */
+ 103:Core/Src/freertos.c **** 
+ 104:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_TIMERS */
+ 105:Core/Src/freertos.c ****   /* start timers, add new ones, ... */
+ 106:Core/Src/freertos.c ****   /* USER CODE END RTOS_TIMERS */
+ 107:Core/Src/freertos.c **** 
+ 108:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_QUEUES */
+ 109:Core/Src/freertos.c ****   /* add queues, ... */
+ 110:Core/Src/freertos.c ****   /* USER CODE END RTOS_QUEUES */
+ 111:Core/Src/freertos.c **** 
+ 112:Core/Src/freertos.c ****   /* Create the thread(s) */
+ 113:Core/Src/freertos.c ****   /* creation of uros_task */
+ 114:Core/Src/freertos.c ****   uros_taskHandle = osThreadNew(start_uros_task, NULL, &uros_task_attributes);
+ 115:Core/Src/freertos.c **** 
+ 116:Core/Src/freertos.c ****   /* creation of motor_control */
+ 117:Core/Src/freertos.c ****   motor_controlHandle = osThreadNew(start_mtr_ctrl_task, NULL, &motor_control_attributes);
+ 118:Core/Src/freertos.c **** 
+ 119:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_THREADS */
+ 120:Core/Src/freertos.c ****   /* add threads, ... */
+ 121:Core/Src/freertos.c ****   /* USER CODE END RTOS_THREADS */
+ 122:Core/Src/freertos.c **** 
+ 123:Core/Src/freertos.c ****   /* USER CODE BEGIN RTOS_EVENTS */
+ 124:Core/Src/freertos.c ****   /* add events, ... */
+ 125:Core/Src/freertos.c ****   /* USER CODE END RTOS_EVENTS */
+ 126:Core/Src/freertos.c **** 
+ 127:Core/Src/freertos.c **** }
+ 128:Core/Src/freertos.c **** 
+ 129:Core/Src/freertos.c **** /* USER CODE BEGIN Header_start_uros_task */
+ 130:Core/Src/freertos.c **** /**
+ 131:Core/Src/freertos.c ****   * @brief  Function implementing the uros_task thread.
+ 132:Core/Src/freertos.c ****   * @param  argument: Not used
+ 133:Core/Src/freertos.c ****   * @retval None
+ 134:Core/Src/freertos.c ****   */
+ 135:Core/Src/freertos.c **** /* USER CODE END Header_start_uros_task */
+ 136:Core/Src/freertos.c **** __weak void start_uros_task(void *argument)
+ 137:Core/Src/freertos.c **** {
+  29              		.loc 1 137 1 view -0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
   33              	.LVL0:
-  34              		.loc 1 121 1 is_stmt 0 view .LVU1
+  34              		.loc 1 137 1 is_stmt 0 view .LVU1
   35 0000 08B5     		push	{r3, lr}
+ARM GAS  /tmp/ccE1FtlN.s 			page 4
+
+
   36              	.LCFI0:
   37              		.cfi_def_cfa_offset 8
   38              		.cfi_offset 3, -8
   39              		.cfi_offset 14, -4
   40              	.LVL1:
   41              	.L2:
- 122:Core/Src/freertos.c ****   /* USER CODE BEGIN start_uros_task */
- 123:Core/Src/freertos.c ****   /* Infinite loop */
- 124:Core/Src/freertos.c ****   for(;;)
-  42              		.loc 1 124 3 is_stmt 1 discriminator 1 view .LVU2
- 125:Core/Src/freertos.c ****   {
- 126:Core/Src/freertos.c ****     osDelay(1);
-  43              		.loc 1 126 5 discriminator 1 view .LVU3
+ 138:Core/Src/freertos.c ****   /* USER CODE BEGIN start_uros_task */
+ 139:Core/Src/freertos.c ****   /* Infinite loop */
+ 140:Core/Src/freertos.c ****   for(;;)
+  42              		.loc 1 140 3 is_stmt 1 discriminator 1 view .LVU2
+ 141:Core/Src/freertos.c ****   {
+ 142:Core/Src/freertos.c ****     osDelay(1);
+  43              		.loc 1 142 5 discriminator 1 view .LVU3
   44 0002 0120     		movs	r0, #1
   45 0004 FFF7FEFF 		bl	osDelay
   46              	.LVL2:
-ARM GAS  /tmp/cc8GyYv0.s 			page 4
-
-
- 124:Core/Src/freertos.c ****   {
-  47              		.loc 1 124 3 discriminator 1 view .LVU4
+ 140:Core/Src/freertos.c ****   {
+  47              		.loc 1 140 3 discriminator 1 view .LVU4
   48 0008 FBE7     		b	.L2
   49              		.cfi_endproc
   50              	.LFE135:
-  52              		.section	.text.MX_FREERTOS_Init,"ax",%progbits
+  52              		.section	.text.start_mtr_ctrl_task,"ax",%progbits
   53              		.align	1
-  54              		.global	MX_FREERTOS_Init
+  54              		.weak	start_mtr_ctrl_task
   55              		.syntax unified
   56              		.thumb
   57              		.thumb_func
-  59              	MX_FREERTOS_Init:
-  60              	.LFB134:
-  78:Core/Src/freertos.c ****   /* USER CODE BEGIN Init */
-  61              		.loc 1 78 29 view -0
+  59              	start_mtr_ctrl_task:
+  60              	.LFB136:
+ 143:Core/Src/freertos.c ****   }
+ 144:Core/Src/freertos.c ****   /* USER CODE END start_uros_task */
+ 145:Core/Src/freertos.c **** }
+ 146:Core/Src/freertos.c **** 
+ 147:Core/Src/freertos.c **** /* USER CODE BEGIN Header_start_mtr_ctrl_task */
+ 148:Core/Src/freertos.c **** /**
+ 149:Core/Src/freertos.c **** * @brief Function implementing the motor_control_t thread.
+ 150:Core/Src/freertos.c **** * @param argument: Not used
+ 151:Core/Src/freertos.c **** * @retval None
+ 152:Core/Src/freertos.c **** */
+ 153:Core/Src/freertos.c **** /* USER CODE END Header_start_mtr_ctrl_task */
+ 154:Core/Src/freertos.c **** __weak void start_mtr_ctrl_task(void *argument)
+ 155:Core/Src/freertos.c **** {
+  61              		.loc 1 155 1 view -0
   62              		.cfi_startproc
   63              		@ args = 0, pretend = 0, frame = 0
   64              		@ frame_needed = 0, uses_anonymous_args = 0
-  65 0000 08B5     		push	{r3, lr}
-  66              	.LCFI1:
-  67              		.cfi_def_cfa_offset 8
-  68              		.cfi_offset 3, -8
-  69              		.cfi_offset 14, -4
- 101:Core/Src/freertos.c **** 
-  70              		.loc 1 101 3 view .LVU6
- 101:Core/Src/freertos.c **** 
-  71              		.loc 1 101 21 is_stmt 0 view .LVU7
-  72 0002 044A     		ldr	r2, .L6
-  73 0004 0021     		movs	r1, #0
-  74 0006 0448     		ldr	r0, .L6+4
-  75 0008 FFF7FEFF 		bl	osThreadNew
-  76              	.LVL3:
- 101:Core/Src/freertos.c **** 
-  77              		.loc 1 101 19 view .LVU8
-  78 000c 034B     		ldr	r3, .L6+8
-  79 000e 1860     		str	r0, [r3]
- 111:Core/Src/freertos.c **** 
-  80              		.loc 1 111 1 view .LVU9
-  81 0010 08BD     		pop	{r3, pc}
-  82              	.L7:
-  83 0012 00BF     		.align	2
-  84              	.L6:
-  85 0014 00000000 		.word	.LANCHOR0
-  86 0018 00000000 		.word	start_uros_task
-  87 001c 00000000 		.word	.LANCHOR1
-  88              		.cfi_endproc
-  89              	.LFE134:
-  91              		.global	uros_task_attributes
-  92              		.section	.rodata.str1.4,"aMS",%progbits,1
-  93              		.align	2
-  94              	.LC0:
-  95 0000 75726F73 		.ascii	"uros_task\000"
-  95      5F746173 
-  95      6B00
-  96              		.global	defaultTaskControlBlock
-  97              		.global	defaultTaskBuffer
-  98              		.global	uros_taskHandle
-ARM GAS  /tmp/cc8GyYv0.s 			page 5
+  65              	.LVL3:
+  66              		.loc 1 155 1 is_stmt 0 view .LVU6
+  67 0000 08B5     		push	{r3, lr}
+  68              	.LCFI1:
+  69              		.cfi_def_cfa_offset 8
+  70              		.cfi_offset 3, -8
+  71              		.cfi_offset 14, -4
+  72              	.LVL4:
+  73              	.L5:
+ 156:Core/Src/freertos.c ****   /* USER CODE BEGIN start_mtr_ctrl_task */
+ 157:Core/Src/freertos.c ****   /* Infinite loop */
+ARM GAS  /tmp/ccE1FtlN.s 			page 5
 
 
-  99              		.section	.bss.defaultTaskBuffer,"aw",%nobits
- 100              		.align	2
- 103              	defaultTaskBuffer:
- 104 0000 00000000 		.space	12000
- 104      00000000 
- 104      00000000 
- 104      00000000 
- 104      00000000 
- 105              		.section	.bss.defaultTaskControlBlock,"aw",%nobits
- 106              		.align	2
- 109              	defaultTaskControlBlock:
- 110 0000 00000000 		.space	92
- 110      00000000 
- 110      00000000 
- 110      00000000 
- 110      00000000 
- 111              		.section	.bss.uros_taskHandle,"aw",%nobits
- 112              		.align	2
- 113              		.set	.LANCHOR1,. + 0
- 116              	uros_taskHandle:
- 117 0000 00000000 		.space	4
- 118              		.section	.rodata.uros_task_attributes,"a"
- 119              		.align	2
- 120              		.set	.LANCHOR0,. + 0
- 123              	uros_task_attributes:
- 124 0000 00000000 		.word	.LC0
- 125 0004 00000000 		.space	4
- 126 0008 00000000 		.word	defaultTaskControlBlock
- 127 000c 5C000000 		.word	92
- 128 0010 00000000 		.word	defaultTaskBuffer
- 129 0014 E02E0000 		.word	12000
- 130 0018 37000000 		.word	55
- 131 001c 00000000 		.space	8
- 131      00000000 
- 132              		.text
- 133              	.Letext0:
- 134              		.file 2 "/opt/gcc-arm/arm-none-eabi/include/machine/_default_types.h"
- 135              		.file 3 "/opt/gcc-arm/arm-none-eabi/include/sys/_stdint.h"
- 136              		.file 4 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h"
- 137              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h"
- 138              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
-ARM GAS  /tmp/cc8GyYv0.s 			page 6
+ 158:Core/Src/freertos.c ****   for(;;)
+  74              		.loc 1 158 3 is_stmt 1 discriminator 1 view .LVU7
+ 159:Core/Src/freertos.c ****   {
+ 160:Core/Src/freertos.c ****     osDelay(1);
+  75              		.loc 1 160 5 discriminator 1 view .LVU8
+  76 0002 0120     		movs	r0, #1
+  77 0004 FFF7FEFF 		bl	osDelay
+  78              	.LVL5:
+ 158:Core/Src/freertos.c ****   {
+  79              		.loc 1 158 3 discriminator 1 view .LVU9
+  80 0008 FBE7     		b	.L5
+  81              		.cfi_endproc
+  82              	.LFE136:
+  84              		.section	.text.MX_FREERTOS_Init,"ax",%progbits
+  85              		.align	1
+  86              		.global	MX_FREERTOS_Init
+  87              		.syntax unified
+  88              		.thumb
+  89              		.thumb_func
+  91              	MX_FREERTOS_Init:
+  92              	.LFB134:
+  91:Core/Src/freertos.c ****   /* USER CODE BEGIN Init */
+  93              		.loc 1 91 29 view -0
+  94              		.cfi_startproc
+  95              		@ args = 0, pretend = 0, frame = 0
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+  97 0000 08B5     		push	{r3, lr}
+  98              	.LCFI2:
+  99              		.cfi_def_cfa_offset 8
+ 100              		.cfi_offset 3, -8
+ 101              		.cfi_offset 14, -4
+ 114:Core/Src/freertos.c **** 
+ 102              		.loc 1 114 3 view .LVU11
+ 114:Core/Src/freertos.c **** 
+ 103              		.loc 1 114 21 is_stmt 0 view .LVU12
+ 104 0002 074A     		ldr	r2, .L9
+ 105 0004 0021     		movs	r1, #0
+ 106 0006 0748     		ldr	r0, .L9+4
+ 107 0008 FFF7FEFF 		bl	osThreadNew
+ 108              	.LVL6:
+ 114:Core/Src/freertos.c **** 
+ 109              		.loc 1 114 19 view .LVU13
+ 110 000c 064B     		ldr	r3, .L9+8
+ 111 000e 1860     		str	r0, [r3]
+ 117:Core/Src/freertos.c **** 
+ 112              		.loc 1 117 3 is_stmt 1 view .LVU14
+ 117:Core/Src/freertos.c **** 
+ 113              		.loc 1 117 25 is_stmt 0 view .LVU15
+ 114 0010 064A     		ldr	r2, .L9+12
+ 115 0012 0021     		movs	r1, #0
+ 116 0014 0648     		ldr	r0, .L9+16
+ 117 0016 FFF7FEFF 		bl	osThreadNew
+ 118              	.LVL7:
+ 117:Core/Src/freertos.c **** 
+ 119              		.loc 1 117 23 view .LVU16
+ 120 001a 064B     		ldr	r3, .L9+20
+ 121 001c 1860     		str	r0, [r3]
+ARM GAS  /tmp/ccE1FtlN.s 			page 6
+
+
+ 127:Core/Src/freertos.c **** 
+ 122              		.loc 1 127 1 view .LVU17
+ 123 001e 08BD     		pop	{r3, pc}
+ 124              	.L10:
+ 125              		.align	2
+ 126              	.L9:
+ 127 0020 00000000 		.word	.LANCHOR0
+ 128 0024 00000000 		.word	start_uros_task
+ 129 0028 00000000 		.word	.LANCHOR1
+ 130 002c 00000000 		.word	.LANCHOR2
+ 131 0030 00000000 		.word	start_mtr_ctrl_task
+ 132 0034 00000000 		.word	.LANCHOR3
+ 133              		.cfi_endproc
+ 134              	.LFE134:
+ 136              		.global	motor_control_attributes
+ 137              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 138              		.align	2
+ 139              	.LC0:
+ 140 0000 6D6F746F 		.ascii	"motor_control\000"
+ 140      725F636F 
+ 140      6E74726F 
+ 140      6C00
+ 141              		.global	motor_control_tControlBlock
+ 142              		.global	motor_control_Buffer
+ 143              		.global	motor_controlHandle
+ 144              		.global	uros_task_attributes
+ 145 000e 0000     		.align	2
+ 146              	.LC1:
+ 147 0010 75726F73 		.ascii	"uros_task\000"
+ 147      5F746173 
+ 147      6B00
+ 148              		.global	defaultTaskControlBlock
+ 149              		.global	uros_task_Buffer
+ 150              		.global	uros_taskHandle
+ 151              		.section	.bss.defaultTaskControlBlock,"aw",%nobits
+ 152              		.align	2
+ 155              	defaultTaskControlBlock:
+ 156 0000 00000000 		.space	92
+ 156      00000000 
+ 156      00000000 
+ 156      00000000 
+ 156      00000000 
+ 157              		.section	.bss.motor_controlHandle,"aw",%nobits
+ 158              		.align	2
+ 159              		.set	.LANCHOR3,. + 0
+ 162              	motor_controlHandle:
+ 163 0000 00000000 		.space	4
+ 164              		.section	.bss.motor_control_Buffer,"aw",%nobits
+ 165              		.align	2
+ 168              	motor_control_Buffer:
+ 169 0000 00000000 		.space	512
+ 169      00000000 
+ 169      00000000 
+ 169      00000000 
+ 169      00000000 
+ 170              		.section	.bss.motor_control_tControlBlock,"aw",%nobits
+ 171              		.align	2
+ARM GAS  /tmp/ccE1FtlN.s 			page 7
+
+
+ 174              	motor_control_tControlBlock:
+ 175 0000 00000000 		.space	92
+ 175      00000000 
+ 175      00000000 
+ 175      00000000 
+ 175      00000000 
+ 176              		.section	.bss.uros_taskHandle,"aw",%nobits
+ 177              		.align	2
+ 178              		.set	.LANCHOR1,. + 0
+ 181              	uros_taskHandle:
+ 182 0000 00000000 		.space	4
+ 183              		.section	.bss.uros_task_Buffer,"aw",%nobits
+ 184              		.align	2
+ 187              	uros_task_Buffer:
+ 188 0000 00000000 		.space	12000
+ 188      00000000 
+ 188      00000000 
+ 188      00000000 
+ 188      00000000 
+ 189              		.section	.rodata.motor_control_attributes,"a"
+ 190              		.align	2
+ 191              		.set	.LANCHOR2,. + 0
+ 194              	motor_control_attributes:
+ 195 0000 00000000 		.word	.LC0
+ 196 0004 00000000 		.space	4
+ 197 0008 00000000 		.word	motor_control_tControlBlock
+ 198 000c 5C000000 		.word	92
+ 199 0010 00000000 		.word	motor_control_Buffer
+ 200 0014 00020000 		.word	512
+ 201 0018 19000000 		.word	25
+ 202 001c 00000000 		.space	8
+ 202      00000000 
+ 203              		.section	.rodata.uros_task_attributes,"a"
+ 204              		.align	2
+ 205              		.set	.LANCHOR0,. + 0
+ 208              	uros_task_attributes:
+ 209 0000 10000000 		.word	.LC1
+ 210 0004 00000000 		.space	4
+ 211 0008 00000000 		.word	defaultTaskControlBlock
+ 212 000c 5C000000 		.word	92
+ 213 0010 00000000 		.word	uros_task_Buffer
+ 214 0014 E02E0000 		.word	12000
+ 215 0018 18000000 		.word	24
+ 216 001c 00000000 		.space	8
+ 216      00000000 
+ 217              		.text
+ 218              	.Letext0:
+ 219              		.file 2 "/opt/gcc-arm/arm-none-eabi/include/machine/_default_types.h"
+ 220              		.file 3 "/opt/gcc-arm/arm-none-eabi/include/sys/_stdint.h"
+ 221              		.file 4 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h"
+ 222              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h"
+ 223              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+ARM GAS  /tmp/ccE1FtlN.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 freertos.c
-     /tmp/cc8GyYv0.s:20     .text.start_uros_task:0000000000000000 $t
-     /tmp/cc8GyYv0.s:26     .text.start_uros_task:0000000000000000 start_uros_task
-     /tmp/cc8GyYv0.s:53     .text.MX_FREERTOS_Init:0000000000000000 $t
-     /tmp/cc8GyYv0.s:59     .text.MX_FREERTOS_Init:0000000000000000 MX_FREERTOS_Init
-     /tmp/cc8GyYv0.s:85     .text.MX_FREERTOS_Init:0000000000000014 $d
-     /tmp/cc8GyYv0.s:123    .rodata.uros_task_attributes:0000000000000000 uros_task_attributes
-     /tmp/cc8GyYv0.s:93     .rodata.str1.4:0000000000000000 $d
-     /tmp/cc8GyYv0.s:109    .bss.defaultTaskControlBlock:0000000000000000 defaultTaskControlBlock
-     /tmp/cc8GyYv0.s:103    .bss.defaultTaskBuffer:0000000000000000 defaultTaskBuffer
-     /tmp/cc8GyYv0.s:116    .bss.uros_taskHandle:0000000000000000 uros_taskHandle
-     /tmp/cc8GyYv0.s:100    .bss.defaultTaskBuffer:0000000000000000 $d
-     /tmp/cc8GyYv0.s:106    .bss.defaultTaskControlBlock:0000000000000000 $d
-     /tmp/cc8GyYv0.s:112    .bss.uros_taskHandle:0000000000000000 $d
-     /tmp/cc8GyYv0.s:119    .rodata.uros_task_attributes:0000000000000000 $d
+     /tmp/ccE1FtlN.s:20     .text.start_uros_task:0000000000000000 $t
+     /tmp/ccE1FtlN.s:26     .text.start_uros_task:0000000000000000 start_uros_task
+     /tmp/ccE1FtlN.s:53     .text.start_mtr_ctrl_task:0000000000000000 $t
+     /tmp/ccE1FtlN.s:59     .text.start_mtr_ctrl_task:0000000000000000 start_mtr_ctrl_task
+     /tmp/ccE1FtlN.s:85     .text.MX_FREERTOS_Init:0000000000000000 $t
+     /tmp/ccE1FtlN.s:91     .text.MX_FREERTOS_Init:0000000000000000 MX_FREERTOS_Init
+     /tmp/ccE1FtlN.s:127    .text.MX_FREERTOS_Init:0000000000000020 $d
+     /tmp/ccE1FtlN.s:194    .rodata.motor_control_attributes:0000000000000000 motor_control_attributes
+     /tmp/ccE1FtlN.s:138    .rodata.str1.4:0000000000000000 $d
+     /tmp/ccE1FtlN.s:174    .bss.motor_control_tControlBlock:0000000000000000 motor_control_tControlBlock
+     /tmp/ccE1FtlN.s:168    .bss.motor_control_Buffer:0000000000000000 motor_control_Buffer
+     /tmp/ccE1FtlN.s:162    .bss.motor_controlHandle:0000000000000000 motor_controlHandle
+     /tmp/ccE1FtlN.s:208    .rodata.uros_task_attributes:0000000000000000 uros_task_attributes
+     /tmp/ccE1FtlN.s:155    .bss.defaultTaskControlBlock:0000000000000000 defaultTaskControlBlock
+     /tmp/ccE1FtlN.s:187    .bss.uros_task_Buffer:0000000000000000 uros_task_Buffer
+     /tmp/ccE1FtlN.s:181    .bss.uros_taskHandle:0000000000000000 uros_taskHandle
+     /tmp/ccE1FtlN.s:152    .bss.defaultTaskControlBlock:0000000000000000 $d
+     /tmp/ccE1FtlN.s:158    .bss.motor_controlHandle:0000000000000000 $d
+     /tmp/ccE1FtlN.s:165    .bss.motor_control_Buffer:0000000000000000 $d
+     /tmp/ccE1FtlN.s:171    .bss.motor_control_tControlBlock:0000000000000000 $d
+     /tmp/ccE1FtlN.s:177    .bss.uros_taskHandle:0000000000000000 $d
+     /tmp/ccE1FtlN.s:184    .bss.uros_task_Buffer:0000000000000000 $d
+     /tmp/ccE1FtlN.s:190    .rodata.motor_control_attributes:0000000000000000 $d
+     /tmp/ccE1FtlN.s:204    .rodata.uros_task_attributes:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 osDelay

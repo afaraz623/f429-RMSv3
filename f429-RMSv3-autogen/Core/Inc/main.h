@@ -61,10 +61,18 @@ void Error_Handler(void);
 #define MTR1_ENC_A__GPIO_Port GPIOA
 #define MTR1_ENC_B__Pin GPIO_PIN_7
 #define MTR1_ENC_B__GPIO_Port GPIOA
-#define led_2_Pin GPIO_PIN_13
-#define led_2_GPIO_Port GPIOG
-#define led_1_Pin GPIO_PIN_14
-#define led_1_GPIO_Port GPIOG
+#define MTR1_LPWM_Pin GPIO_PIN_6
+#define MTR1_LPWM_GPIO_Port GPIOC
+#define MTR1_RPWM_Pin GPIO_PIN_7
+#define MTR1_RPWM_GPIO_Port GPIOC
+#define MTR1_L_EN_Pin GPIO_PIN_8
+#define MTR1_L_EN_GPIO_Port GPIOA
+#define MTR1_R_EN_Pin GPIO_PIN_9
+#define MTR1_R_EN_GPIO_Port GPIOA
+#define LED1_Pin GPIO_PIN_13
+#define LED1_GPIO_Port GPIOG
+#define LED2_Pin GPIO_PIN_14
+#define LED2_GPIO_Port GPIOG
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

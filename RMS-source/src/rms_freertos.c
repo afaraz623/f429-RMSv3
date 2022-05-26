@@ -1,29 +1,28 @@
-#include "rms-microros.h"
+#include "FreeRTOS.h"
 #include "cmsis_os.h"
 #include "main.h"
 #include "usart.h"
 #include "tim.h"
+#include "dh052_internal.h"
+#include <rcl/rcl.h>
+#include <rcl/error_handling.h>
+#include <rclc/rclc.h>
+#include <rclc/executor.h>
+#include <uxr/client/transport.h>
+#include <rmw_microxrcedds_c/config.h>
+#include <rmw_microros/rmw_microros.h>
+#include <std_msgs/msg/int32.h>
 #include <stdbool.h>
 #include <unistd.h>
 #include <stdio.h>
 
 /******************************* Aliases **************************************/
-/* 
- * 'ONE_PERIOD" is this val because im triggering both encoder inputs on both 
- * rising and falling edges, for greater accuracy, so encoder val in  4x. 
- * Thats my 65536 / 4 to get this 
- */
-#define ONE_PERIOD 16384  
-#define HALF_PERIOD 8192
-#define ENC_VAL (TIM3->CNT>>2) // same reason as 'ONE_PERIOD', shifting the actual val by 2bits
+#define ENC_VAL (TIM3->CNT>>2) // shifting the actual val by 2bits
 #define BUF_SIZE 256
 
 /****************************** Global Variables ******************************/
 int32_t encPrev = 0;
-
-/*************************** Global RCL Variables *****************************/
-rcl_publisher_t my_pub_1;
-std_msgs__msg__String pub_msg_1;
+int32_t val = 0;
 
 /********************************* Prototypes ********************************/
 extern bool cubemx_transport_open(struct uxrCustomTransport * transport);
@@ -35,23 +34,6 @@ extern void * microros_allocate(size_t size, void * state);
 extern void * microros_reallocate(void * pointer, size_t size, void * state);
 extern void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element, void * state);
 
-int32_t unwrap_encoder(uint16_t in, int32_t * prev);
-
-/****************************** Callbacks ***********************************/
-void my_timer_callback(rcl_timer_t *timer, int64_t last_call_time)
-{
-    rcl_ret_t rc;
-    (void)last_call_time; // wtf?
-    if(timer != NULL)
-    {   
-		int32_t encUnwraped = unwrap_encoder(ENC_VAL, &encPrev);
-        snprintf(pub_msg_1.data.data, pub_msg_1.data.capacity, "%ld", encUnwraped);
-        pub_msg_1.data.size = strlen(pub_msg_1.data.data);
-        rc = rcl_publish(&my_pub_1, &pub_msg_1, NULL);
-        if(rc != RCL_RET_OK)
-            Error_Handler();
-    }
-}
 
 /* This task creates and handles the execution of node 'RMS' */ 
 void start_uros_task(void *argument)
@@ -64,75 +46,76 @@ void start_uros_task(void *argument)
     freeRTOS_allocator.reallocate = microros_reallocate;
     freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
 
-    rcl_allocator_t allocator = rcl_get_default_allocator();
-    rclc_support_t support;
-    rcl_ret_t rc;
+     if (!rcutils_set_default_allocator(&freeRTOS_allocator)) {
+      printf("Error on default allocators (line %d)\n", __LINE__); 
+  }
+
+  // micro-ROS app
+
+  rcl_publisher_t publisher;
+  std_msgs__msg__Int32 msg;
+  rclc_support_t support;
+  rcl_allocator_t allocator;
+  rcl_node_t node;
+
+  allocator = rcl_get_default_allocator();
+
+  //create init_options
+  rclc_support_init(&support, 0, NULL, &allocator);
+
+  // create node
+  rclc_node_init_default(&node, "rms_node", "", &support);
+
+  // create publisher
+  rclc_publisher_init_default(
+    &publisher,
+    &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32), "numbers");
+
+  msg.data = 0;
+
+  for(;;)
+  {
+    rcl_ret_t ret;
+
+	msg.data = val;
+    ret = rcl_publish(&publisher, &msg, NULL);
+    if (ret != RCL_RET_OK)
+    {
+      printf("Error publishing (line %d)\n", __LINE__); 
+    }
     
-    rc = rclc_support_init(&support, 0, NULL, &allocator);
-    if(rc != RCL_RET_OK)
-            Error_Handler();
-
-    rcl_node_t my_node;
-    rc = rclc_node_init_default(&my_node, "test_node", "RMS", &support);
-    if(rc != RCL_RET_OK)
-            Error_Handler();
-
-    const char *topic_name_1 = "topic_1";
-    const rosidl_message_type_support_t *my_type_support = ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, String);
-
-    rc = rclc_publisher_init_default(&my_pub_1, &my_node, my_type_support, topic_name_1);
-    if(rc != RCL_RET_OK)
-            Error_Handler();
-
-    rcl_timer_t my_timer; 
-    const unsigned int timer_timeout = 10; // in ms
-    rc = rclc_timer_init_default( &my_timer, &support, RCL_MS_TO_NS(timer_timeout), my_timer_callback);
-    if(rc != RCL_RET_OK)
-            Error_Handler();
-
-    // Assign message to publisher
-    std_msgs__msg__String__init(&pub_msg_1);    
-    const unsigned int PUB_MSG_BUFFER = BUF_SIZE;
-    pub_msg_1.data.data = malloc(PUB_MSG_BUFFER);
-    pub_msg_1.data.capacity = PUB_MSG_BUFFER;
-
-    rclc_executor_t executor = rclc_executor_get_zero_initialized_executor();
-    // Total number of handles = #timers + #subscriptions
-    unsigned int num_handles = 1; // as this program is using a single timer and no subscriptions at the moment
-    rclc_executor_init(&executor, &support.context, num_handles, &allocator);
-    rclc_executor_add_timer(&executor, &my_timer);
-    if(rc != RCL_RET_OK)
-            Error_Handler();
-
-    rclc_executor_spin(&executor);
-
-    // Cleaning up
-    rc = rclc_executor_fini(&executor);
-    rc += rcl_publisher_fini(&my_pub_1, &my_node);
-    rc += rcl_timer_fini(&my_timer);
-    rc += rcl_node_fini(&my_node);
-    rc += rclc_support_fini(&support);
-    std_msgs__msg__String__fini(&pub_msg_1);
-
-    if(rc != RCL_RET_OK)
-            Error_Handler();
-
-    // Just in case the thread ends abruptly, this function makes sure the thread exits safely
-    osThreadTerminate(NULL);
+    osDelay(100);
+  }
 }
 
-int32_t unwrap_encoder(uint16_t in, int32_t * prev)
+void start_mtr_ctrl_task(void *argument)
 {
-    int32_t c32 = (int32_t)in - HALF_PERIOD; //remove half period to determine (+/-) sign of the wrap
-    int32_t dif = (c32-*prev); //core concept: prev + (current - prev) = current
+  Motor mtr1;
 
-    //wrap difference from -HALF_PERIOD to HALF_PERIOD. modulo prevents differences after the wrap from having an incorrect result
-    int32_t mod_dif = ((dif + HALF_PERIOD) % ONE_PERIOD) - HALF_PERIOD;
-    if(dif < -HALF_PERIOD)
-        mod_dif += ONE_PERIOD; //account for mod of negative number behavior in C
+  Motor_Init(&mtr1, TIM_CHANNEL_1, TIM_CHANNEL_2, GPIOA, MTR1_L_EN_Pin, MTR1_R_EN_Pin);
 
-    int32_t unwrapped = *prev + mod_dif;
-    *prev = unwrapped; //load previous value
+  while (1)
+  {  
+    Motor_enable(&mtr1);
 
-    return unwrapped + HALF_PERIOD; //remove the shift we applied at the beginning, and return
+    Motor_turn_left(&mtr1, 200);
+    osDelay(2000);
+
+    Motor_turn_left(&mtr1, 400);
+    osDelay(2000);
+
+    Motor_turn_left(&mtr1, 600);
+    osDelay(2000);
+
+    Motor_turn_left(&mtr1, 800);
+    osDelay(2000);
+
+    Motor_turn_left(&mtr1, 1000);
+    osDelay(2000);
+
+    Motor_disable(&mtr1);
+    osDelay(2000);
+  }
+  
 }

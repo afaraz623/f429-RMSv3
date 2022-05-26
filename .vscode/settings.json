@@ -11,6 +11,9 @@
         "freertos.h": "c",
         "core_cm4.h": "c",
         "portmacro.h": "c",
-        "cmsis_os.h": "c"
+        "cmsis_os.h": "c",
+        "rcl.h": "c",
+        "string.h": "c",
+        "gpio.h": "c"
     }
 }

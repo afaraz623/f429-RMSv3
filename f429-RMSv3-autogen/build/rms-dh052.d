@@ -1,4 +1,5 @@
-build/rms-dh052.o: ../RMS-source/src/rms-dh052.c Core/Inc/main.h \
+build/rms-dh052.o: ../RMS-source/src/rms-dh052.c \
+ ../RMS-source/inc/dh052_internal.h Core/Inc/gpio.h Core/Inc/main.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  Core/Inc/stm32f4xx_hal_conf.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -24,7 +25,20 @@ build/rms-dh052.o: ../RMS-source/src/rms-dh052.c Core/Inc/main.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h Core/Inc/tim.h \
+ Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h \
+ Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
+ Core/Inc/FreeRTOSConfig.h \
+ Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h \
+ Middlewares/Third_Party/FreeRTOS/Source/include/portable.h \
+ Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h \
+ Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h \
+ Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h \
+ Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
+ Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
+ Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
+../RMS-source/inc/dh052_internal.h:
+Core/Inc/gpio.h:
 Core/Inc/main.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 Core/Inc/stm32f4xx_hal_conf.h:
@@ -54,3 +68,15 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+Core/Inc/tim.h:
+Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
+Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
+Core/Inc/FreeRTOSConfig.h:
+Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
+Middlewares/Third_Party/FreeRTOS/Source/include/portable.h:
+Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h:
+Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h:
+Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h:
+Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
+Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
+Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
