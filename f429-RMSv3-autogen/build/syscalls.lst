@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccs0nCLB.s 			page 1
+ARM GAS  /tmp/cc6fyvOb.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
   28:Core/Src/syscalls.c **** **   2. Redistributions in binary form must reproduce the above copyright notice,
   29:Core/Src/syscalls.c **** **      this list of conditions and the following disclaimer in the documentation
   30:Core/Src/syscalls.c **** **      and/or other materials provided with the distribution.
-ARM GAS  /tmp/ccs0nCLB.s 			page 2
+ARM GAS  /tmp/cc6fyvOb.s 			page 2
 
 
   31:Core/Src/syscalls.c **** **   3. Neither the name of STMicroelectronics nor the names of its contributors
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
   34              		.loc 1 79 1 view .LVU1
   35 0000 7047     		bx	lr
   36              		.cfi_endproc
-ARM GAS  /tmp/ccs0nCLB.s 			page 3
+ARM GAS  /tmp/cc6fyvOb.s 			page 3
 
 
   37              	.LFE25:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
   89:Core/Src/syscalls.c ****     return -1;
   86              		.loc 1 89 5 is_stmt 1 view .LVU9
   90:Core/Src/syscalls.c **** }
-ARM GAS  /tmp/ccs0nCLB.s 			page 4
+ARM GAS  /tmp/cc6fyvOb.s 			page 4
 
 
   87              		.loc 1 90 1 is_stmt 0 view .LVU10
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  136              		.loc 1 99 1 view -0
  137              		.cfi_startproc
  138              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccs0nCLB.s 			page 5
+ARM GAS  /tmp/cc6fyvOb.s 			page 5
 
 
  139              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  182 001e 70BD     		pop	{r4, r5, r6, pc}
  183              		.loc 1 108 1 view .LVU32
  184              		.cfi_endproc
-ARM GAS  /tmp/ccs0nCLB.s 			page 6
+ARM GAS  /tmp/cc6fyvOb.s 			page 6
 
 
  185              	.LFE29:
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  231              		.loc 1 114 31 discriminator 1 view .LVU43
  232 0014 B542     		cmp	r5, r6
  233 0016 F8DB     		blt	.L14
-ARM GAS  /tmp/ccs0nCLB.s 			page 7
+ARM GAS  /tmp/cc6fyvOb.s 			page 7
 
 
  117:Core/Src/syscalls.c ****     }
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  129:Core/Src/syscalls.c **** 
  130:Core/Src/syscalls.c ****     if (heap_end + incr > &_estack - _Min_Stack_Size) {
  278              		.loc 1 130 5 is_stmt 1 view .LVU57
-ARM GAS  /tmp/ccs0nCLB.s 			page 8
+ARM GAS  /tmp/cc6fyvOb.s 			page 8
 
 
  279              		.loc 1 130 18 is_stmt 0 view .LVU58
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  319              	.LVL24:
  132:Core/Src/syscalls.c ****         return (caddr_t)-1;
  320              		.loc 1 132 15 is_stmt 0 view .LVU69
-ARM GAS  /tmp/ccs0nCLB.s 			page 9
+ARM GAS  /tmp/cc6fyvOb.s 			page 9
 
 
  321 0030 0C23     		movs	r3, #12
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  147:Core/Src/syscalls.c **** 
  148:Core/Src/syscalls.c **** int _fstat(int file, struct stat *st)
  149:Core/Src/syscalls.c **** {
-ARM GAS  /tmp/ccs0nCLB.s 			page 10
+ARM GAS  /tmp/cc6fyvOb.s 			page 10
 
 
  371              		.loc 1 149 1 is_stmt 1 view -0
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  421              	.LVL31:
  422              	.LFB35:
  158:Core/Src/syscalls.c **** 
-ARM GAS  /tmp/ccs0nCLB.s 			page 11
+ARM GAS  /tmp/cc6fyvOb.s 			page 11
 
 
  159:Core/Src/syscalls.c **** int _lseek(int file, int ptr, int dir)
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  469              		.cfi_def_cfa_offset 0
  470 0008 7047     		bx	lr
  471              		.cfi_endproc
-ARM GAS  /tmp/ccs0nCLB.s 			page 12
+ARM GAS  /tmp/cc6fyvOb.s 			page 12
 
 
  472              	.LFE36:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  521              		.loc 1 177 1 is_stmt 0 view .LVU102
  522 0000 08B5     		push	{r3, lr}
  523              	.LCFI8:
-ARM GAS  /tmp/ccs0nCLB.s 			page 13
+ARM GAS  /tmp/cc6fyvOb.s 			page 13
 
 
  524              		.cfi_def_cfa_offset 8
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  186:Core/Src/syscalls.c **** 
  187:Core/Src/syscalls.c **** int _stat(char *file, struct stat *st)
  188:Core/Src/syscalls.c **** {
-ARM GAS  /tmp/ccs0nCLB.s 			page 14
+ARM GAS  /tmp/cc6fyvOb.s 			page 14
 
 
  574              		.loc 1 188 1 is_stmt 1 view -0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  621 000e 08BD     		pop	{r3, pc}
  622              		.cfi_endproc
  623              	.LFE41:
-ARM GAS  /tmp/ccs0nCLB.s 			page 15
+ARM GAS  /tmp/cc6fyvOb.s 			page 15
 
 
  625              		.section	.text._fork,"ax",%progbits
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  673              		.cfi_def_cfa_offset 8
  674              		.cfi_offset 3, -8
  675              		.cfi_offset 14, -4
-ARM GAS  /tmp/ccs0nCLB.s 			page 16
+ARM GAS  /tmp/cc6fyvOb.s 			page 16
 
 
  207:Core/Src/syscalls.c ****     errno = ENOMEM;
@@ -943,56 +943,56 @@ ARM GAS  /tmp/ccs0nCLB.s 			page 1
  719              		.file 7 "/opt/gcc-arm/arm-none-eabi/include/sys/stat.h"
  720              		.file 8 "/opt/gcc-arm/arm-none-eabi/include/sys/times.h"
  721              		.file 9 "/opt/gcc-arm/arm-none-eabi/include/sys/errno.h"
-ARM GAS  /tmp/ccs0nCLB.s 			page 17
+ARM GAS  /tmp/cc6fyvOb.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 syscalls.c
-     /tmp/ccs0nCLB.s:20     .text.initialise_monitor_handles:0000000000000000 $t
-     /tmp/ccs0nCLB.s:26     .text.initialise_monitor_handles:0000000000000000 initialise_monitor_handles
-     /tmp/ccs0nCLB.s:40     .text._getpid:0000000000000000 $t
-     /tmp/ccs0nCLB.s:46     .text._getpid:0000000000000000 _getpid
-     /tmp/ccs0nCLB.s:61     .text._kill:0000000000000000 $t
-     /tmp/ccs0nCLB.s:67     .text._kill:0000000000000000 _kill
-     /tmp/ccs0nCLB.s:94     .text._exit:0000000000000000 $t
-     /tmp/ccs0nCLB.s:100    .text._exit:0000000000000000 _exit
-     /tmp/ccs0nCLB.s:127    .text._read:0000000000000000 $t
-     /tmp/ccs0nCLB.s:133    .text._read:0000000000000000 _read
-     /tmp/ccs0nCLB.s:188    .text._write:0000000000000000 $t
-     /tmp/ccs0nCLB.s:194    .text._write:0000000000000000 _write
-     /tmp/ccs0nCLB.s:243    .text._sbrk:0000000000000000 $t
-     /tmp/ccs0nCLB.s:249    .text._sbrk:0000000000000000 _sbrk
-     /tmp/ccs0nCLB.s:330    .text._sbrk:000000000000003c $d
-     /tmp/ccs0nCLB.s:338    .text._close:0000000000000000 $t
-     /tmp/ccs0nCLB.s:344    .text._close:0000000000000000 _close
-     /tmp/ccs0nCLB.s:362    .text._fstat:0000000000000000 $t
-     /tmp/ccs0nCLB.s:368    .text._fstat:0000000000000000 _fstat
-     /tmp/ccs0nCLB.s:390    .text._isatty:0000000000000000 $t
-     /tmp/ccs0nCLB.s:396    .text._isatty:0000000000000000 _isatty
-     /tmp/ccs0nCLB.s:414    .text._lseek:0000000000000000 $t
-     /tmp/ccs0nCLB.s:420    .text._lseek:0000000000000000 _lseek
-     /tmp/ccs0nCLB.s:438    .text._open:0000000000000000 $t
-     /tmp/ccs0nCLB.s:444    .text._open:0000000000000000 _open
-     /tmp/ccs0nCLB.s:475    .text._wait:0000000000000000 $t
-     /tmp/ccs0nCLB.s:481    .text._wait:0000000000000000 _wait
-     /tmp/ccs0nCLB.s:508    .text._unlink:0000000000000000 $t
-     /tmp/ccs0nCLB.s:514    .text._unlink:0000000000000000 _unlink
-     /tmp/ccs0nCLB.s:541    .text._times:0000000000000000 $t
-     /tmp/ccs0nCLB.s:547    .text._times:0000000000000000 _times
-     /tmp/ccs0nCLB.s:565    .text._stat:0000000000000000 $t
-     /tmp/ccs0nCLB.s:571    .text._stat:0000000000000000 _stat
-     /tmp/ccs0nCLB.s:593    .text._link:0000000000000000 $t
-     /tmp/ccs0nCLB.s:599    .text._link:0000000000000000 _link
-     /tmp/ccs0nCLB.s:626    .text._fork:0000000000000000 $t
-     /tmp/ccs0nCLB.s:632    .text._fork:0000000000000000 _fork
-     /tmp/ccs0nCLB.s:657    .text._execve:0000000000000000 $t
-     /tmp/ccs0nCLB.s:663    .text._execve:0000000000000000 _execve
-     /tmp/ccs0nCLB.s:708    .data.environ:0000000000000000 environ
-     /tmp/ccs0nCLB.s:695    .bss.__env:0000000000000000 __env
-     /tmp/ccs0nCLB.s:692    .bss.__env:0000000000000000 $d
-     /tmp/ccs0nCLB.s:698    .bss.heap_end.0:0000000000000000 $d
-     /tmp/ccs0nCLB.s:702    .bss.heap_end.0:0000000000000000 heap_end.0
-     /tmp/ccs0nCLB.s:705    .data.environ:0000000000000000 $d
+     /tmp/cc6fyvOb.s:20     .text.initialise_monitor_handles:0000000000000000 $t
+     /tmp/cc6fyvOb.s:26     .text.initialise_monitor_handles:0000000000000000 initialise_monitor_handles
+     /tmp/cc6fyvOb.s:40     .text._getpid:0000000000000000 $t
+     /tmp/cc6fyvOb.s:46     .text._getpid:0000000000000000 _getpid
+     /tmp/cc6fyvOb.s:61     .text._kill:0000000000000000 $t
+     /tmp/cc6fyvOb.s:67     .text._kill:0000000000000000 _kill
+     /tmp/cc6fyvOb.s:94     .text._exit:0000000000000000 $t
+     /tmp/cc6fyvOb.s:100    .text._exit:0000000000000000 _exit
+     /tmp/cc6fyvOb.s:127    .text._read:0000000000000000 $t
+     /tmp/cc6fyvOb.s:133    .text._read:0000000000000000 _read
+     /tmp/cc6fyvOb.s:188    .text._write:0000000000000000 $t
+     /tmp/cc6fyvOb.s:194    .text._write:0000000000000000 _write
+     /tmp/cc6fyvOb.s:243    .text._sbrk:0000000000000000 $t
+     /tmp/cc6fyvOb.s:249    .text._sbrk:0000000000000000 _sbrk
+     /tmp/cc6fyvOb.s:330    .text._sbrk:000000000000003c $d
+     /tmp/cc6fyvOb.s:338    .text._close:0000000000000000 $t
+     /tmp/cc6fyvOb.s:344    .text._close:0000000000000000 _close
+     /tmp/cc6fyvOb.s:362    .text._fstat:0000000000000000 $t
+     /tmp/cc6fyvOb.s:368    .text._fstat:0000000000000000 _fstat
+     /tmp/cc6fyvOb.s:390    .text._isatty:0000000000000000 $t
+     /tmp/cc6fyvOb.s:396    .text._isatty:0000000000000000 _isatty
+     /tmp/cc6fyvOb.s:414    .text._lseek:0000000000000000 $t
+     /tmp/cc6fyvOb.s:420    .text._lseek:0000000000000000 _lseek
+     /tmp/cc6fyvOb.s:438    .text._open:0000000000000000 $t
+     /tmp/cc6fyvOb.s:444    .text._open:0000000000000000 _open
+     /tmp/cc6fyvOb.s:475    .text._wait:0000000000000000 $t
+     /tmp/cc6fyvOb.s:481    .text._wait:0000000000000000 _wait
+     /tmp/cc6fyvOb.s:508    .text._unlink:0000000000000000 $t
+     /tmp/cc6fyvOb.s:514    .text._unlink:0000000000000000 _unlink
+     /tmp/cc6fyvOb.s:541    .text._times:0000000000000000 $t
+     /tmp/cc6fyvOb.s:547    .text._times:0000000000000000 _times
+     /tmp/cc6fyvOb.s:565    .text._stat:0000000000000000 $t
+     /tmp/cc6fyvOb.s:571    .text._stat:0000000000000000 _stat
+     /tmp/cc6fyvOb.s:593    .text._link:0000000000000000 $t
+     /tmp/cc6fyvOb.s:599    .text._link:0000000000000000 _link
+     /tmp/cc6fyvOb.s:626    .text._fork:0000000000000000 $t
+     /tmp/cc6fyvOb.s:632    .text._fork:0000000000000000 _fork
+     /tmp/cc6fyvOb.s:657    .text._execve:0000000000000000 $t
+     /tmp/cc6fyvOb.s:663    .text._execve:0000000000000000 _execve
+     /tmp/cc6fyvOb.s:708    .data.environ:0000000000000000 environ
+     /tmp/cc6fyvOb.s:695    .bss.__env:0000000000000000 __env
+     /tmp/cc6fyvOb.s:692    .bss.__env:0000000000000000 $d
+     /tmp/cc6fyvOb.s:698    .bss.heap_end.0:0000000000000000 $d
+     /tmp/cc6fyvOb.s:702    .bss.heap_end.0:0000000000000000 heap_end.0
+     /tmp/cc6fyvOb.s:705    .data.environ:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 __errno

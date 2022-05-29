@@ -62,7 +62,7 @@ const osThreadAttr_t uros_task_attributes = {
 };
 /* Definitions for motor_control */
 osThreadId_t motor_controlHandle;
-uint32_t motor_control_Buffer[ 128 ];
+uint32_t motor_control_Buffer[ 1000 ];
 osStaticThreadDef_t motor_control_tControlBlock;
 const osThreadAttr_t motor_control_attributes = {
   .name = "motor_control",
@@ -70,7 +70,7 @@ const osThreadAttr_t motor_control_attributes = {
   .cb_size = sizeof(motor_control_tControlBlock),
   .stack_mem = &motor_control_Buffer[0],
   .stack_size = sizeof(motor_control_Buffer),
-  .priority = (osPriority_t) osPriorityNormal1,
+  .priority = (osPriority_t) osPriorityBelowNormal7,
 };
 
 /* Private function prototypes -----------------------------------------------*/

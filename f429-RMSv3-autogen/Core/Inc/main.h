@@ -57,10 +57,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define MTR1_ENC_A__Pin GPIO_PIN_6
-#define MTR1_ENC_A__GPIO_Port GPIOA
-#define MTR1_ENC_B__Pin GPIO_PIN_7
-#define MTR1_ENC_B__GPIO_Port GPIOA
+#define MTR1_ENC_A_Pin GPIO_PIN_6
+#define MTR1_ENC_A_GPIO_Port GPIOA
+#define MTR1_ENC_B_Pin GPIO_PIN_7
+#define MTR1_ENC_B_GPIO_Port GPIOA
 #define MTR1_LPWM_Pin GPIO_PIN_6
 #define MTR1_LPWM_GPIO_Port GPIOC
 #define MTR1_RPWM_Pin GPIO_PIN_7
