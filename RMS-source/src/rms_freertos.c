@@ -23,8 +23,17 @@
 #define ONE_PERIOD 16384  
 #define HALF_PERIOD 8192
 #define BUF_SIZE 256
+
+
 /****************************** Global Variables ******************************/
 int32_t encPrev = 0;
+
+// uint16_t IC_Val1 = 0;
+// uint16_t IC_Val2 = 0;
+// uint16_t Difference = 0;
+// uint16_t rpm = 0;
+// int Is_First_Captured = 0;
+
 /********************************* Prototypes ********************************/
 extern bool cubemx_transport_open(struct uxrCustomTransport * transport);
 extern bool cubemx_transport_close(struct uxrCustomTransport * transport);
@@ -71,14 +80,13 @@ void start_uros_task(void *argument)
   std_msgs__msg__String__init(&msg);
   msg.data.data = malloc(BUF_SIZE);
   msg.data.capacity = BUF_SIZE;
-
-  __HAL_TIM_GetCounter(&htim3) = 32768; 
   
   for(;;)
   {
-    snprintf(msg.data.data, msg.data.capacity, "Encoder Val: %ld, Encoder Dir: %d", __HAL_TIM_GetCounter(&htim3) / 4, __HAL_TIM_DIRECTION_STATUS(&htim3));
+    snprintf(msg.data.data, msg.data.capacity, "Enc Count: %ld", TIM3->CNT>>2);
     msg.data.size = strlen(msg.data.data);
     rcl_publish(&publisher, &msg, NULL);
+    // osDelay(500);
   }
 }
 
@@ -88,22 +96,44 @@ void start_mtr_ctrl_task(void *argument)
 
   Motor_Init(&mtr1, TIM_CHANNEL_1, TIM_CHANNEL_2, GPIOA, MTR1_L_EN_Pin, MTR1_R_EN_Pin);
 
-  Motor_enable(&mtr1);
+  Motor_disable(&mtr1);
   while (1)
   {
-    Motor_turn_left(&mtr1, 100);
-    osDelay(2000);
-
-    Motor_stop(&mtr1);
-    osDelay(1000);
-    
-    Motor_turn_right(&mtr1, 100);
-    osDelay(2000);
-
-    Motor_stop(&mtr1);
-    osDelay(1000);
+    Motor_turn_left(&mtr1, 500);
   }
 }
+
+
+// void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+// {
+//   if (Is_First_Captured==0) // if the first rising edge is not captured
+//   {
+//     HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+//     IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1); // read the first value
+//     Is_First_Captured = 1;  // set the first captured as true
+//   }
+
+//   else   // If the first rising edge is captured, now we will capture the second edge
+//   {
+//     IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);  // read second value
+
+//     if (IC_Val2 > IC_Val1)
+//     {
+//       Difference = IC_Val2-IC_Val1;
+//     }
+
+//     else if (IC_Val1 > IC_Val2)
+//     {
+//       Difference = (0xffff - IC_Val1) + IC_Val2;
+//     }
+
+//     uint16_t enctoms = Difference * 0.5; // converting enc counts to ms
+//     rpm = 60000 / enctoms;
+
+//     __HAL_TIM_SET_COUNTER(htim, 0);  // reset the counter
+//     Is_First_Captured = 0; // set it back to false
+//   }
+// }
 
 int32_t unwrap_encoder(uint16_t encCount, int32_t * prev)
 {

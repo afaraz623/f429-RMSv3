@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccbOEnYG.s 			page 1
+ARM GAS  /tmp/cc18UPyU.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccbOEnYG.s 			page 1
   28:Core/Src/freertos.c **** 
   29:Core/Src/freertos.c **** /* USER CODE END Includes */
   30:Core/Src/freertos.c **** 
-ARM GAS  /tmp/ccbOEnYG.s 			page 2
+ARM GAS  /tmp/cc18UPyU.s 			page 2
 
 
   31:Core/Src/freertos.c **** /* Private typedef -----------------------------------------------------------*/
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccbOEnYG.s 			page 1
   85:Core/Src/freertos.c **** 
   86:Core/Src/freertos.c **** /**
   87:Core/Src/freertos.c ****   * @brief  FreeRTOS initialization
-ARM GAS  /tmp/ccbOEnYG.s 			page 3
+ARM GAS  /tmp/cc18UPyU.s 			page 3
 
 
   88:Core/Src/freertos.c ****   * @param  None
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccbOEnYG.s 			page 1
   33              	.LVL0:
   34              		.loc 1 137 1 is_stmt 0 view .LVU1
   35 0000 08B5     		push	{r3, lr}
-ARM GAS  /tmp/ccbOEnYG.s 			page 4
+ARM GAS  /tmp/cc18UPyU.s 			page 4
 
 
   36              	.LCFI0:
@@ -198,7 +198,7 @@ ARM GAS  /tmp/ccbOEnYG.s 			page 1
   45 0004 FFF7FEFF 		bl	osDelay
   46              	.LVL2:
  140:Core/Src/freertos.c ****   {
-  47              		.loc 1 140 3 discriminator 1 view .LVU4
+  47              		.loc 1 140 8 discriminator 1 view .LVU4
   48 0008 FBE7     		b	.L2
   49              		.cfi_endproc
   50              	.LFE135:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccbOEnYG.s 			page 1
   73              	.L5:
  156:Core/Src/freertos.c ****   /* USER CODE BEGIN start_mtr_ctrl_task */
  157:Core/Src/freertos.c ****   /* Infinite loop */
-ARM GAS  /tmp/ccbOEnYG.s 			page 5
+ARM GAS  /tmp/cc18UPyU.s 			page 5
 
 
  158:Core/Src/freertos.c ****   for(;;)
@@ -250,7 +250,7 @@ ARM GAS  /tmp/ccbOEnYG.s 			page 1
   77 0004 FFF7FEFF 		bl	osDelay
   78              	.LVL5:
  158:Core/Src/freertos.c ****   {
-  79              		.loc 1 158 3 discriminator 1 view .LVU9
+  79              		.loc 1 158 8 discriminator 1 view .LVU9
   80 0008 FBE7     		b	.L5
   81              		.cfi_endproc
   82              	.LFE136:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccbOEnYG.s 			page 1
  119              		.loc 1 117 23 view .LVU16
  120 001a 064B     		ldr	r3, .L9+20
  121 001c 1860     		str	r0, [r3]
-ARM GAS  /tmp/ccbOEnYG.s 			page 6
+ARM GAS  /tmp/cc18UPyU.s 			page 6
 
 
  127:Core/Src/freertos.c **** 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccbOEnYG.s 			page 1
  169      00000000 
  170              		.section	.bss.motor_control_tControlBlock,"aw",%nobits
  171              		.align	2
-ARM GAS  /tmp/ccbOEnYG.s 			page 7
+ARM GAS  /tmp/cc18UPyU.s 			page 7
 
 
  174              	motor_control_tControlBlock:
@@ -408,40 +408,40 @@ ARM GAS  /tmp/ccbOEnYG.s 			page 1
  216      00000000 
  217              		.text
  218              	.Letext0:
- 219              		.file 2 "/opt/gcc-arm/arm-none-eabi/include/machine/_default_types.h"
- 220              		.file 3 "/opt/gcc-arm/arm-none-eabi/include/sys/_stdint.h"
+ 219              		.file 2 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_types.h"
+ 220              		.file 3 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
  221              		.file 4 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h"
  222              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h"
  223              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
-ARM GAS  /tmp/ccbOEnYG.s 			page 8
+ARM GAS  /tmp/cc18UPyU.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 freertos.c
-     /tmp/ccbOEnYG.s:20     .text.start_uros_task:0000000000000000 $t
-     /tmp/ccbOEnYG.s:26     .text.start_uros_task:0000000000000000 start_uros_task
-     /tmp/ccbOEnYG.s:53     .text.start_mtr_ctrl_task:0000000000000000 $t
-     /tmp/ccbOEnYG.s:59     .text.start_mtr_ctrl_task:0000000000000000 start_mtr_ctrl_task
-     /tmp/ccbOEnYG.s:85     .text.MX_FREERTOS_Init:0000000000000000 $t
-     /tmp/ccbOEnYG.s:91     .text.MX_FREERTOS_Init:0000000000000000 MX_FREERTOS_Init
-     /tmp/ccbOEnYG.s:127    .text.MX_FREERTOS_Init:0000000000000020 $d
-     /tmp/ccbOEnYG.s:194    .rodata.motor_control_attributes:0000000000000000 motor_control_attributes
-     /tmp/ccbOEnYG.s:138    .rodata.str1.4:0000000000000000 $d
-     /tmp/ccbOEnYG.s:174    .bss.motor_control_tControlBlock:0000000000000000 motor_control_tControlBlock
-     /tmp/ccbOEnYG.s:168    .bss.motor_control_Buffer:0000000000000000 motor_control_Buffer
-     /tmp/ccbOEnYG.s:162    .bss.motor_controlHandle:0000000000000000 motor_controlHandle
-     /tmp/ccbOEnYG.s:208    .rodata.uros_task_attributes:0000000000000000 uros_task_attributes
-     /tmp/ccbOEnYG.s:155    .bss.defaultTaskControlBlock:0000000000000000 defaultTaskControlBlock
-     /tmp/ccbOEnYG.s:187    .bss.uros_task_Buffer:0000000000000000 uros_task_Buffer
-     /tmp/ccbOEnYG.s:181    .bss.uros_taskHandle:0000000000000000 uros_taskHandle
-     /tmp/ccbOEnYG.s:152    .bss.defaultTaskControlBlock:0000000000000000 $d
-     /tmp/ccbOEnYG.s:158    .bss.motor_controlHandle:0000000000000000 $d
-     /tmp/ccbOEnYG.s:165    .bss.motor_control_Buffer:0000000000000000 $d
-     /tmp/ccbOEnYG.s:171    .bss.motor_control_tControlBlock:0000000000000000 $d
-     /tmp/ccbOEnYG.s:177    .bss.uros_taskHandle:0000000000000000 $d
-     /tmp/ccbOEnYG.s:184    .bss.uros_task_Buffer:0000000000000000 $d
-     /tmp/ccbOEnYG.s:190    .rodata.motor_control_attributes:0000000000000000 $d
-     /tmp/ccbOEnYG.s:204    .rodata.uros_task_attributes:0000000000000000 $d
+     /tmp/cc18UPyU.s:20     .text.start_uros_task:0000000000000000 $t
+     /tmp/cc18UPyU.s:26     .text.start_uros_task:0000000000000000 start_uros_task
+     /tmp/cc18UPyU.s:53     .text.start_mtr_ctrl_task:0000000000000000 $t
+     /tmp/cc18UPyU.s:59     .text.start_mtr_ctrl_task:0000000000000000 start_mtr_ctrl_task
+     /tmp/cc18UPyU.s:85     .text.MX_FREERTOS_Init:0000000000000000 $t
+     /tmp/cc18UPyU.s:91     .text.MX_FREERTOS_Init:0000000000000000 MX_FREERTOS_Init
+     /tmp/cc18UPyU.s:127    .text.MX_FREERTOS_Init:0000000000000020 $d
+     /tmp/cc18UPyU.s:194    .rodata.motor_control_attributes:0000000000000000 motor_control_attributes
+     /tmp/cc18UPyU.s:138    .rodata.str1.4:0000000000000000 $d
+     /tmp/cc18UPyU.s:174    .bss.motor_control_tControlBlock:0000000000000000 motor_control_tControlBlock
+     /tmp/cc18UPyU.s:168    .bss.motor_control_Buffer:0000000000000000 motor_control_Buffer
+     /tmp/cc18UPyU.s:162    .bss.motor_controlHandle:0000000000000000 motor_controlHandle
+     /tmp/cc18UPyU.s:208    .rodata.uros_task_attributes:0000000000000000 uros_task_attributes
+     /tmp/cc18UPyU.s:155    .bss.defaultTaskControlBlock:0000000000000000 defaultTaskControlBlock
+     /tmp/cc18UPyU.s:187    .bss.uros_task_Buffer:0000000000000000 uros_task_Buffer
+     /tmp/cc18UPyU.s:181    .bss.uros_taskHandle:0000000000000000 uros_taskHandle
+     /tmp/cc18UPyU.s:152    .bss.defaultTaskControlBlock:0000000000000000 $d
+     /tmp/cc18UPyU.s:158    .bss.motor_controlHandle:0000000000000000 $d
+     /tmp/cc18UPyU.s:165    .bss.motor_control_Buffer:0000000000000000 $d
+     /tmp/cc18UPyU.s:171    .bss.motor_control_tControlBlock:0000000000000000 $d
+     /tmp/cc18UPyU.s:177    .bss.uros_taskHandle:0000000000000000 $d
+     /tmp/cc18UPyU.s:184    .bss.uros_task_Buffer:0000000000000000 $d
+     /tmp/cc18UPyU.s:190    .rodata.motor_control_attributes:0000000000000000 $d
+     /tmp/cc18UPyU.s:204    .rodata.uros_task_attributes:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 osDelay

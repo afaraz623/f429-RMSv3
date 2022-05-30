@@ -18,7 +18,7 @@
                 "STM32F429xx",
                 "USE_HAL_DRIVER"
             ],
-            "compilerPath": "/opt/gcc-arm/bin/arm-none-eabi-gcc",
+            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
             "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],

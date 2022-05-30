@@ -1,18 +1,68 @@
+// Configure debug launch settings
+// Feel free to copy these and modify them for your debugger and MCU
 {
+    "version": "0.2.0",
+    "projectName": "f429-RMSv3-autogen",
     "configurations": [
         {
-            "showDevDebugOutput": "parsed",
+            "name": "JLink launch",
             "cwd": "${workspaceRoot}",
-            "executable": "./build/f239-microros.elf",
-            "name": "Debug STM32",
+            "executable": "${workspaceRoot}/f429-RMSv3-autogen/build/f429-RMSv3-autogen.elf",
             "request": "launch",
             "type": "cortex-debug",
-            "servertype": "openocd",
-            "preLaunchTask": "Build STM",
-            "device": "stm32f429",
-            "configFiles": [
-                "openocd.cfg"
-            ]
-        }
+            "servertype": "jlink",
+            "device": "STM32F429ZI",
+            "interface": "swd",
+            "runToEntryPoint": "main", // else it starts at reset handler - not interested
+            "preLaunchTask": "Build", // configured in tasks.json
+            "svdFile": "", // Include svd to watch device peripherals
+            "swoConfig":
+            {
+                "enabled": true,
+                "cpuFrequency": 160000000,
+                "swoFrequency": 4000000,
+                "source": "probe",
+                "decoders":
+                [
+                    {
+                        "label": "ITM port 0 output",
+                        "type": "console",
+                        "port": 0,
+                        "showOnStartup": true,
+                        "encoding": "ascii"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "JLink attach",
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/f429-RMSv3-autogen/build/f429-RMSv3-autogen.elf",
+            "request": "attach",
+            "type": "cortex-debug",
+            "servertype": "jlink",
+            "device": "STM32F429ZI",
+            "interface": "swd",
+            "runToEntryPoint": "main", // else it starts at reset handler - not interested
+            "preLaunchTask": "Build", // configured in tasks.json
+            "svdFile": "", // Include svd to watch device peripherals
+            "swoConfig":
+            {
+                "enabled": true,
+                "cpuFrequency": 160000000,
+                "swoFrequency": 4000000,
+                "source": "probe",
+                "decoders":
+                [
+                    {
+                        "label": "ITM port 0 output",
+                        "type": "console",
+                        "port": 0,
+                        "showOnStartup": true,
+                        "encoding": "ascii"
+                    }
+                ]
+            }
+        },
     ]
 }
