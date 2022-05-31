@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccSDEssh.s 			page 1
+ARM GAS  /tmp/cc6d6qTk.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -19,559 +19,621 @@ ARM GAS  /tmp/ccSDEssh.s 			page 1
   16              		.text
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
-  19              		.section	.text.Motor_Init,"ax",%progbits
+  19              		.section	.text.servo_Init,"ax",%progbits
   20              		.align	1
-  21              		.global	Motor_Init
+  21              		.global	servo_Init
   22              		.syntax unified
   23              		.thumb
   24              		.thumb_func
-  26              	Motor_Init:
+  26              	servo_Init:
   27              	.LVL0:
-  28              	.LFB134:
+  28              	.LFB130:
   29              		.file 1 "../RMS-source/src/rms-dh052.c"
    1:../RMS-source/src/rms-dh052.c **** #include "dh052_internal.h"
-   2:../RMS-source/src/rms-dh052.c **** #include "gpio.h"
-   3:../RMS-source/src/rms-dh052.c **** #include "tim.h"
-   4:../RMS-source/src/rms-dh052.c **** #include "cmsis_os.h"
-   5:../RMS-source/src/rms-dh052.c **** 
-   6:../RMS-source/src/rms-dh052.c **** 
-   7:../RMS-source/src/rms-dh052.c **** void Motor_Init(Motor * self, uint8_t L_PWM_CH, uint8_t R_PWM_CH, GPIO_TypeDef * Port, uint16_t L_E
-   8:../RMS-source/src/rms-dh052.c **** {
-  30              		.loc 1 8 1 view -0
+   2:../RMS-source/src/rms-dh052.c **** 
+   3:../RMS-source/src/rms-dh052.c **** /******************************* Aliases **************************************/
+   4:../RMS-source/src/rms-dh052.c **** /* 
+   5:../RMS-source/src/rms-dh052.c ****    "ONE_PERIOD" is this value because the counter counts on "both" edges of both 
+   6:../RMS-source/src/rms-dh052.c ****    channels making one pulse counted as 4 for greater accuracy. Thats the this is
+   7:../RMS-source/src/rms-dh052.c ****    divided by 4.
+   8:../RMS-source/src/rms-dh052.c **** */ 
+   9:../RMS-source/src/rms-dh052.c **** #define ONE_PERIOD 16384  
+  10:../RMS-source/src/rms-dh052.c **** #define HALF_PERIOD 8192
+  11:../RMS-source/src/rms-dh052.c **** 
+  12:../RMS-source/src/rms-dh052.c **** /****************************** Global Variables ******************************/
+  13:../RMS-source/src/rms-dh052.c **** static int32_t g_prev = 0;
+  14:../RMS-source/src/rms-dh052.c **** 
+  15:../RMS-source/src/rms-dh052.c **** void servo_Init(Motor *handle,TIM_HandleTypeDef *pwm_tim_h , uint8_t lpwm_ch, uint8_t rpwm_ch, GPIO
+  16:../RMS-source/src/rms-dh052.c **** {
+  30              		.loc 1 16 1 view -0
   31              		.cfi_startproc
-  32              		@ args = 8, pretend = 0, frame = 0
+  32              		@ args = 16, pretend = 0, frame = 0
   33              		@ frame_needed = 0, uses_anonymous_args = 0
   34              		@ link register save eliminated.
-   9:../RMS-source/src/rms-dh052.c ****     self->Port = Port;
-  35              		.loc 1 9 5 view .LVU1
-  36              		.loc 1 9 16 is_stmt 0 view .LVU2
-  37 0000 4360     		str	r3, [r0, #4]
-  10:../RMS-source/src/rms-dh052.c ****     self->L_EN = L_EN;
-  38              		.loc 1 10 5 is_stmt 1 view .LVU3
-  39              		.loc 1 10 16 is_stmt 0 view .LVU4
-  40 0002 BDF80030 		ldrh	r3, [sp]
+  17:../RMS-source/src/rms-dh052.c ****     handle->pwm_tim_h = pwm_tim_h;
+  35              		.loc 1 17 5 view .LVU1
+  36              		.loc 1 17 23 is_stmt 0 view .LVU2
+  37 0000 0160     		str	r1, [r0]
+  18:../RMS-source/src/rms-dh052.c ****     handle->port = port;
+  38              		.loc 1 18 5 is_stmt 1 view .LVU3
+  39              		.loc 1 18 18 is_stmt 0 view .LVU4
+  40 0002 0099     		ldr	r1, [sp]
+ARM GAS  /tmp/cc6d6qTk.s 			page 2
+
+
   41              	.LVL1:
-  42              		.loc 1 10 16 view .LVU5
-  43 0006 0381     		strh	r3, [r0, #8]	@ movhi
-  11:../RMS-source/src/rms-dh052.c ****     self->R_EN = R_EN;
-  44              		.loc 1 11 5 is_stmt 1 view .LVU6
-  45              		.loc 1 11 16 is_stmt 0 view .LVU7
-  46 0008 BDF80430 		ldrh	r3, [sp, #4]
-  47 000c 4381     		strh	r3, [r0, #10]	@ movhi
-ARM GAS  /tmp/ccSDEssh.s 			page 2
+  42              		.loc 1 18 18 view .LVU5
+  43 0004 8160     		str	r1, [r0, #8]
+  19:../RMS-source/src/rms-dh052.c ****     handle->l_en = l_en;
+  44              		.loc 1 19 5 is_stmt 1 view .LVU6
+  45              		.loc 1 19 18 is_stmt 0 view .LVU7
+  46 0006 BDF80410 		ldrh	r1, [sp, #4]
+  47 000a 8181     		strh	r1, [r0, #12]	@ movhi
+  20:../RMS-source/src/rms-dh052.c ****     handle->r_en = r_en;
+  48              		.loc 1 20 5 is_stmt 1 view .LVU8
+  49              		.loc 1 20 18 is_stmt 0 view .LVU9
+  50 000c BDF80810 		ldrh	r1, [sp, #8]
+  51 0010 C181     		strh	r1, [r0, #14]	@ movhi
+  21:../RMS-source/src/rms-dh052.c ****     handle->lpwm_ch = lpwm_ch;
+  52              		.loc 1 21 5 is_stmt 1 view .LVU10
+  53              		.loc 1 21 21 is_stmt 0 view .LVU11
+  54 0012 0271     		strb	r2, [r0, #4]
+  22:../RMS-source/src/rms-dh052.c ****     handle->rpwm_ch = rpwm_ch;
+  55              		.loc 1 22 5 is_stmt 1 view .LVU12
+  56              		.loc 1 22 21 is_stmt 0 view .LVU13
+  57 0014 4371     		strb	r3, [r0, #5]
+  23:../RMS-source/src/rms-dh052.c ****     handle->enc_tim_h = enc_tim_h;
+  58              		.loc 1 23 5 is_stmt 1 view .LVU14
+  59              		.loc 1 23 23 is_stmt 0 view .LVU15
+  60 0016 039B     		ldr	r3, [sp, #12]
+  61              	.LVL2:
+  62              		.loc 1 23 23 view .LVU16
+  63 0018 0361     		str	r3, [r0, #16]
+  24:../RMS-source/src/rms-dh052.c **** }
+  64              		.loc 1 24 1 view .LVU17
+  65 001a 7047     		bx	lr
+  66              		.cfi_endproc
+  67              	.LFE130:
+  69              		.section	.text.servo_enable,"ax",%progbits
+  70              		.align	1
+  71              		.global	servo_enable
+  72              		.syntax unified
+  73              		.thumb
+  74              		.thumb_func
+  76              	servo_enable:
+  77              	.LVL3:
+  78              	.LFB131:
+  25:../RMS-source/src/rms-dh052.c **** 
+  26:../RMS-source/src/rms-dh052.c **** void servo_enable(Motor const *handle)
+  27:../RMS-source/src/rms-dh052.c **** {   
+  79              		.loc 1 27 1 is_stmt 1 view -0
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83              		.loc 1 27 1 is_stmt 0 view .LVU19
+  84 0000 10B5     		push	{r4, lr}
+  85              	.LCFI0:
+  86              		.cfi_def_cfa_offset 8
+  87              		.cfi_offset 4, -8
+  88              		.cfi_offset 14, -4
+  89 0002 0446     		mov	r4, r0
+  28:../RMS-source/src/rms-dh052.c ****     HAL_GPIO_WritePin(handle->port, handle->l_en, 1);
+ARM GAS  /tmp/cc6d6qTk.s 			page 3
 
 
-  12:../RMS-source/src/rms-dh052.c ****     self->L_PWM_CH = L_PWM_CH;
-  48              		.loc 1 12 5 is_stmt 1 view .LVU8
-  49              		.loc 1 12 20 is_stmt 0 view .LVU9
-  50 000e 0170     		strb	r1, [r0]
-  13:../RMS-source/src/rms-dh052.c ****     self->R_PWM_CH = R_PWM_CH;
-  51              		.loc 1 13 5 is_stmt 1 view .LVU10
-  52              		.loc 1 13 20 is_stmt 0 view .LVU11
-  53 0010 4270     		strb	r2, [r0, #1]
-  14:../RMS-source/src/rms-dh052.c **** }
-  54              		.loc 1 14 1 view .LVU12
-  55 0012 7047     		bx	lr
-  56              		.cfi_endproc
-  57              	.LFE134:
-  59              		.section	.text.Motor_enable,"ax",%progbits
-  60              		.align	1
-  61              		.global	Motor_enable
-  62              		.syntax unified
-  63              		.thumb
-  64              		.thumb_func
-  66              	Motor_enable:
-  67              	.LVL2:
-  68              	.LFB135:
-  15:../RMS-source/src/rms-dh052.c **** 
-  16:../RMS-source/src/rms-dh052.c **** void Motor_enable(Motor const * self)
-  17:../RMS-source/src/rms-dh052.c **** {   
-  69              		.loc 1 17 1 is_stmt 1 view -0
-  70              		.cfi_startproc
-  71              		@ args = 0, pretend = 0, frame = 0
-  72              		@ frame_needed = 0, uses_anonymous_args = 0
-  73              		.loc 1 17 1 is_stmt 0 view .LVU14
-  74 0000 10B5     		push	{r4, lr}
-  75              	.LCFI0:
-  76              		.cfi_def_cfa_offset 8
-  77              		.cfi_offset 4, -8
-  78              		.cfi_offset 14, -4
-  79 0002 0446     		mov	r4, r0
-  18:../RMS-source/src/rms-dh052.c ****     HAL_GPIO_WritePin(self->Port, self->L_EN, 1);
-  80              		.loc 1 18 5 is_stmt 1 view .LVU15
-  81 0004 0122     		movs	r2, #1
-  82 0006 0189     		ldrh	r1, [r0, #8]
-  83 0008 4068     		ldr	r0, [r0, #4]
-  84              	.LVL3:
-  85              		.loc 1 18 5 is_stmt 0 view .LVU16
-  86 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
-  87              	.LVL4:
-  19:../RMS-source/src/rms-dh052.c ****     HAL_GPIO_WritePin(self->Port, self->R_EN, 1);
-  88              		.loc 1 19 5 is_stmt 1 view .LVU17
-  89 000e 0122     		movs	r2, #1
-  90 0010 6189     		ldrh	r1, [r4, #10]
-  91 0012 6068     		ldr	r0, [r4, #4]
-  92 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
-  93              	.LVL5:
-  20:../RMS-source/src/rms-dh052.c **** }
-  94              		.loc 1 20 1 is_stmt 0 view .LVU18
-  95 0018 10BD     		pop	{r4, pc}
-  96              		.loc 1 20 1 view .LVU19
-  97              		.cfi_endproc
-ARM GAS  /tmp/ccSDEssh.s 			page 3
+  90              		.loc 1 28 5 is_stmt 1 view .LVU20
+  91 0004 0122     		movs	r2, #1
+  92 0006 8189     		ldrh	r1, [r0, #12]
+  93 0008 8068     		ldr	r0, [r0, #8]
+  94              	.LVL4:
+  95              		.loc 1 28 5 is_stmt 0 view .LVU21
+  96 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  97              	.LVL5:
+  29:../RMS-source/src/rms-dh052.c ****     HAL_GPIO_WritePin(handle->port, handle->r_en, 1);
+  98              		.loc 1 29 5 is_stmt 1 view .LVU22
+  99 000e 0122     		movs	r2, #1
+ 100 0010 E189     		ldrh	r1, [r4, #14]
+ 101 0012 A068     		ldr	r0, [r4, #8]
+ 102 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 103              	.LVL6:
+  30:../RMS-source/src/rms-dh052.c **** }
+ 104              		.loc 1 30 1 is_stmt 0 view .LVU23
+ 105 0018 10BD     		pop	{r4, pc}
+ 106              		.loc 1 30 1 view .LVU24
+ 107              		.cfi_endproc
+ 108              	.LFE131:
+ 110              		.section	.text.servo_disable,"ax",%progbits
+ 111              		.align	1
+ 112              		.global	servo_disable
+ 113              		.syntax unified
+ 114              		.thumb
+ 115              		.thumb_func
+ 117              	servo_disable:
+ 118              	.LVL7:
+ 119              	.LFB132:
+  31:../RMS-source/src/rms-dh052.c **** 
+  32:../RMS-source/src/rms-dh052.c **** void servo_disable(Motor const *handle)
+  33:../RMS-source/src/rms-dh052.c **** {   
+ 120              		.loc 1 33 1 is_stmt 1 view -0
+ 121              		.cfi_startproc
+ 122              		@ args = 0, pretend = 0, frame = 0
+ 123              		@ frame_needed = 0, uses_anonymous_args = 0
+ 124              		.loc 1 33 1 is_stmt 0 view .LVU26
+ 125 0000 10B5     		push	{r4, lr}
+ 126              	.LCFI1:
+ 127              		.cfi_def_cfa_offset 8
+ 128              		.cfi_offset 4, -8
+ 129              		.cfi_offset 14, -4
+ 130 0002 0446     		mov	r4, r0
+  34:../RMS-source/src/rms-dh052.c ****     HAL_GPIO_WritePin(handle->port, handle->l_en, 0);
+ 131              		.loc 1 34 5 is_stmt 1 view .LVU27
+ 132 0004 0022     		movs	r2, #0
+ 133 0006 8189     		ldrh	r1, [r0, #12]
+ 134 0008 8068     		ldr	r0, [r0, #8]
+ 135              	.LVL8:
+ 136              		.loc 1 34 5 is_stmt 0 view .LVU28
+ 137 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 138              	.LVL9:
+  35:../RMS-source/src/rms-dh052.c ****     HAL_GPIO_WritePin(handle->port, handle->r_en, 0);
+ 139              		.loc 1 35 5 is_stmt 1 view .LVU29
+ 140 000e 0022     		movs	r2, #0
+ 141 0010 E189     		ldrh	r1, [r4, #14]
+ARM GAS  /tmp/cc6d6qTk.s 			page 4
 
 
-  98              	.LFE135:
- 100              		.section	.text.Motor_disable,"ax",%progbits
- 101              		.align	1
- 102              		.global	Motor_disable
- 103              		.syntax unified
- 104              		.thumb
- 105              		.thumb_func
- 107              	Motor_disable:
- 108              	.LVL6:
- 109              	.LFB136:
-  21:../RMS-source/src/rms-dh052.c **** 
-  22:../RMS-source/src/rms-dh052.c **** void Motor_disable(Motor const * self)
-  23:../RMS-source/src/rms-dh052.c **** {   
- 110              		.loc 1 23 1 is_stmt 1 view -0
- 111              		.cfi_startproc
- 112              		@ args = 0, pretend = 0, frame = 0
- 113              		@ frame_needed = 0, uses_anonymous_args = 0
- 114              		.loc 1 23 1 is_stmt 0 view .LVU21
- 115 0000 10B5     		push	{r4, lr}
- 116              	.LCFI1:
- 117              		.cfi_def_cfa_offset 8
- 118              		.cfi_offset 4, -8
- 119              		.cfi_offset 14, -4
- 120 0002 0446     		mov	r4, r0
-  24:../RMS-source/src/rms-dh052.c ****     HAL_GPIO_WritePin(self->Port, self->L_EN, 0);
- 121              		.loc 1 24 5 is_stmt 1 view .LVU22
- 122 0004 0022     		movs	r2, #0
- 123 0006 0189     		ldrh	r1, [r0, #8]
- 124 0008 4068     		ldr	r0, [r0, #4]
- 125              	.LVL7:
- 126              		.loc 1 24 5 is_stmt 0 view .LVU23
- 127 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
- 128              	.LVL8:
-  25:../RMS-source/src/rms-dh052.c ****     HAL_GPIO_WritePin(self->Port, self->R_EN, 0);
- 129              		.loc 1 25 5 is_stmt 1 view .LVU24
- 130 000e 0022     		movs	r2, #0
- 131 0010 6189     		ldrh	r1, [r4, #10]
- 132 0012 6068     		ldr	r0, [r4, #4]
- 133 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 134              	.LVL9:
-  26:../RMS-source/src/rms-dh052.c **** }
- 135              		.loc 1 26 1 is_stmt 0 view .LVU25
- 136 0018 10BD     		pop	{r4, pc}
- 137              		.loc 1 26 1 view .LVU26
- 138              		.cfi_endproc
- 139              	.LFE136:
- 141              		.section	.text.Motor_turn_left,"ax",%progbits
- 142              		.align	1
- 143              		.global	Motor_turn_left
- 144              		.syntax unified
- 145              		.thumb
- 146              		.thumb_func
- 148              	Motor_turn_left:
- 149              	.LVL10:
- 150              	.LFB137:
-  27:../RMS-source/src/rms-dh052.c **** 
-  28:../RMS-source/src/rms-dh052.c **** void Motor_turn_left(Motor const * self, uint16_t pwm)
-ARM GAS  /tmp/ccSDEssh.s 			page 4
+ 142 0012 A068     		ldr	r0, [r4, #8]
+ 143 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 144              	.LVL10:
+  36:../RMS-source/src/rms-dh052.c **** }
+ 145              		.loc 1 36 1 is_stmt 0 view .LVU30
+ 146 0018 10BD     		pop	{r4, pc}
+ 147              		.loc 1 36 1 view .LVU31
+ 148              		.cfi_endproc
+ 149              	.LFE132:
+ 151              		.section	.text.servo_turn_left,"ax",%progbits
+ 152              		.align	1
+ 153              		.global	servo_turn_left
+ 154              		.syntax unified
+ 155              		.thumb
+ 156              		.thumb_func
+ 158              	servo_turn_left:
+ 159              	.LVL11:
+ 160              	.LFB133:
+  37:../RMS-source/src/rms-dh052.c **** 
+  38:../RMS-source/src/rms-dh052.c **** void servo_turn_left(Motor const *handle, uint16_t pwm)
+  39:../RMS-source/src/rms-dh052.c **** {
+ 161              		.loc 1 39 1 is_stmt 1 view -0
+ 162              		.cfi_startproc
+ 163              		@ args = 0, pretend = 0, frame = 0
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 165              		@ link register save eliminated.
+  40:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, pwm);
+ 166              		.loc 1 40 5 view .LVU33
+ 167 0000 0379     		ldrb	r3, [r0, #4]	@ zero_extendqisi2
+ 168 0002 4BB9     		cbnz	r3, .L7
+ 169              		.loc 1 40 5 is_stmt 0 discriminator 1 view .LVU34
+ 170 0004 0368     		ldr	r3, [r0]
+ 171 0006 1B68     		ldr	r3, [r3]
+ 172 0008 5963     		str	r1, [r3, #52]
+ 173              	.L8:
+  41:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, 0);
+ 174              		.loc 1 41 5 is_stmt 1 view .LVU35
+ 175 000a 4379     		ldrb	r3, [r0, #5]	@ zero_extendqisi2
+ 176 000c A3B9     		cbnz	r3, .L11
+ 177              		.loc 1 41 5 is_stmt 0 discriminator 1 view .LVU36
+ 178 000e 0368     		ldr	r3, [r0]
+ 179 0010 1B68     		ldr	r3, [r3]
+ 180 0012 0022     		movs	r2, #0
+ 181 0014 5A63     		str	r2, [r3, #52]
+ 182 0016 7047     		bx	lr
+ 183              	.L7:
+  40:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, pwm);
+ 184              		.loc 1 40 5 discriminator 2 view .LVU37
+ 185 0018 042B     		cmp	r3, #4
+ 186 001a 05D0     		beq	.L15
+  40:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, pwm);
+ 187              		.loc 1 40 5 discriminator 4 view .LVU38
+ 188 001c 082B     		cmp	r3, #8
+ 189 001e 07D0     		beq	.L16
+  40:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, pwm);
+ 190              		.loc 1 40 5 discriminator 7 view .LVU39
+ 191 0020 0368     		ldr	r3, [r0]
+ARM GAS  /tmp/cc6d6qTk.s 			page 5
 
 
-  29:../RMS-source/src/rms-dh052.c **** {
- 151              		.loc 1 29 1 is_stmt 1 view -0
- 152              		.cfi_startproc
- 153              		@ args = 0, pretend = 0, frame = 0
- 154              		@ frame_needed = 0, uses_anonymous_args = 0
- 155              		.loc 1 29 1 is_stmt 0 view .LVU28
- 156 0000 10B5     		push	{r4, lr}
- 157              	.LCFI2:
- 158              		.cfi_def_cfa_offset 8
- 159              		.cfi_offset 4, -8
- 160              		.cfi_offset 14, -4
- 161 0002 0446     		mov	r4, r0
-  30:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, pwm);
- 162              		.loc 1 30 5 is_stmt 1 view .LVU29
- 163 0004 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
- 164 0006 63B9     		cbnz	r3, .L7
- 165              		.loc 1 30 5 is_stmt 0 discriminator 1 view .LVU30
- 166 0008 174B     		ldr	r3, .L20
- 167 000a 1B68     		ldr	r3, [r3]
- 168 000c 5963     		str	r1, [r3, #52]
- 169              	.L8:
-  31:../RMS-source/src/rms-dh052.c ****     osDelay(1);
- 170              		.loc 1 31 5 is_stmt 1 view .LVU31
- 171 000e 0120     		movs	r0, #1
- 172              	.LVL11:
- 173              		.loc 1 31 5 is_stmt 0 view .LVU32
- 174 0010 FFF7FEFF 		bl	osDelay
- 175              	.LVL12:
-  32:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->R_PWM_CH, 0);
- 176              		.loc 1 32 5 is_stmt 1 view .LVU33
- 177 0014 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
- 178 0016 A3B9     		cbnz	r3, .L11
- 179              		.loc 1 32 5 is_stmt 0 discriminator 1 view .LVU34
- 180 0018 134B     		ldr	r3, .L20
- 181 001a 1B68     		ldr	r3, [r3]
- 182 001c 0022     		movs	r2, #0
- 183 001e 5A63     		str	r2, [r3, #52]
- 184              	.L6:
-  33:../RMS-source/src/rms-dh052.c **** }
- 185              		.loc 1 33 1 view .LVU35
- 186 0020 10BD     		pop	{r4, pc}
- 187              	.LVL13:
- 188              	.L7:
-  30:../RMS-source/src/rms-dh052.c ****     osDelay(1);
- 189              		.loc 1 30 5 discriminator 2 view .LVU36
- 190 0022 042B     		cmp	r3, #4
- 191 0024 05D0     		beq	.L16
-  30:../RMS-source/src/rms-dh052.c ****     osDelay(1);
- 192              		.loc 1 30 5 discriminator 4 view .LVU37
- 193 0026 082B     		cmp	r3, #8
- 194 0028 07D0     		beq	.L17
-  30:../RMS-source/src/rms-dh052.c ****     osDelay(1);
- 195              		.loc 1 30 5 discriminator 7 view .LVU38
- 196 002a 0F4B     		ldr	r3, .L20
- 197 002c 1B68     		ldr	r3, [r3]
- 198 002e 1964     		str	r1, [r3, #64]
- 199 0030 EDE7     		b	.L8
-ARM GAS  /tmp/ccSDEssh.s 			page 5
+ 192 0022 1B68     		ldr	r3, [r3]
+ 193 0024 1964     		str	r1, [r3, #64]
+ 194 0026 F0E7     		b	.L8
+ 195              	.L15:
+  40:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, pwm);
+ 196              		.loc 1 40 5 discriminator 3 view .LVU40
+ 197 0028 0368     		ldr	r3, [r0]
+ 198 002a 1B68     		ldr	r3, [r3]
+ 199 002c 9963     		str	r1, [r3, #56]
+ 200 002e ECE7     		b	.L8
+ 201              	.L16:
+  40:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, pwm);
+ 202              		.loc 1 40 5 discriminator 6 view .LVU41
+ 203 0030 0368     		ldr	r3, [r0]
+ 204 0032 1B68     		ldr	r3, [r3]
+ 205 0034 D963     		str	r1, [r3, #60]
+ 206 0036 E8E7     		b	.L8
+ 207              	.L11:
+ 208              		.loc 1 41 5 discriminator 2 view .LVU42
+ 209 0038 042B     		cmp	r3, #4
+ 210 003a 06D0     		beq	.L17
+ 211              		.loc 1 41 5 discriminator 4 view .LVU43
+ 212 003c 082B     		cmp	r3, #8
+ 213 003e 09D0     		beq	.L18
+ 214              		.loc 1 41 5 discriminator 7 view .LVU44
+ 215 0040 0368     		ldr	r3, [r0]
+ 216 0042 1B68     		ldr	r3, [r3]
+ 217 0044 0022     		movs	r2, #0
+ 218 0046 1A64     		str	r2, [r3, #64]
+  42:../RMS-source/src/rms-dh052.c **** }
+ 219              		.loc 1 42 1 discriminator 7 view .LVU45
+ 220 0048 7047     		bx	lr
+ 221              	.L17:
+  41:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, 0);
+ 222              		.loc 1 41 5 discriminator 3 view .LVU46
+ 223 004a 0368     		ldr	r3, [r0]
+ 224 004c 1B68     		ldr	r3, [r3]
+ 225 004e 0022     		movs	r2, #0
+ 226 0050 9A63     		str	r2, [r3, #56]
+ 227 0052 7047     		bx	lr
+ 228              	.L18:
+  41:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, 0);
+ 229              		.loc 1 41 5 discriminator 6 view .LVU47
+ 230 0054 0368     		ldr	r3, [r0]
+ 231 0056 1B68     		ldr	r3, [r3]
+ 232 0058 0022     		movs	r2, #0
+ 233 005a DA63     		str	r2, [r3, #60]
+ 234 005c 7047     		bx	lr
+ 235              		.cfi_endproc
+ 236              	.LFE133:
+ 238              		.section	.text.servo_turn_right,"ax",%progbits
+ 239              		.align	1
+ 240              		.global	servo_turn_right
+ 241              		.syntax unified
+ 242              		.thumb
+ 243              		.thumb_func
+ 245              	servo_turn_right:
+ARM GAS  /tmp/cc6d6qTk.s 			page 6
 
 
- 200              	.L16:
-  30:../RMS-source/src/rms-dh052.c ****     osDelay(1);
- 201              		.loc 1 30 5 discriminator 3 view .LVU39
- 202 0032 0D4B     		ldr	r3, .L20
- 203 0034 1B68     		ldr	r3, [r3]
- 204 0036 9963     		str	r1, [r3, #56]
- 205 0038 E9E7     		b	.L8
- 206              	.L17:
-  30:../RMS-source/src/rms-dh052.c ****     osDelay(1);
- 207              		.loc 1 30 5 discriminator 6 view .LVU40
- 208 003a 0B4B     		ldr	r3, .L20
- 209 003c 1B68     		ldr	r3, [r3]
- 210 003e D963     		str	r1, [r3, #60]
- 211 0040 E5E7     		b	.L8
- 212              	.LVL14:
- 213              	.L11:
-  32:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->R_PWM_CH, 0);
- 214              		.loc 1 32 5 discriminator 2 view .LVU41
- 215 0042 042B     		cmp	r3, #4
- 216 0044 06D0     		beq	.L18
-  32:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->R_PWM_CH, 0);
- 217              		.loc 1 32 5 discriminator 4 view .LVU42
- 218 0046 082B     		cmp	r3, #8
- 219 0048 09D0     		beq	.L19
-  32:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->R_PWM_CH, 0);
- 220              		.loc 1 32 5 discriminator 7 view .LVU43
- 221 004a 074B     		ldr	r3, .L20
- 222 004c 1B68     		ldr	r3, [r3]
- 223 004e 0022     		movs	r2, #0
- 224 0050 1A64     		str	r2, [r3, #64]
- 225              		.loc 1 33 1 discriminator 7 view .LVU44
- 226 0052 E5E7     		b	.L6
- 227              	.L18:
-  32:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->R_PWM_CH, 0);
- 228              		.loc 1 32 5 discriminator 3 view .LVU45
- 229 0054 044B     		ldr	r3, .L20
- 230 0056 1B68     		ldr	r3, [r3]
- 231 0058 0022     		movs	r2, #0
- 232 005a 9A63     		str	r2, [r3, #56]
- 233 005c E0E7     		b	.L6
- 234              	.L19:
-  32:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->R_PWM_CH, 0);
- 235              		.loc 1 32 5 discriminator 6 view .LVU46
- 236 005e 024B     		ldr	r3, .L20
- 237 0060 1B68     		ldr	r3, [r3]
- 238 0062 0022     		movs	r2, #0
- 239 0064 DA63     		str	r2, [r3, #60]
- 240 0066 DBE7     		b	.L6
- 241              	.L21:
- 242              		.align	2
- 243              	.L20:
- 244 0068 00000000 		.word	htim8
- 245              		.cfi_endproc
- 246              	.LFE137:
- 248              		.section	.text.Motor_turn_right,"ax",%progbits
- 249              		.align	1
- 250              		.global	Motor_turn_right
-ARM GAS  /tmp/ccSDEssh.s 			page 6
+ 246              	.LVL12:
+ 247              	.LFB134:
+  43:../RMS-source/src/rms-dh052.c **** 
+  44:../RMS-source/src/rms-dh052.c **** void servo_turn_right(Motor const *handle, uint16_t pwm)
+  45:../RMS-source/src/rms-dh052.c **** {
+ 248              		.loc 1 45 1 is_stmt 1 view -0
+ 249              		.cfi_startproc
+ 250              		@ args = 0, pretend = 0, frame = 0
+ 251              		@ frame_needed = 0, uses_anonymous_args = 0
+ 252              		@ link register save eliminated.
+  46:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, pwm);
+ 253              		.loc 1 46 5 view .LVU49
+ 254 0000 4379     		ldrb	r3, [r0, #5]	@ zero_extendqisi2
+ 255 0002 4BB9     		cbnz	r3, .L20
+ 256              		.loc 1 46 5 is_stmt 0 discriminator 1 view .LVU50
+ 257 0004 0368     		ldr	r3, [r0]
+ 258 0006 1B68     		ldr	r3, [r3]
+ 259 0008 5963     		str	r1, [r3, #52]
+ 260              	.L21:
+  47:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, 0);
+ 261              		.loc 1 47 5 is_stmt 1 view .LVU51
+ 262 000a 0379     		ldrb	r3, [r0, #4]	@ zero_extendqisi2
+ 263 000c A3B9     		cbnz	r3, .L24
+ 264              		.loc 1 47 5 is_stmt 0 discriminator 1 view .LVU52
+ 265 000e 0368     		ldr	r3, [r0]
+ 266 0010 1B68     		ldr	r3, [r3]
+ 267 0012 0022     		movs	r2, #0
+ 268 0014 5A63     		str	r2, [r3, #52]
+ 269 0016 7047     		bx	lr
+ 270              	.L20:
+  46:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, pwm);
+ 271              		.loc 1 46 5 discriminator 2 view .LVU53
+ 272 0018 042B     		cmp	r3, #4
+ 273 001a 05D0     		beq	.L28
+  46:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, pwm);
+ 274              		.loc 1 46 5 discriminator 4 view .LVU54
+ 275 001c 082B     		cmp	r3, #8
+ 276 001e 07D0     		beq	.L29
+  46:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, pwm);
+ 277              		.loc 1 46 5 discriminator 7 view .LVU55
+ 278 0020 0368     		ldr	r3, [r0]
+ 279 0022 1B68     		ldr	r3, [r3]
+ 280 0024 1964     		str	r1, [r3, #64]
+ 281 0026 F0E7     		b	.L21
+ 282              	.L28:
+  46:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, pwm);
+ 283              		.loc 1 46 5 discriminator 3 view .LVU56
+ 284 0028 0368     		ldr	r3, [r0]
+ 285 002a 1B68     		ldr	r3, [r3]
+ 286 002c 9963     		str	r1, [r3, #56]
+ 287 002e ECE7     		b	.L21
+ 288              	.L29:
+  46:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, pwm);
+ 289              		.loc 1 46 5 discriminator 6 view .LVU57
+ 290 0030 0368     		ldr	r3, [r0]
+ 291 0032 1B68     		ldr	r3, [r3]
+ 292 0034 D963     		str	r1, [r3, #60]
+ARM GAS  /tmp/cc6d6qTk.s 			page 7
 
 
- 251              		.syntax unified
- 252              		.thumb
- 253              		.thumb_func
- 255              	Motor_turn_right:
- 256              	.LVL15:
- 257              	.LFB138:
-  34:../RMS-source/src/rms-dh052.c **** 
-  35:../RMS-source/src/rms-dh052.c **** void Motor_turn_right(Motor const * self, uint16_t pwm)
-  36:../RMS-source/src/rms-dh052.c **** {
- 258              		.loc 1 36 1 is_stmt 1 view -0
- 259              		.cfi_startproc
- 260              		@ args = 0, pretend = 0, frame = 0
- 261              		@ frame_needed = 0, uses_anonymous_args = 0
- 262              		.loc 1 36 1 is_stmt 0 view .LVU48
- 263 0000 10B5     		push	{r4, lr}
- 264              	.LCFI3:
- 265              		.cfi_def_cfa_offset 8
- 266              		.cfi_offset 4, -8
- 267              		.cfi_offset 14, -4
- 268 0002 0446     		mov	r4, r0
-  37:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->R_PWM_CH, pwm);
- 269              		.loc 1 37 5 is_stmt 1 view .LVU49
- 270 0004 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
- 271 0006 63B9     		cbnz	r3, .L23
- 272              		.loc 1 37 5 is_stmt 0 discriminator 1 view .LVU50
- 273 0008 174B     		ldr	r3, .L36
- 274 000a 1B68     		ldr	r3, [r3]
- 275 000c 5963     		str	r1, [r3, #52]
- 276              	.L24:
-  38:../RMS-source/src/rms-dh052.c ****     osDelay(1);
- 277              		.loc 1 38 5 is_stmt 1 view .LVU51
- 278 000e 0120     		movs	r0, #1
- 279              	.LVL16:
- 280              		.loc 1 38 5 is_stmt 0 view .LVU52
- 281 0010 FFF7FEFF 		bl	osDelay
- 282              	.LVL17:
-  39:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, 0);
- 283              		.loc 1 39 5 is_stmt 1 view .LVU53
- 284 0014 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
- 285 0016 A3B9     		cbnz	r3, .L27
- 286              		.loc 1 39 5 is_stmt 0 discriminator 1 view .LVU54
- 287 0018 134B     		ldr	r3, .L36
- 288 001a 1B68     		ldr	r3, [r3]
- 289 001c 0022     		movs	r2, #0
- 290 001e 5A63     		str	r2, [r3, #52]
- 291              	.L22:
-  40:../RMS-source/src/rms-dh052.c **** }
- 292              		.loc 1 40 1 view .LVU55
- 293 0020 10BD     		pop	{r4, pc}
- 294              	.LVL18:
- 295              	.L23:
-  37:../RMS-source/src/rms-dh052.c ****     osDelay(1);
- 296              		.loc 1 37 5 discriminator 2 view .LVU56
- 297 0022 042B     		cmp	r3, #4
- 298 0024 05D0     		beq	.L32
-  37:../RMS-source/src/rms-dh052.c ****     osDelay(1);
- 299              		.loc 1 37 5 discriminator 4 view .LVU57
-ARM GAS  /tmp/ccSDEssh.s 			page 7
+ 293 0036 E8E7     		b	.L21
+ 294              	.L24:
+ 295              		.loc 1 47 5 discriminator 2 view .LVU58
+ 296 0038 042B     		cmp	r3, #4
+ 297 003a 06D0     		beq	.L30
+ 298              		.loc 1 47 5 discriminator 4 view .LVU59
+ 299 003c 082B     		cmp	r3, #8
+ 300 003e 09D0     		beq	.L31
+ 301              		.loc 1 47 5 discriminator 7 view .LVU60
+ 302 0040 0368     		ldr	r3, [r0]
+ 303 0042 1B68     		ldr	r3, [r3]
+ 304 0044 0022     		movs	r2, #0
+ 305 0046 1A64     		str	r2, [r3, #64]
+  48:../RMS-source/src/rms-dh052.c **** }
+ 306              		.loc 1 48 1 discriminator 7 view .LVU61
+ 307 0048 7047     		bx	lr
+ 308              	.L30:
+  47:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, 0);
+ 309              		.loc 1 47 5 discriminator 3 view .LVU62
+ 310 004a 0368     		ldr	r3, [r0]
+ 311 004c 1B68     		ldr	r3, [r3]
+ 312 004e 0022     		movs	r2, #0
+ 313 0050 9A63     		str	r2, [r3, #56]
+ 314 0052 7047     		bx	lr
+ 315              	.L31:
+  47:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, 0);
+ 316              		.loc 1 47 5 discriminator 6 view .LVU63
+ 317 0054 0368     		ldr	r3, [r0]
+ 318 0056 1B68     		ldr	r3, [r3]
+ 319 0058 0022     		movs	r2, #0
+ 320 005a DA63     		str	r2, [r3, #60]
+ 321 005c 7047     		bx	lr
+ 322              		.cfi_endproc
+ 323              	.LFE134:
+ 325              		.section	.text.servo_stop,"ax",%progbits
+ 326              		.align	1
+ 327              		.global	servo_stop
+ 328              		.syntax unified
+ 329              		.thumb
+ 330              		.thumb_func
+ 332              	servo_stop:
+ 333              	.LVL13:
+ 334              	.LFB135:
+  49:../RMS-source/src/rms-dh052.c **** 
+  50:../RMS-source/src/rms-dh052.c **** void servo_stop(Motor const *handle)
+  51:../RMS-source/src/rms-dh052.c **** {
+ 335              		.loc 1 51 1 is_stmt 1 view -0
+ 336              		.cfi_startproc
+ 337              		@ args = 0, pretend = 0, frame = 0
+ 338              		@ frame_needed = 0, uses_anonymous_args = 0
+ 339              		@ link register save eliminated.
+  52:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, 0);
+ 340              		.loc 1 52 5 view .LVU65
+ 341 0000 0379     		ldrb	r3, [r0, #4]	@ zero_extendqisi2
+ 342 0002 53B9     		cbnz	r3, .L33
+ 343              		.loc 1 52 5 is_stmt 0 discriminator 1 view .LVU66
+ 344 0004 0368     		ldr	r3, [r0]
+ARM GAS  /tmp/cc6d6qTk.s 			page 8
 
 
- 300 0026 082B     		cmp	r3, #8
- 301 0028 07D0     		beq	.L33
-  37:../RMS-source/src/rms-dh052.c ****     osDelay(1);
- 302              		.loc 1 37 5 discriminator 7 view .LVU58
- 303 002a 0F4B     		ldr	r3, .L36
- 304 002c 1B68     		ldr	r3, [r3]
- 305 002e 1964     		str	r1, [r3, #64]
- 306 0030 EDE7     		b	.L24
- 307              	.L32:
-  37:../RMS-source/src/rms-dh052.c ****     osDelay(1);
- 308              		.loc 1 37 5 discriminator 3 view .LVU59
- 309 0032 0D4B     		ldr	r3, .L36
- 310 0034 1B68     		ldr	r3, [r3]
- 311 0036 9963     		str	r1, [r3, #56]
- 312 0038 E9E7     		b	.L24
- 313              	.L33:
-  37:../RMS-source/src/rms-dh052.c ****     osDelay(1);
- 314              		.loc 1 37 5 discriminator 6 view .LVU60
- 315 003a 0B4B     		ldr	r3, .L36
- 316 003c 1B68     		ldr	r3, [r3]
- 317 003e D963     		str	r1, [r3, #60]
- 318 0040 E5E7     		b	.L24
- 319              	.LVL19:
- 320              	.L27:
-  39:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, 0);
- 321              		.loc 1 39 5 discriminator 2 view .LVU61
- 322 0042 042B     		cmp	r3, #4
- 323 0044 06D0     		beq	.L34
-  39:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, 0);
- 324              		.loc 1 39 5 discriminator 4 view .LVU62
- 325 0046 082B     		cmp	r3, #8
- 326 0048 09D0     		beq	.L35
-  39:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, 0);
- 327              		.loc 1 39 5 discriminator 7 view .LVU63
- 328 004a 074B     		ldr	r3, .L36
- 329 004c 1B68     		ldr	r3, [r3]
- 330 004e 0022     		movs	r2, #0
- 331 0050 1A64     		str	r2, [r3, #64]
- 332              		.loc 1 40 1 discriminator 7 view .LVU64
- 333 0052 E5E7     		b	.L22
- 334              	.L34:
-  39:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, 0);
- 335              		.loc 1 39 5 discriminator 3 view .LVU65
- 336 0054 044B     		ldr	r3, .L36
- 337 0056 1B68     		ldr	r3, [r3]
- 338 0058 0022     		movs	r2, #0
- 339 005a 9A63     		str	r2, [r3, #56]
- 340 005c E0E7     		b	.L22
- 341              	.L35:
-  39:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, 0);
- 342              		.loc 1 39 5 discriminator 6 view .LVU66
- 343 005e 024B     		ldr	r3, .L36
- 344 0060 1B68     		ldr	r3, [r3]
- 345 0062 0022     		movs	r2, #0
- 346 0064 DA63     		str	r2, [r3, #60]
- 347 0066 DBE7     		b	.L22
- 348              	.L37:
-ARM GAS  /tmp/ccSDEssh.s 			page 8
+ 345 0006 1B68     		ldr	r3, [r3]
+ 346 0008 0022     		movs	r2, #0
+ 347 000a 5A63     		str	r2, [r3, #52]
+ 348              	.L34:
+  53:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, 0);
+ 349              		.loc 1 53 5 is_stmt 1 view .LVU67
+ 350 000c 4379     		ldrb	r3, [r0, #5]	@ zero_extendqisi2
+ 351 000e BBB9     		cbnz	r3, .L37
+ 352              		.loc 1 53 5 is_stmt 0 discriminator 1 view .LVU68
+ 353 0010 0368     		ldr	r3, [r0]
+ 354 0012 1B68     		ldr	r3, [r3]
+ 355 0014 0022     		movs	r2, #0
+ 356 0016 5A63     		str	r2, [r3, #52]
+ 357 0018 7047     		bx	lr
+ 358              	.L33:
+  52:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, 0);
+ 359              		.loc 1 52 5 discriminator 2 view .LVU69
+ 360 001a 042B     		cmp	r3, #4
+ 361 001c 06D0     		beq	.L41
+  52:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, 0);
+ 362              		.loc 1 52 5 discriminator 4 view .LVU70
+ 363 001e 082B     		cmp	r3, #8
+ 364 0020 09D0     		beq	.L42
+  52:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, 0);
+ 365              		.loc 1 52 5 discriminator 7 view .LVU71
+ 366 0022 0368     		ldr	r3, [r0]
+ 367 0024 1B68     		ldr	r3, [r3]
+ 368 0026 0022     		movs	r2, #0
+ 369 0028 1A64     		str	r2, [r3, #64]
+ 370 002a EFE7     		b	.L34
+ 371              	.L41:
+  52:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, 0);
+ 372              		.loc 1 52 5 discriminator 3 view .LVU72
+ 373 002c 0368     		ldr	r3, [r0]
+ 374 002e 1B68     		ldr	r3, [r3]
+ 375 0030 0022     		movs	r2, #0
+ 376 0032 9A63     		str	r2, [r3, #56]
+ 377 0034 EAE7     		b	.L34
+ 378              	.L42:
+  52:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, 0);
+ 379              		.loc 1 52 5 discriminator 6 view .LVU73
+ 380 0036 0368     		ldr	r3, [r0]
+ 381 0038 1B68     		ldr	r3, [r3]
+ 382 003a 0022     		movs	r2, #0
+ 383 003c DA63     		str	r2, [r3, #60]
+ 384 003e E5E7     		b	.L34
+ 385              	.L37:
+ 386              		.loc 1 53 5 discriminator 2 view .LVU74
+ 387 0040 042B     		cmp	r3, #4
+ 388 0042 06D0     		beq	.L43
+ 389              		.loc 1 53 5 discriminator 4 view .LVU75
+ 390 0044 082B     		cmp	r3, #8
+ 391 0046 09D0     		beq	.L44
+ 392              		.loc 1 53 5 discriminator 7 view .LVU76
+ 393 0048 0368     		ldr	r3, [r0]
+ 394 004a 1B68     		ldr	r3, [r3]
+ 395 004c 0022     		movs	r2, #0
+ARM GAS  /tmp/cc6d6qTk.s 			page 9
 
 
- 349              		.align	2
- 350              	.L36:
- 351 0068 00000000 		.word	htim8
- 352              		.cfi_endproc
- 353              	.LFE138:
- 355              		.section	.text.Motor_stop,"ax",%progbits
- 356              		.align	1
- 357              		.global	Motor_stop
- 358              		.syntax unified
- 359              		.thumb
- 360              		.thumb_func
- 362              	Motor_stop:
- 363              	.LVL20:
- 364              	.LFB139:
-  41:../RMS-source/src/rms-dh052.c **** 
-  42:../RMS-source/src/rms-dh052.c **** void Motor_stop(Motor const * self)
-  43:../RMS-source/src/rms-dh052.c **** {
- 365              		.loc 1 43 1 is_stmt 1 view -0
- 366              		.cfi_startproc
- 367              		@ args = 0, pretend = 0, frame = 0
- 368              		@ frame_needed = 0, uses_anonymous_args = 0
- 369              		@ link register save eliminated.
-  44:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, 0);
- 370              		.loc 1 44 5 view .LVU68
- 371 0000 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
- 372 0002 53B9     		cbnz	r3, .L39
- 373              		.loc 1 44 5 is_stmt 0 discriminator 1 view .LVU69
- 374 0004 184B     		ldr	r3, .L51
- 375 0006 1B68     		ldr	r3, [r3]
- 376 0008 0022     		movs	r2, #0
- 377 000a 5A63     		str	r2, [r3, #52]
- 378              	.L40:
-  45:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->R_PWM_CH, 0);
- 379              		.loc 1 45 5 is_stmt 1 view .LVU70
- 380 000c 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
- 381 000e BBB9     		cbnz	r3, .L43
- 382              		.loc 1 45 5 is_stmt 0 discriminator 1 view .LVU71
- 383 0010 154B     		ldr	r3, .L51
- 384 0012 1B68     		ldr	r3, [r3]
- 385 0014 0022     		movs	r2, #0
- 386 0016 5A63     		str	r2, [r3, #52]
- 387 0018 7047     		bx	lr
- 388              	.L39:
-  44:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, 0);
- 389              		.loc 1 44 5 discriminator 2 view .LVU72
- 390 001a 042B     		cmp	r3, #4
- 391 001c 06D0     		beq	.L47
-  44:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, 0);
- 392              		.loc 1 44 5 discriminator 4 view .LVU73
- 393 001e 082B     		cmp	r3, #8
- 394 0020 09D0     		beq	.L48
-  44:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, 0);
- 395              		.loc 1 44 5 discriminator 7 view .LVU74
- 396 0022 114B     		ldr	r3, .L51
- 397 0024 1B68     		ldr	r3, [r3]
- 398 0026 0022     		movs	r2, #0
- 399 0028 1A64     		str	r2, [r3, #64]
-ARM GAS  /tmp/ccSDEssh.s 			page 9
+ 396 004e 1A64     		str	r2, [r3, #64]
+  54:../RMS-source/src/rms-dh052.c **** }
+ 397              		.loc 1 54 1 discriminator 7 view .LVU77
+ 398 0050 7047     		bx	lr
+ 399              	.L43:
+  53:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, 0);
+ 400              		.loc 1 53 5 discriminator 3 view .LVU78
+ 401 0052 0368     		ldr	r3, [r0]
+ 402 0054 1B68     		ldr	r3, [r3]
+ 403 0056 0022     		movs	r2, #0
+ 404 0058 9A63     		str	r2, [r3, #56]
+ 405 005a 7047     		bx	lr
+ 406              	.L44:
+  53:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, 0);
+ 407              		.loc 1 53 5 discriminator 6 view .LVU79
+ 408 005c 0368     		ldr	r3, [r0]
+ 409 005e 1B68     		ldr	r3, [r3]
+ 410 0060 0022     		movs	r2, #0
+ 411 0062 DA63     		str	r2, [r3, #60]
+ 412 0064 7047     		bx	lr
+ 413              		.cfi_endproc
+ 414              	.LFE135:
+ 416              		.section	.text.servo_encoder_count,"ax",%progbits
+ 417              		.align	1
+ 418              		.global	servo_encoder_count
+ 419              		.syntax unified
+ 420              		.thumb
+ 421              		.thumb_func
+ 423              	servo_encoder_count:
+ 424              	.LVL14:
+ 425              	.LFB136:
+  55:../RMS-source/src/rms-dh052.c **** 
+  56:../RMS-source/src/rms-dh052.c **** int32_t servo_encoder_count(Motor const *handle)
+  57:../RMS-source/src/rms-dh052.c **** {
+ 426              		.loc 1 57 1 is_stmt 1 view -0
+ 427              		.cfi_startproc
+ 428              		@ args = 0, pretend = 0, frame = 0
+ 429              		@ frame_needed = 0, uses_anonymous_args = 0
+ 430              		@ link register save eliminated.
+  58:../RMS-source/src/rms-dh052.c ****     int32_t c32 =  (int32_t)handle->enc_tim_h->Instance->CNT - HALF_PERIOD;
+ 431              		.loc 1 58 5 view .LVU81
+ 432              		.loc 1 58 35 is_stmt 0 view .LVU82
+ 433 0000 0369     		ldr	r3, [r0, #16]
+ 434              		.loc 1 58 46 view .LVU83
+ 435 0002 1B68     		ldr	r3, [r3]
+ 436              		.loc 1 58 56 view .LVU84
+ 437 0004 5A6A     		ldr	r2, [r3, #36]
+ 438              		.loc 1 58 13 view .LVU85
+ 439 0006 A2F50052 		sub	r2, r2, #8192
+ 440              	.LVL15:
+  59:../RMS-source/src/rms-dh052.c ****     int32_t dif = c32 - g_prev; 
+ 441              		.loc 1 59 5 is_stmt 1 view .LVU86
+ 442              		.loc 1 59 23 is_stmt 0 view .LVU87
+ 443 000a 0C4B     		ldr	r3, .L47
+ 444 000c 1868     		ldr	r0, [r3]
+ 445              	.LVL16:
+ 446              		.loc 1 59 13 view .LVU88
+ARM GAS  /tmp/cc6d6qTk.s 			page 10
 
 
- 400 002a EFE7     		b	.L40
- 401              	.L47:
-  44:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, 0);
- 402              		.loc 1 44 5 discriminator 3 view .LVU75
- 403 002c 0E4B     		ldr	r3, .L51
- 404 002e 1B68     		ldr	r3, [r3]
- 405 0030 0022     		movs	r2, #0
- 406 0032 9A63     		str	r2, [r3, #56]
- 407 0034 EAE7     		b	.L40
- 408              	.L48:
-  44:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->L_PWM_CH, 0);
- 409              		.loc 1 44 5 discriminator 6 view .LVU76
- 410 0036 0C4B     		ldr	r3, .L51
- 411 0038 1B68     		ldr	r3, [r3]
- 412 003a 0022     		movs	r2, #0
- 413 003c DA63     		str	r2, [r3, #60]
- 414 003e E5E7     		b	.L40
- 415              	.L43:
- 416              		.loc 1 45 5 discriminator 2 view .LVU77
- 417 0040 042B     		cmp	r3, #4
- 418 0042 06D0     		beq	.L49
- 419              		.loc 1 45 5 discriminator 4 view .LVU78
- 420 0044 082B     		cmp	r3, #8
- 421 0046 09D0     		beq	.L50
- 422              		.loc 1 45 5 discriminator 7 view .LVU79
- 423 0048 074B     		ldr	r3, .L51
- 424 004a 1B68     		ldr	r3, [r3]
- 425 004c 0022     		movs	r2, #0
- 426 004e 1A64     		str	r2, [r3, #64]
-  46:../RMS-source/src/rms-dh052.c **** }...
- 427              		.loc 1 46 1 discriminator 7 view .LVU80
- 428 0050 7047     		bx	lr
- 429              	.L49:
-  45:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->R_PWM_CH, 0);
- 430              		.loc 1 45 5 discriminator 3 view .LVU81
- 431 0052 054B     		ldr	r3, .L51
- 432 0054 1B68     		ldr	r3, [r3]
- 433 0056 0022     		movs	r2, #0
- 434 0058 9A63     		str	r2, [r3, #56]
- 435 005a 7047     		bx	lr
- 436              	.L50:
-  45:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(&htim8, self->R_PWM_CH, 0);
- 437              		.loc 1 45 5 discriminator 6 view .LVU82
- 438 005c 024B     		ldr	r3, .L51
- 439 005e 1B68     		ldr	r3, [r3]
- 440 0060 0022     		movs	r2, #0
- 441 0062 DA63     		str	r2, [r3, #60]
- 442 0064 7047     		bx	lr
- 443              	.L52:
- 444 0066 00BF     		.align	2
- 445              	.L51:
- 446 0068 00000000 		.word	htim8
- 447              		.cfi_endproc
- 448              	.LFE139:
- 450              		.text
- 451              	.Letext0:
- 452              		.file 2 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_types.h"
-ARM GAS  /tmp/ccSDEssh.s 			page 10
+ 447 000e 121A     		subs	r2, r2, r0
+ 448              	.LVL17:
+  60:../RMS-source/src/rms-dh052.c **** 
+  61:../RMS-source/src/rms-dh052.c ****     int32_t mod_dif = ((dif + HALF_PERIOD) % ONE_PERIOD) - HALF_PERIOD;
+ 449              		.loc 1 61 5 is_stmt 1 view .LVU89
+ 450              		.loc 1 61 29 is_stmt 0 view .LVU90
+ 451 0010 02F50053 		add	r3, r2, #8192
+ 452              		.loc 1 61 44 view .LVU91
+ 453 0014 5942     		rsbs	r1, r3, #0
+ 454 0016 C3F30D03 		ubfx	r3, r3, #0, #14
+ 455 001a C1F30D01 		ubfx	r1, r1, #0, #14
+ 456 001e 58BF     		it	pl
+ 457 0020 4B42     		rsbpl	r3, r1, #0
+ 458              		.loc 1 61 13 view .LVU92
+ 459 0022 A3F50051 		sub	r1, r3, #8192
+ 460              	.LVL18:
+  62:../RMS-source/src/rms-dh052.c ****     if(dif < -HALF_PERIOD)
+ 461              		.loc 1 62 5 is_stmt 1 view .LVU93
+ 462              		.loc 1 62 7 is_stmt 0 view .LVU94
+ 463 0026 12F5005F 		cmn	r2, #8192
+ 464 002a 01DA     		bge	.L46
+  63:../RMS-source/src/rms-dh052.c ****         mod_dif += ONE_PERIOD; 
+ 465              		.loc 1 63 9 is_stmt 1 view .LVU95
+ 466              		.loc 1 63 17 is_stmt 0 view .LVU96
+ 467 002c 03F50051 		add	r1, r3, #8192
+ 468              	.LVL19:
+ 469              	.L46:
+  64:../RMS-source/src/rms-dh052.c **** 
+  65:../RMS-source/src/rms-dh052.c ****     int32_t unwrapped = g_prev + mod_dif;
+ 470              		.loc 1 65 5 is_stmt 1 view .LVU97
+ 471              		.loc 1 65 13 is_stmt 0 view .LVU98
+ 472 0030 0844     		add	r0, r0, r1
+ 473              	.LVL20:
+  66:../RMS-source/src/rms-dh052.c ****     g_prev = unwrapped; //load previous value
+ 474              		.loc 1 66 5 is_stmt 1 view .LVU99
+ 475              		.loc 1 66 12 is_stmt 0 view .LVU100
+ 476 0032 024B     		ldr	r3, .L47
+ 477 0034 1860     		str	r0, [r3]
+  67:../RMS-source/src/rms-dh052.c **** 
+  68:../RMS-source/src/rms-dh052.c ****     return unwrapped + HALF_PERIOD;
+ 478              		.loc 1 68 5 is_stmt 1 view .LVU101
+  69:../RMS-source/src/rms-dh052.c **** }...
+ 479              		.loc 1 69 1 is_stmt 0 view .LVU102
+ 480 0036 00F50050 		add	r0, r0, #8192
+ 481              	.LVL21:
+ 482              		.loc 1 69 1 view .LVU103
+ 483 003a 7047     		bx	lr
+ 484              	.L48:
+ 485              		.align	2
+ 486              	.L47:
+ 487 003c 00000000 		.word	.LANCHOR0
+ 488              		.cfi_endproc
+ 489              	.LFE136:
+ 491              		.section	.bss.g_prev,"aw",%nobits
+ 492              		.align	2
+ 493              		.set	.LANCHOR0,. + 0
+ 496              	g_prev:
+ARM GAS  /tmp/cc6d6qTk.s 			page 11
 
 
- 453              		.file 3 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
- 454              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
- 455              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
- 456              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
- 457              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
- 458              		.file 8 "../RMS-source/inc/dh052_internal.h"
- 459              		.file 9 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
- 460              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
- 461              		.file 11 "Core/Inc/tim.h"
-ARM GAS  /tmp/ccSDEssh.s 			page 11
+ 497 0000 00000000 		.space	4
+ 498              		.text
+ 499              	.Letext0:
+ 500              		.file 2 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_types.h"
+ 501              		.file 3 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ 502              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
+ 503              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 504              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 505              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+ 506              		.file 8 "../RMS-source/inc/dh052_internal.h"
+ 507              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ARM GAS  /tmp/cc6d6qTk.s 			page 12
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 rms-dh052.c
-     /tmp/ccSDEssh.s:20     .text.Motor_Init:0000000000000000 $t
-     /tmp/ccSDEssh.s:26     .text.Motor_Init:0000000000000000 Motor_Init
-     /tmp/ccSDEssh.s:60     .text.Motor_enable:0000000000000000 $t
-     /tmp/ccSDEssh.s:66     .text.Motor_enable:0000000000000000 Motor_enable
-     /tmp/ccSDEssh.s:101    .text.Motor_disable:0000000000000000 $t
-     /tmp/ccSDEssh.s:107    .text.Motor_disable:0000000000000000 Motor_disable
-     /tmp/ccSDEssh.s:142    .text.Motor_turn_left:0000000000000000 $t
-     /tmp/ccSDEssh.s:148    .text.Motor_turn_left:0000000000000000 Motor_turn_left
-     /tmp/ccSDEssh.s:244    .text.Motor_turn_left:0000000000000068 $d
-     /tmp/ccSDEssh.s:249    .text.Motor_turn_right:0000000000000000 $t
-     /tmp/ccSDEssh.s:255    .text.Motor_turn_right:0000000000000000 Motor_turn_right
-     /tmp/ccSDEssh.s:351    .text.Motor_turn_right:0000000000000068 $d
-     /tmp/ccSDEssh.s:356    .text.Motor_stop:0000000000000000 $t
-     /tmp/ccSDEssh.s:362    .text.Motor_stop:0000000000000000 Motor_stop
-     /tmp/ccSDEssh.s:446    .text.Motor_stop:0000000000000068 $d
+     /tmp/cc6d6qTk.s:20     .text.servo_Init:0000000000000000 $t
+     /tmp/cc6d6qTk.s:26     .text.servo_Init:0000000000000000 servo_Init
+     /tmp/cc6d6qTk.s:70     .text.servo_enable:0000000000000000 $t
+     /tmp/cc6d6qTk.s:76     .text.servo_enable:0000000000000000 servo_enable
+     /tmp/cc6d6qTk.s:111    .text.servo_disable:0000000000000000 $t
+     /tmp/cc6d6qTk.s:117    .text.servo_disable:0000000000000000 servo_disable
+     /tmp/cc6d6qTk.s:152    .text.servo_turn_left:0000000000000000 $t
+     /tmp/cc6d6qTk.s:158    .text.servo_turn_left:0000000000000000 servo_turn_left
+     /tmp/cc6d6qTk.s:239    .text.servo_turn_right:0000000000000000 $t
+     /tmp/cc6d6qTk.s:245    .text.servo_turn_right:0000000000000000 servo_turn_right
+     /tmp/cc6d6qTk.s:326    .text.servo_stop:0000000000000000 $t
+     /tmp/cc6d6qTk.s:332    .text.servo_stop:0000000000000000 servo_stop
+     /tmp/cc6d6qTk.s:417    .text.servo_encoder_count:0000000000000000 $t
+     /tmp/cc6d6qTk.s:423    .text.servo_encoder_count:0000000000000000 servo_encoder_count
+     /tmp/cc6d6qTk.s:487    .text.servo_encoder_count:000000000000003c $d
+     /tmp/cc6d6qTk.s:492    .bss.g_prev:0000000000000000 $d
+     /tmp/cc6d6qTk.s:496    .bss.g_prev:0000000000000000 g_prev
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin
-osDelay
-htim8

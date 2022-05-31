@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccFCAwmZ.s 			page 1
+ARM GAS  /tmp/ccQAAZC5.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccFCAwmZ.s 			page 1
   44              	.LFB138:
   45              		.file 1 "../RMS-source/src/rms_freertos.c"
    1:../RMS-source/src/rms_freertos.c **** #include "FreeRTOS.h"
-ARM GAS  /tmp/ccFCAwmZ.s 			page 2
+ARM GAS  /tmp/ccQAAZC5.s 			page 2
 
 
    2:../RMS-source/src/rms_freertos.c **** #include "cmsis_os.h"
@@ -79,501 +79,330 @@ ARM GAS  /tmp/ccFCAwmZ.s 			page 1
   17:../RMS-source/src/rms_freertos.c **** #include <stdio.h>
   18:../RMS-source/src/rms_freertos.c **** 
   19:../RMS-source/src/rms_freertos.c **** /******************************* Aliases **************************************/
-  20:../RMS-source/src/rms_freertos.c **** // 'ONE_PERIOD" is this val because im triggering both encoder inputs on both 
-  21:../RMS-source/src/rms_freertos.c **** // rising and falling edges, for greater accuracy, so encoder val in  4x. 
-  22:../RMS-source/src/rms_freertos.c **** // Thats why 65536 / 4 to get this 
-  23:../RMS-source/src/rms_freertos.c **** #define ONE_PERIOD 16384  
-  24:../RMS-source/src/rms_freertos.c **** #define HALF_PERIOD 8192
-  25:../RMS-source/src/rms_freertos.c **** #define BUF_SIZE 256
-  26:../RMS-source/src/rms_freertos.c **** 
-  27:../RMS-source/src/rms_freertos.c **** 
-  28:../RMS-source/src/rms_freertos.c **** /****************************** Global Variables ******************************/
-  29:../RMS-source/src/rms_freertos.c **** int32_t encPrev = 0;
-  30:../RMS-source/src/rms_freertos.c **** 
-  31:../RMS-source/src/rms_freertos.c **** // uint16_t IC_Val1 = 0;
-  32:../RMS-source/src/rms_freertos.c **** // uint16_t IC_Val2 = 0;
-  33:../RMS-source/src/rms_freertos.c **** // uint16_t Difference = 0;
-  34:../RMS-source/src/rms_freertos.c **** // uint16_t rpm = 0;
-  35:../RMS-source/src/rms_freertos.c **** // int Is_First_Captured = 0;
-  36:../RMS-source/src/rms_freertos.c **** 
-  37:../RMS-source/src/rms_freertos.c **** /********************************* Prototypes ********************************/
-  38:../RMS-source/src/rms_freertos.c **** extern bool cubemx_transport_open(struct uxrCustomTransport * transport);
-  39:../RMS-source/src/rms_freertos.c **** extern bool cubemx_transport_close(struct uxrCustomTransport * transport);
-  40:../RMS-source/src/rms_freertos.c **** extern size_t cubemx_transport_write(struct uxrCustomTransport* transport, const uint8_t * buf, siz
-  41:../RMS-source/src/rms_freertos.c **** extern size_t cubemx_transport_read(struct uxrCustomTransport* transport, uint8_t* buf, size_t len,
-  42:../RMS-source/src/rms_freertos.c **** extern void microros_deallocate(void * pointer, void * state);
-  43:../RMS-source/src/rms_freertos.c **** extern void * microros_allocate(size_t size, void * state);
-  44:../RMS-source/src/rms_freertos.c **** extern void * microros_reallocate(void * pointer, size_t size, void * state);
-  45:../RMS-source/src/rms_freertos.c **** extern void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element, void * stat
+  20:../RMS-source/src/rms_freertos.c **** #define BUF_SIZE 128
+  21:../RMS-source/src/rms_freertos.c **** 
+  22:../RMS-source/src/rms_freertos.c **** 
+  23:../RMS-source/src/rms_freertos.c **** /****************************** Global Variables ******************************/
+  24:../RMS-source/src/rms_freertos.c **** // uint16_t IC_Val1 = 0;
+  25:../RMS-source/src/rms_freertos.c **** // uint16_t IC_Val2 = 0;
+  26:../RMS-source/src/rms_freertos.c **** // uint16_t Difference = 0;
+  27:../RMS-source/src/rms_freertos.c **** // uint16_t rpm = 0;
+  28:../RMS-source/src/rms_freertos.c **** // int Is_First_Captured = 0;
+  29:../RMS-source/src/rms_freertos.c **** 
+  30:../RMS-source/src/rms_freertos.c **** /********************************* Prototypes ********************************/
+  31:../RMS-source/src/rms_freertos.c **** extern bool cubemx_transport_open(struct uxrCustomTransport * transport);
+  32:../RMS-source/src/rms_freertos.c **** extern bool cubemx_transport_close(struct uxrCustomTransport * transport);
+  33:../RMS-source/src/rms_freertos.c **** extern size_t cubemx_transport_write(struct uxrCustomTransport* transport, const uint8_t * buf, siz
+  34:../RMS-source/src/rms_freertos.c **** extern size_t cubemx_transport_read(struct uxrCustomTransport* transport, uint8_t* buf, size_t len,
+  35:../RMS-source/src/rms_freertos.c **** extern void microros_deallocate(void * pointer, void * state);
+  36:../RMS-source/src/rms_freertos.c **** extern void * microros_allocate(size_t size, void * state);
+  37:../RMS-source/src/rms_freertos.c **** extern void * microros_reallocate(void * pointer, size_t size, void * state);
+  38:../RMS-source/src/rms_freertos.c **** extern void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element, void * stat
+  39:../RMS-source/src/rms_freertos.c **** extern void servo_Init(Motor *handle,TIM_HandleTypeDef *pwm_tim_h , uint8_t lpwm_ch, uint8_t rpwm_c
+  40:../RMS-source/src/rms_freertos.c **** extern void servo_enable(Motor const * handle);
+  41:../RMS-source/src/rms_freertos.c **** extern void servo_disable(Motor const * handle);
+  42:../RMS-source/src/rms_freertos.c **** extern void servo_turn_left(Motor const * handle, uint16_t pwm);
+  43:../RMS-source/src/rms_freertos.c **** extern void servo_turn_right(Motor const * handle, uint16_t pwm);
+  44:../RMS-source/src/rms_freertos.c **** extern void servo_stop(Motor const * handle);
+  45:../RMS-source/src/rms_freertos.c **** extern int32_t servo_encoder_count(Motor const *handle);
   46:../RMS-source/src/rms_freertos.c **** 
-  47:../RMS-source/src/rms_freertos.c **** int32_t unwrap_encoder(uint16_t encCount, int32_t * prev);
-  48:../RMS-source/src/rms_freertos.c **** 
-  49:../RMS-source/src/rms_freertos.c **** /* This task creates and handles the execution of ros node */ 
-  50:../RMS-source/src/rms_freertos.c **** void start_uros_task(void *argument)
-  51:../RMS-source/src/rms_freertos.c **** {
-  46              		.loc 1 51 1 view -0
+  47:../RMS-source/src/rms_freertos.c **** 
+  48:../RMS-source/src/rms_freertos.c **** /* This task creates and handles the execution of ros node */ 
+  49:../RMS-source/src/rms_freertos.c **** void start_uros_task(void *argument)
+  50:../RMS-source/src/rms_freertos.c **** {
+  46              		.loc 1 50 1 view -0
   47              		.cfi_startproc
   48              		@ Volatile: function does not return.
-  49              		@ args = 0, pretend = 0, frame = 144
+  49              		@ args = 0, pretend = 0, frame = 168
   50              		@ frame_needed = 0, uses_anonymous_args = 0
-  51              		.loc 1 51 1 is_stmt 0 view .LVU1
+  51              		.loc 1 50 1 is_stmt 0 view .LVU1
   52 0000 00B5     		push	{lr}
-ARM GAS  /tmp/ccFCAwmZ.s 			page 3
-
-
   53              	.LCFI0:
+ARM GAS  /tmp/ccQAAZC5.s 			page 3
+
+
   54              		.cfi_def_cfa_offset 4
   55              		.cfi_offset 14, -4
-  56 0002 A7B0     		sub	sp, sp, #156
+  56 0002 AFB0     		sub	sp, sp, #188
   57              	.LCFI1:
-  58              		.cfi_def_cfa_offset 160
-  52:../RMS-source/src/rms_freertos.c ****     rmw_uros_set_custom_transport(true, (void *) &huart3, cubemx_transport_open, cubemx_transport_c
-  59              		.loc 1 52 5 is_stmt 1 view .LVU2
-  60 0004 2F4B     		ldr	r3, .L6
+  58              		.cfi_def_cfa_offset 192
+  51:../RMS-source/src/rms_freertos.c ****     rmw_uros_set_custom_transport(true, (void *) &huart3, cubemx_transport_open, cubemx_transport_c
+  59              		.loc 1 51 5 is_stmt 1 view .LVU2
+  60 0004 364B     		ldr	r3, .L6
   61 0006 0193     		str	r3, [sp, #4]
-  62 0008 2F4B     		ldr	r3, .L6+4
+  62 0008 364B     		ldr	r3, .L6+4
   63 000a 0093     		str	r3, [sp]
-  64 000c 2F4B     		ldr	r3, .L6+8
-  65 000e 304A     		ldr	r2, .L6+12
-  66 0010 3049     		ldr	r1, .L6+16
+  64 000c 364B     		ldr	r3, .L6+8
+  65 000e 374A     		ldr	r2, .L6+12
+  66 0010 3749     		ldr	r1, .L6+16
   67 0012 0120     		movs	r0, #1
   68              	.LVL1:
-  69              		.loc 1 52 5 is_stmt 0 view .LVU3
+  69              		.loc 1 51 5 is_stmt 0 view .LVU3
   70 0014 FFF7FEFF 		bl	rmw_uros_set_custom_transport
   71              	.LVL2:
-  53:../RMS-source/src/rms_freertos.c **** 
-  54:../RMS-source/src/rms_freertos.c ****     rcl_allocator_t freeRTOS_allocator = rcutils_get_zero_initialized_allocator();
-  72              		.loc 1 54 5 is_stmt 1 view .LVU4
-  73              		.loc 1 54 42 is_stmt 0 view .LVU5
-  74 0018 21A8     		add	r0, sp, #132
+  52:../RMS-source/src/rms_freertos.c **** 
+  53:../RMS-source/src/rms_freertos.c ****     rcl_allocator_t freeRTOS_allocator = rcutils_get_zero_initialized_allocator();
+  72              		.loc 1 53 5 is_stmt 1 view .LVU4
+  73              		.loc 1 53 42 is_stmt 0 view .LVU5
+  74 0018 29A8     		add	r0, sp, #164
   75 001a FFF7FEFF 		bl	rcutils_get_zero_initialized_allocator
   76              	.LVL3:
-  55:../RMS-source/src/rms_freertos.c ****     freeRTOS_allocator.allocate = microros_allocate;
-  77              		.loc 1 55 5 is_stmt 1 view .LVU6
-  78              		.loc 1 55 33 is_stmt 0 view .LVU7
-  79 001e 2E4B     		ldr	r3, .L6+20
-  80 0020 2193     		str	r3, [sp, #132]
-  56:../RMS-source/src/rms_freertos.c ****     freeRTOS_allocator.deallocate = microros_deallocate;
-  81              		.loc 1 56 5 is_stmt 1 view .LVU8
-  82              		.loc 1 56 35 is_stmt 0 view .LVU9
-  83 0022 2E4B     		ldr	r3, .L6+24
-  84 0024 2293     		str	r3, [sp, #136]
-  57:../RMS-source/src/rms_freertos.c ****     freeRTOS_allocator.reallocate = microros_reallocate;
-  85              		.loc 1 57 5 is_stmt 1 view .LVU10
-  86              		.loc 1 57 35 is_stmt 0 view .LVU11
-  87 0026 2E4B     		ldr	r3, .L6+28
-  88 0028 2393     		str	r3, [sp, #140]
-  58:../RMS-source/src/rms_freertos.c ****     freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
-  89              		.loc 1 58 5 is_stmt 1 view .LVU12
-  90              		.loc 1 58 38 is_stmt 0 view .LVU13
-  91 002a 2E4B     		ldr	r3, .L6+32
-  92 002c 2493     		str	r3, [sp, #144]
-  59:../RMS-source/src/rms_freertos.c **** 
-  60:../RMS-source/src/rms_freertos.c ****     if (!rcutils_set_default_allocator(&freeRTOS_allocator)) 
-  93              		.loc 1 60 5 is_stmt 1 view .LVU14
-  94              		.loc 1 60 10 is_stmt 0 view .LVU15
-  95 002e 21A8     		add	r0, sp, #132
+  54:../RMS-source/src/rms_freertos.c ****     freeRTOS_allocator.allocate = microros_allocate;
+  77              		.loc 1 54 5 is_stmt 1 view .LVU6
+  78              		.loc 1 54 33 is_stmt 0 view .LVU7
+  79 001e 354B     		ldr	r3, .L6+20
+  80 0020 2993     		str	r3, [sp, #164]
+  55:../RMS-source/src/rms_freertos.c ****     freeRTOS_allocator.deallocate = microros_deallocate;
+  81              		.loc 1 55 5 is_stmt 1 view .LVU8
+  82              		.loc 1 55 35 is_stmt 0 view .LVU9
+  83 0022 354B     		ldr	r3, .L6+24
+  84 0024 2A93     		str	r3, [sp, #168]
+  56:../RMS-source/src/rms_freertos.c ****     freeRTOS_allocator.reallocate = microros_reallocate;
+  85              		.loc 1 56 5 is_stmt 1 view .LVU10
+  86              		.loc 1 56 35 is_stmt 0 view .LVU11
+  87 0026 354B     		ldr	r3, .L6+28
+  88 0028 2B93     		str	r3, [sp, #172]
+  57:../RMS-source/src/rms_freertos.c ****     freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
+  89              		.loc 1 57 5 is_stmt 1 view .LVU12
+  90              		.loc 1 57 38 is_stmt 0 view .LVU13
+  91 002a 354B     		ldr	r3, .L6+32
+  92 002c 2C93     		str	r3, [sp, #176]
+  58:../RMS-source/src/rms_freertos.c **** 
+  59:../RMS-source/src/rms_freertos.c ****     if (!rcutils_set_default_allocator(&freeRTOS_allocator)) 
+  93              		.loc 1 59 5 is_stmt 1 view .LVU14
+  94              		.loc 1 59 10 is_stmt 0 view .LVU15
+  95 002e 29A8     		add	r0, sp, #164
   96 0030 FFF7FEFF 		bl	rcutils_set_default_allocator
   97              	.LVL4:
-  98              		.loc 1 60 8 view .LVU16
+  98              		.loc 1 59 8 view .LVU16
   99 0034 0028     		cmp	r0, #0
- 100 0036 3FD0     		beq	.L5
-ARM GAS  /tmp/ccFCAwmZ.s 			page 4
-
-
+ 100 0036 4ED0     		beq	.L5
  101              	.L2:
-  61:../RMS-source/src/rms_freertos.c ****     {
-  62:../RMS-source/src/rms_freertos.c ****       printf("Error on default allocators (line %d)\n", __LINE__); 
-  63:../RMS-source/src/rms_freertos.c ****     }
-  64:../RMS-source/src/rms_freertos.c **** 
-  65:../RMS-source/src/rms_freertos.c ****   // micro-ROS app
-  66:../RMS-source/src/rms_freertos.c ****   std_msgs__msg__String msg;
- 102              		.loc 1 66 3 is_stmt 1 view .LVU17
-  67:../RMS-source/src/rms_freertos.c **** 
-  68:../RMS-source/src/rms_freertos.c ****   rcl_allocator_t allocator;
- 103              		.loc 1 68 3 view .LVU18
-  69:../RMS-source/src/rms_freertos.c ****   allocator = rcl_get_default_allocator();
- 104              		.loc 1 69 3 view .LVU19
- 105              		.loc 1 69 15 is_stmt 0 view .LVU20
- 106 0038 02A8     		add	r0, sp, #8
+ARM GAS  /tmp/ccQAAZC5.s 			page 4
+
+
+  60:../RMS-source/src/rms_freertos.c ****     {
+  61:../RMS-source/src/rms_freertos.c ****       printf("Error on default allocators (line %d)\n", __LINE__); 
+  62:../RMS-source/src/rms_freertos.c ****     }
+  63:../RMS-source/src/rms_freertos.c **** 
+  64:../RMS-source/src/rms_freertos.c ****   // micro-ROS app
+  65:../RMS-source/src/rms_freertos.c ****   std_msgs__msg__String msg;
+ 102              		.loc 1 65 3 is_stmt 1 view .LVU17
+  66:../RMS-source/src/rms_freertos.c **** 
+  67:../RMS-source/src/rms_freertos.c ****   rcl_allocator_t allocator;
+ 103              		.loc 1 67 3 view .LVU18
+  68:../RMS-source/src/rms_freertos.c ****   allocator = rcl_get_default_allocator();
+ 104              		.loc 1 68 3 view .LVU19
+ 105              		.loc 1 68 15 is_stmt 0 view .LVU20
+ 106 0038 04A8     		add	r0, sp, #16
  107 003a FFF7FEFF 		bl	rcutils_get_default_allocator
  108              	.LVL5:
- 109 003e 0DF1640E 		add	lr, sp, #100
- 110 0042 0DF1080C 		add	ip, sp, #8
- 111 0046 BCE80F00 		ldmia	ip!, {r0, r1, r2, r3}
- 112 004a AEE80F00 		stmia	lr!, {r0, r1, r2, r3}
- 113 004e DCF80030 		ldr	r3, [ip]
- 114 0052 CEF80030 		str	r3, [lr]
-  70:../RMS-source/src/rms_freertos.c **** 
-  71:../RMS-source/src/rms_freertos.c ****   rclc_support_t support;
- 115              		.loc 1 71 3 is_stmt 1 view .LVU21
-  72:../RMS-source/src/rms_freertos.c ****   rclc_support_init(&support, 0, NULL, &allocator);
- 116              		.loc 1 72 3 view .LVU22
- 117 0056 19AB     		add	r3, sp, #100
- 118 0058 0022     		movs	r2, #0
- 119 005a 1146     		mov	r1, r2
- 120 005c 0BA8     		add	r0, sp, #44
- 121 005e FFF7FEFF 		bl	rclc_support_init
+ 109 003e 21AD     		add	r5, sp, #132
+ 110 0040 04AC     		add	r4, sp, #16
+ 111 0042 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 112 0044 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 113 0046 2368     		ldr	r3, [r4]
+ 114 0048 2B60     		str	r3, [r5]
+  69:../RMS-source/src/rms_freertos.c **** 
+  70:../RMS-source/src/rms_freertos.c ****   rclc_support_t support;
+ 115              		.loc 1 70 3 is_stmt 1 view .LVU21
+  71:../RMS-source/src/rms_freertos.c ****   rclc_support_init(&support, 0, NULL, &allocator);
+ 116              		.loc 1 71 3 view .LVU22
+ 117 004a 21AB     		add	r3, sp, #132
+ 118 004c 0022     		movs	r2, #0
+ 119 004e 1146     		mov	r1, r2
+ 120 0050 13A8     		add	r0, sp, #76
+ 121 0052 FFF7FEFF 		bl	rclc_support_init
  122              	.LVL6:
-  73:../RMS-source/src/rms_freertos.c **** 
-  74:../RMS-source/src/rms_freertos.c ****   rcl_node_t node;
- 123              		.loc 1 74 3 view .LVU23
-  75:../RMS-source/src/rms_freertos.c ****   rclc_node_init_default(&node, "rms_node", "", &support);
- 124              		.loc 1 75 3 view .LVU24
- 125 0062 0BAB     		add	r3, sp, #44
- 126 0064 204A     		ldr	r2, .L6+36
- 127 0066 2149     		ldr	r1, .L6+40
- 128 0068 09A8     		add	r0, sp, #36
- 129 006a FFF7FEFF 		bl	rclc_node_init_default
+  72:../RMS-source/src/rms_freertos.c **** 
+  73:../RMS-source/src/rms_freertos.c ****   rcl_node_t node;
+ 123              		.loc 1 73 3 view .LVU23
+  74:../RMS-source/src/rms_freertos.c ****   rclc_node_init_default(&node, "rms_node", "", &support);
+ 124              		.loc 1 74 3 view .LVU24
+ 125 0056 13AB     		add	r3, sp, #76
+ 126 0058 2A4A     		ldr	r2, .L6+36
+ 127 005a 2B49     		ldr	r1, .L6+40
+ 128 005c 11A8     		add	r0, sp, #68
+ 129 005e FFF7FEFF 		bl	rclc_node_init_default
  130              	.LVL7:
-  76:../RMS-source/src/rms_freertos.c **** 
-  77:../RMS-source/src/rms_freertos.c ****   rcl_publisher_t publisher;
- 131              		.loc 1 77 3 view .LVU25
-  78:../RMS-source/src/rms_freertos.c ****   rclc_publisher_init_default(&publisher, &node, ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, String)
- 132              		.loc 1 78 3 view .LVU26
- 133 006e FFF7FEFF 		bl	rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__String
+  75:../RMS-source/src/rms_freertos.c **** 
+  76:../RMS-source/src/rms_freertos.c ****   rcl_publisher_t publisher;
+ 131              		.loc 1 76 3 view .LVU25
+  77:../RMS-source/src/rms_freertos.c ****   rclc_publisher_init_default(&publisher, &node, ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, String)
+ 132              		.loc 1 77 3 view .LVU26
+ 133 0062 FFF7FEFF 		bl	rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__String
  134              	.LVL8:
- 135 0072 0246     		mov	r2, r0
- 136 0074 1E4B     		ldr	r3, .L6+44
- 137 0076 09A9     		add	r1, sp, #36
- 138 0078 08A8     		add	r0, sp, #32
- 139 007a FFF7FEFF 		bl	rclc_publisher_init_default
-ARM GAS  /tmp/ccFCAwmZ.s 			page 5
-
-
+ 135 0066 0246     		mov	r2, r0
+ 136 0068 284B     		ldr	r3, .L6+44
+ 137 006a 11A9     		add	r1, sp, #68
+ 138 006c 10A8     		add	r0, sp, #64
+ 139 006e FFF7FEFF 		bl	rclc_publisher_init_default
  140              	.LVL9:
-  79:../RMS-source/src/rms_freertos.c **** 
-  80:../RMS-source/src/rms_freertos.c ****   std_msgs__msg__String__init(&msg);
- 141              		.loc 1 80 3 view .LVU27
- 142 007e 1EA8     		add	r0, sp, #120
- 143 0080 FFF7FEFF 		bl	std_msgs__msg__String__init
+ARM GAS  /tmp/ccQAAZC5.s 			page 5
+
+
+  78:../RMS-source/src/rms_freertos.c **** 
+  79:../RMS-source/src/rms_freertos.c ****   std_msgs__msg__String__init(&msg);
+ 141              		.loc 1 79 3 view .LVU27
+ 142 0072 26A8     		add	r0, sp, #152
+ 143 0074 FFF7FEFF 		bl	std_msgs__msg__String__init
  144              	.LVL10:
-  81:../RMS-source/src/rms_freertos.c ****   msg.data.data = malloc(BUF_SIZE);
- 145              		.loc 1 81 3 view .LVU28
- 146              		.loc 1 81 19 is_stmt 0 view .LVU29
- 147 0084 4FF48070 		mov	r0, #256
- 148 0088 FFF7FEFF 		bl	malloc
+  80:../RMS-source/src/rms_freertos.c ****   msg.data.data = malloc(BUF_SIZE);
+ 145              		.loc 1 80 3 view .LVU28
+ 146              		.loc 1 80 19 is_stmt 0 view .LVU29
+ 147 0078 8020     		movs	r0, #128
+ 148 007a FFF7FEFF 		bl	malloc
  149              	.LVL11:
- 150              		.loc 1 81 17 view .LVU30
- 151 008c 1E90     		str	r0, [sp, #120]
-  82:../RMS-source/src/rms_freertos.c ****   msg.data.capacity = BUF_SIZE;
- 152              		.loc 1 82 3 is_stmt 1 view .LVU31
- 153              		.loc 1 82 21 is_stmt 0 view .LVU32
- 154 008e 4FF48073 		mov	r3, #256
- 155 0092 2093     		str	r3, [sp, #128]
- 156              	.L3:
-  83:../RMS-source/src/rms_freertos.c ****   
-  84:../RMS-source/src/rms_freertos.c ****   for(;;)
- 157              		.loc 1 84 3 is_stmt 1 discriminator 1 view .LVU33
-  85:../RMS-source/src/rms_freertos.c ****   {
-  86:../RMS-source/src/rms_freertos.c ****     snprintf(msg.data.data, msg.data.capacity, "Enc Count: %ld", TIM3->CNT>>2);
- 158              		.loc 1 86 5 discriminator 1 view .LVU34
- 159              		.loc 1 86 70 is_stmt 0 discriminator 1 view .LVU35
- 160 0094 174B     		ldr	r3, .L6+48
- 161 0096 5B6A     		ldr	r3, [r3, #36]
- 162              		.loc 1 86 5 discriminator 1 view .LVU36
- 163 0098 9B08     		lsrs	r3, r3, #2
- 164 009a 174A     		ldr	r2, .L6+52
- 165 009c 2099     		ldr	r1, [sp, #128]
- 166 009e 1E98     		ldr	r0, [sp, #120]
- 167 00a0 FFF7FEFF 		bl	snprintf
- 168              	.LVL12:
-  87:../RMS-source/src/rms_freertos.c ****     msg.data.size = strlen(msg.data.data);
- 169              		.loc 1 87 5 is_stmt 1 discriminator 1 view .LVU37
- 170              		.loc 1 87 21 is_stmt 0 discriminator 1 view .LVU38
- 171 00a4 1E98     		ldr	r0, [sp, #120]
- 172 00a6 FFF7FEFF 		bl	strlen
- 173              	.LVL13:
- 174              		.loc 1 87 19 discriminator 1 view .LVU39
- 175 00aa 1F90     		str	r0, [sp, #124]
-  88:../RMS-source/src/rms_freertos.c ****     rcl_publish(&publisher, &msg, NULL);
- 176              		.loc 1 88 5 is_stmt 1 discriminator 1 view .LVU40
- 177 00ac 0022     		movs	r2, #0
- 178 00ae 1EA9     		add	r1, sp, #120
- 179 00b0 08A8     		add	r0, sp, #32
- 180 00b2 FFF7FEFF 		bl	rcl_publish
- 181              	.LVL14:
-  84:../RMS-source/src/rms_freertos.c ****   {
- 182              		.loc 1 84 8 discriminator 1 view .LVU41
- 183 00b6 EDE7     		b	.L3
- 184              	.L5:
-  62:../RMS-source/src/rms_freertos.c ****     }
-ARM GAS  /tmp/ccFCAwmZ.s 			page 6
+ 150              		.loc 1 80 17 view .LVU30
+ 151 007e 2690     		str	r0, [sp, #152]
+  81:../RMS-source/src/rms_freertos.c ****   msg.data.capacity = BUF_SIZE;
+ 152              		.loc 1 81 3 is_stmt 1 view .LVU31
+ 153              		.loc 1 81 21 is_stmt 0 view .LVU32
+ 154 0080 8023     		movs	r3, #128
+ 155 0082 2893     		str	r3, [sp, #160]
+  82:../RMS-source/src/rms_freertos.c ****   
+  83:../RMS-source/src/rms_freertos.c ****   Motor mtr1;
+ 156              		.loc 1 83 3 is_stmt 1 view .LVU33
+  84:../RMS-source/src/rms_freertos.c ****   servo_Init(&mtr1, &htim8, TIM_CHANNEL_1, TIM_CHANNEL_2, GPIOA, MTR1_L_EN_Pin, MTR1_R_EN_Pin, &hti
+ 157              		.loc 1 84 3 view .LVU34
+ 158 0084 224B     		ldr	r3, .L6+48
+ 159 0086 0393     		str	r3, [sp, #12]
+ 160 0088 4FF40073 		mov	r3, #512
+ 161 008c 0293     		str	r3, [sp, #8]
+ 162 008e 4FF48073 		mov	r3, #256
+ 163 0092 0193     		str	r3, [sp, #4]
+ 164 0094 1F4B     		ldr	r3, .L6+52
+ 165 0096 0093     		str	r3, [sp]
+ 166 0098 0423     		movs	r3, #4
+ 167 009a 0022     		movs	r2, #0
+ 168 009c 1E49     		ldr	r1, .L6+56
+ 169 009e 0BA8     		add	r0, sp, #44
+ 170 00a0 FFF7FEFF 		bl	servo_Init
+ 171              	.LVL12:
+ 172              	.L3:
+  85:../RMS-source/src/rms_freertos.c ****   
+  86:../RMS-source/src/rms_freertos.c ****   for(;;)
+ 173              		.loc 1 86 3 discriminator 1 view .LVU35
+  87:../RMS-source/src/rms_freertos.c ****   {
+  88:../RMS-source/src/rms_freertos.c ****     snprintf(msg.data.data, msg.data.capacity, "Enc Count: %ld", servo_encoder_count(&mtr1));
+ 174              		.loc 1 88 5 discriminator 1 view .LVU36
+ 175 00a4 269C     		ldr	r4, [sp, #152]
+ 176 00a6 289D     		ldr	r5, [sp, #160]
+ 177 00a8 0BA8     		add	r0, sp, #44
+ 178 00aa FFF7FEFF 		bl	servo_encoder_count
+ 179              	.LVL13:
+ 180 00ae 0346     		mov	r3, r0
+ 181 00b0 1A4A     		ldr	r2, .L6+60
+ 182 00b2 2946     		mov	r1, r5
+ 183 00b4 2046     		mov	r0, r4
+ 184 00b6 FFF7FEFF 		bl	snprintf
+ 185              	.LVL14:
+  89:../RMS-source/src/rms_freertos.c ****     msg.data.size = strlen(msg.data.data);
+ARM GAS  /tmp/ccQAAZC5.s 			page 6
 
 
- 185              		.loc 1 62 7 view .LVU42
- 186 00b8 3E21     		movs	r1, #62
- 187 00ba 1048     		ldr	r0, .L6+56
- 188 00bc FFF7FEFF 		bl	printf
- 189              	.LVL15:
- 190 00c0 BAE7     		b	.L2
- 191              	.L7:
- 192 00c2 00BF     		.align	2
- 193              	.L6:
- 194 00c4 00000000 		.word	cubemx_transport_read
- 195 00c8 00000000 		.word	cubemx_transport_write
- 196 00cc 00000000 		.word	cubemx_transport_close
- 197 00d0 00000000 		.word	cubemx_transport_open
- 198 00d4 00000000 		.word	huart3
- 199 00d8 00000000 		.word	microros_allocate
- 200 00dc 00000000 		.word	microros_deallocate
- 201 00e0 00000000 		.word	microros_reallocate
- 202 00e4 00000000 		.word	microros_zero_allocate
- 203 00e8 28000000 		.word	.LC1
- 204 00ec 2C000000 		.word	.LC2
- 205 00f0 38000000 		.word	.LC3
- 206 00f4 00040040 		.word	1073742848
- 207 00f8 48000000 		.word	.LC4
- 208 00fc 00000000 		.word	.LC0
- 209              		.cfi_endproc
- 210              	.LFE138:
- 212              		.section	.text.start_mtr_ctrl_task,"ax",%progbits
- 213              		.align	1
- 214              		.global	start_mtr_ctrl_task
- 215              		.syntax unified
- 216              		.thumb
- 217              		.thumb_func
- 219              	start_mtr_ctrl_task:
- 220              	.LVL16:
- 221              	.LFB139:
-  89:../RMS-source/src/rms_freertos.c ****     // osDelay(500);
-  90:../RMS-source/src/rms_freertos.c ****   }
-  91:../RMS-source/src/rms_freertos.c **** }
-  92:../RMS-source/src/rms_freertos.c **** 
-  93:../RMS-source/src/rms_freertos.c **** void start_mtr_ctrl_task(void *argument)
-  94:../RMS-source/src/rms_freertos.c **** {
- 222              		.loc 1 94 1 view -0
- 223              		.cfi_startproc
- 224              		@ Volatile: function does not return.
- 225              		@ args = 0, pretend = 0, frame = 16
- 226              		@ frame_needed = 0, uses_anonymous_args = 0
- 227              		.loc 1 94 1 is_stmt 0 view .LVU44
- 228 0000 00B5     		push	{lr}
- 229              	.LCFI2:
- 230              		.cfi_def_cfa_offset 4
- 231              		.cfi_offset 14, -4
- 232 0002 87B0     		sub	sp, sp, #28
- 233              	.LCFI3:
- 234              		.cfi_def_cfa_offset 32
-  95:../RMS-source/src/rms_freertos.c ****   Motor mtr1;
- 235              		.loc 1 95 3 is_stmt 1 view .LVU45
-  96:../RMS-source/src/rms_freertos.c **** 
-ARM GAS  /tmp/ccFCAwmZ.s 			page 7
+ 186              		.loc 1 89 5 discriminator 1 view .LVU37
+ 187              		.loc 1 89 21 is_stmt 0 discriminator 1 view .LVU38
+ 188 00ba 2698     		ldr	r0, [sp, #152]
+ 189 00bc FFF7FEFF 		bl	strlen
+ 190              	.LVL15:
+ 191              		.loc 1 89 19 discriminator 1 view .LVU39
+ 192 00c0 2790     		str	r0, [sp, #156]
+  90:../RMS-source/src/rms_freertos.c ****     rcl_publish(&publisher, &msg, NULL);
+ 193              		.loc 1 90 5 is_stmt 1 discriminator 1 view .LVU40
+ 194 00c2 0022     		movs	r2, #0
+ 195 00c4 26A9     		add	r1, sp, #152
+ 196 00c6 10A8     		add	r0, sp, #64
+ 197 00c8 FFF7FEFF 		bl	rcl_publish
+ 198              	.LVL16:
+  91:../RMS-source/src/rms_freertos.c ****     osDelay(500);
+ 199              		.loc 1 91 5 discriminator 1 view .LVU41
+ 200 00cc 4FF4FA70 		mov	r0, #500
+ 201 00d0 FFF7FEFF 		bl	osDelay
+ 202              	.LVL17:
+  86:../RMS-source/src/rms_freertos.c ****   {
+ 203              		.loc 1 86 8 discriminator 1 view .LVU42
+ 204 00d4 E6E7     		b	.L3
+ 205              	.L5:
+  61:../RMS-source/src/rms_freertos.c ****     }
+ 206              		.loc 1 61 7 view .LVU43
+ 207 00d6 3D21     		movs	r1, #61
+ 208 00d8 1148     		ldr	r0, .L6+64
+ 209 00da FFF7FEFF 		bl	printf
+ 210              	.LVL18:
+ 211 00de ABE7     		b	.L2
+ 212              	.L7:
+ 213              		.align	2
+ 214              	.L6:
+ 215 00e0 00000000 		.word	cubemx_transport_read
+ 216 00e4 00000000 		.word	cubemx_transport_write
+ 217 00e8 00000000 		.word	cubemx_transport_close
+ 218 00ec 00000000 		.word	cubemx_transport_open
+ 219 00f0 00000000 		.word	huart3
+ 220 00f4 00000000 		.word	microros_allocate
+ 221 00f8 00000000 		.word	microros_deallocate
+ 222 00fc 00000000 		.word	microros_reallocate
+ 223 0100 00000000 		.word	microros_zero_allocate
+ 224 0104 28000000 		.word	.LC1
+ 225 0108 2C000000 		.word	.LC2
+ 226 010c 38000000 		.word	.LC3
+ 227 0110 00000000 		.word	htim3
+ 228 0114 00000240 		.word	1073872896
+ 229 0118 00000000 		.word	htim8
+ 230 011c 48000000 		.word	.LC4
+ 231 0120 00000000 		.word	.LC0
+ 232              		.cfi_endproc
+ 233              	.LFE138:
+ 235              		.text
+ 236              	.Letext0:
+ 237              		.file 2 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
+ 238              		.file 3 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_types.h"
+ 239              		.file 4 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ARM GAS  /tmp/ccQAAZC5.s 			page 7
 
 
-  97:../RMS-source/src/rms_freertos.c ****   Motor_Init(&mtr1, TIM_CHANNEL_1, TIM_CHANNEL_2, GPIOA, MTR1_L_EN_Pin, MTR1_R_EN_Pin);
- 236              		.loc 1 97 3 view .LVU46
- 237 0004 4FF40073 		mov	r3, #512
- 238 0008 0193     		str	r3, [sp, #4]
- 239 000a 4FF48073 		mov	r3, #256
- 240 000e 0093     		str	r3, [sp]
- 241 0010 074B     		ldr	r3, .L11
- 242 0012 0422     		movs	r2, #4
- 243 0014 0021     		movs	r1, #0
- 244 0016 03A8     		add	r0, sp, #12
- 245              	.LVL17:
- 246              		.loc 1 97 3 is_stmt 0 view .LVU47
- 247 0018 FFF7FEFF 		bl	Motor_Init
- 248              	.LVL18:
-  98:../RMS-source/src/rms_freertos.c **** 
-  99:../RMS-source/src/rms_freertos.c ****   Motor_disable(&mtr1);
- 249              		.loc 1 99 3 is_stmt 1 view .LVU48
- 250 001c 03A8     		add	r0, sp, #12
- 251 001e FFF7FEFF 		bl	Motor_disable
- 252              	.LVL19:
- 253              	.L9:
- 100:../RMS-source/src/rms_freertos.c ****   while (1)
- 254              		.loc 1 100 3 discriminator 1 view .LVU49
- 101:../RMS-source/src/rms_freertos.c ****   {
- 102:../RMS-source/src/rms_freertos.c ****     Motor_turn_left(&mtr1, 500);
- 255              		.loc 1 102 5 discriminator 1 view .LVU50
- 256 0022 4FF4FA71 		mov	r1, #500
- 257 0026 03A8     		add	r0, sp, #12
- 258 0028 FFF7FEFF 		bl	Motor_turn_left
- 259              	.LVL20:
- 100:../RMS-source/src/rms_freertos.c ****   while (1)
- 260              		.loc 1 100 9 discriminator 1 view .LVU51
- 261 002c F9E7     		b	.L9
- 262              	.L12:
- 263 002e 00BF     		.align	2
- 264              	.L11:
- 265 0030 00000240 		.word	1073872896
- 266              		.cfi_endproc
- 267              	.LFE139:
- 269              		.section	.text.unwrap_encoder,"ax",%progbits
- 270              		.align	1
- 271              		.global	unwrap_encoder
- 272              		.syntax unified
- 273              		.thumb
- 274              		.thumb_func
- 276              	unwrap_encoder:
- 277              	.LVL21:
- 278              	.LFB140:
- 103:../RMS-source/src/rms_freertos.c ****   }
- 104:../RMS-source/src/rms_freertos.c **** }
- 105:../RMS-source/src/rms_freertos.c **** 
- 106:../RMS-source/src/rms_freertos.c **** 
- 107:../RMS-source/src/rms_freertos.c **** // void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
- 108:../RMS-source/src/rms_freertos.c **** // {
- 109:../RMS-source/src/rms_freertos.c **** //   if (Is_First_Captured==0) // if the first rising edge is not captured
- 110:../RMS-source/src/rms_freertos.c **** //   {
- 111:../RMS-source/src/rms_freertos.c **** //     HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-ARM GAS  /tmp/ccFCAwmZ.s 			page 8
-
-
- 112:../RMS-source/src/rms_freertos.c **** //     IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1); // read the first value
- 113:../RMS-source/src/rms_freertos.c **** //     Is_First_Captured = 1;  // set the first captured as true
- 114:../RMS-source/src/rms_freertos.c **** //   }
- 115:../RMS-source/src/rms_freertos.c **** 
- 116:../RMS-source/src/rms_freertos.c **** //   else   // If the first rising edge is captured, now we will capture the second edge
- 117:../RMS-source/src/rms_freertos.c **** //   {
- 118:../RMS-source/src/rms_freertos.c **** //     IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);  // read second value
- 119:../RMS-source/src/rms_freertos.c **** 
- 120:../RMS-source/src/rms_freertos.c **** //     if (IC_Val2 > IC_Val1)
- 121:../RMS-source/src/rms_freertos.c **** //     {
- 122:../RMS-source/src/rms_freertos.c **** //       Difference = IC_Val2-IC_Val1;
- 123:../RMS-source/src/rms_freertos.c **** //     }
- 124:../RMS-source/src/rms_freertos.c **** 
- 125:../RMS-source/src/rms_freertos.c **** //     else if (IC_Val1 > IC_Val2)
- 126:../RMS-source/src/rms_freertos.c **** //     {
- 127:../RMS-source/src/rms_freertos.c **** //       Difference = (0xffff - IC_Val1) + IC_Val2;
- 128:../RMS-source/src/rms_freertos.c **** //     }
- 129:../RMS-source/src/rms_freertos.c **** 
- 130:../RMS-source/src/rms_freertos.c **** //     uint16_t enctoms = Difference * 0.5; // converting enc counts to ms
- 131:../RMS-source/src/rms_freertos.c **** //     rpm = 60000 / enctoms;
- 132:../RMS-source/src/rms_freertos.c **** 
- 133:../RMS-source/src/rms_freertos.c **** //     __HAL_TIM_SET_COUNTER(htim, 0);  // reset the counter
- 134:../RMS-source/src/rms_freertos.c **** //     Is_First_Captured = 0; // set it back to false
- 135:../RMS-source/src/rms_freertos.c **** //   }
- 136:../RMS-source/src/rms_freertos.c **** // }
- 137:../RMS-source/src/rms_freertos.c **** 
- 138:../RMS-source/src/rms_freertos.c **** int32_t unwrap_encoder(uint16_t encCount, int32_t * prev)
- 139:../RMS-source/src/rms_freertos.c **** {
- 279              		.loc 1 139 1 view -0
- 280              		.cfi_startproc
- 281              		@ args = 0, pretend = 0, frame = 0
- 282              		@ frame_needed = 0, uses_anonymous_args = 0
- 283              		@ link register save eliminated.
- 140:../RMS-source/src/rms_freertos.c ****     int32_t c32 = (int32_t)encCount - HALF_PERIOD;
- 284              		.loc 1 140 5 view .LVU53
- 285              		.loc 1 140 13 is_stmt 0 view .LVU54
- 286 0000 A0F50050 		sub	r0, r0, #8192
- 287              	.LVL22:
- 141:../RMS-source/src/rms_freertos.c ****     int32_t dif = c32 - *prev; 
- 288              		.loc 1 141 5 is_stmt 1 view .LVU55
- 289              		.loc 1 141 25 is_stmt 0 view .LVU56
- 290 0004 0A68     		ldr	r2, [r1]
- 291              		.loc 1 141 13 view .LVU57
- 292 0006 801A     		subs	r0, r0, r2
- 293              	.LVL23:
- 142:../RMS-source/src/rms_freertos.c **** 
- 143:../RMS-source/src/rms_freertos.c ****     int32_t mod_dif = ((dif + HALF_PERIOD) % ONE_PERIOD) - HALF_PERIOD;
- 294              		.loc 1 143 5 is_stmt 1 view .LVU58
- 295              		.loc 1 143 29 is_stmt 0 view .LVU59
- 296 0008 00F50053 		add	r3, r0, #8192
- 297              		.loc 1 143 44 view .LVU60
- 298 000c D3F1000C 		rsbs	ip, r3, #0
- 299 0010 C3F30D03 		ubfx	r3, r3, #0, #14
- 300 0014 CCF30D0C 		ubfx	ip, ip, #0, #14
- 301 0018 58BF     		it	pl
- 302 001a CCF10003 		rsbpl	r3, ip, #0
- 303              		.loc 1 143 13 view .LVU61
-ARM GAS  /tmp/ccFCAwmZ.s 			page 9
-
-
- 304 001e A3F5005C 		sub	ip, r3, #8192
- 305              	.LVL24:
- 144:../RMS-source/src/rms_freertos.c ****     if(dif < -HALF_PERIOD)
- 306              		.loc 1 144 5 is_stmt 1 view .LVU62
- 307              		.loc 1 144 7 is_stmt 0 view .LVU63
- 308 0022 10F5005F 		cmn	r0, #8192
- 309 0026 01DA     		bge	.L14
- 145:../RMS-source/src/rms_freertos.c ****         mod_dif += ONE_PERIOD; 
- 310              		.loc 1 145 9 is_stmt 1 view .LVU64
- 311              		.loc 1 145 17 is_stmt 0 view .LVU65
- 312 0028 03F5005C 		add	ip, r3, #8192
- 313              	.LVL25:
- 314              	.L14:
- 146:../RMS-source/src/rms_freertos.c **** 
- 147:../RMS-source/src/rms_freertos.c ****     int32_t unwrapped = *prev + mod_dif;
- 315              		.loc 1 147 5 is_stmt 1 view .LVU66
- 316              		.loc 1 147 13 is_stmt 0 view .LVU67
- 317 002c 02EB0C00 		add	r0, r2, ip
- 318              	.LVL26:
- 148:../RMS-source/src/rms_freertos.c ****     *prev = unwrapped; //load previous value
- 319              		.loc 1 148 5 is_stmt 1 view .LVU68
- 320              		.loc 1 148 11 is_stmt 0 view .LVU69
- 321 0030 0860     		str	r0, [r1]
- 149:../RMS-source/src/rms_freertos.c **** 
- 150:../RMS-source/src/rms_freertos.c ****     return unwrapped + HALF_PERIOD;
- 322              		.loc 1 150 5 is_stmt 1 view .LVU70
- 151:../RMS-source/src/rms_freertos.c **** }...
- 323              		.loc 1 151 1 is_stmt 0 view .LVU71
- 324 0032 00F50050 		add	r0, r0, #8192
- 325              	.LVL27:
- 326              		.loc 1 151 1 view .LVU72
- 327 0036 7047     		bx	lr
- 328              		.cfi_endproc
- 329              	.LFE140:
- 331              		.global	encPrev
- 332              		.section	.bss.encPrev,"aw",%nobits
- 333              		.align	2
- 336              	encPrev:
- 337 0000 00000000 		.space	4
- 338              		.text
- 339              	.Letext0:
- 340              		.file 2 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
- 341              		.file 3 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_types.h"
- 342              		.file 4 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
- 343              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
- 344              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
- 345              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
- 346              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
- 347              		.file 9 "../RMS-source/inc/dh052_internal.h"
- 348              		.file 10 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcutils
- 349              		.file 11 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/all
- 350              		.file 12 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw/ret
- 351              		.file 13 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcutils
- 352              		.file 14 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw/typ
- 353              		.file 15 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/typ
- 354              		.file 16 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/ini
- 355              		.file 17 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/con
-ARM GAS  /tmp/ccFCAwmZ.s 			page 10
-
-
- 356              		.file 18 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/nod
- 357              		.file 19 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/pub
- 358              		.file 20 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/tim
- 359              		.file 21 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw/qos
- 360              		.file 22 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/ty
- 361              		.file 23 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rosidl_
- 362              		.file 24 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/std_msg
- 363              		.file 25 "Core/Inc/usart.h"
- 364              		.file 26 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw_mic
- 365              		.file 27 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/in
- 366              		.file 28 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/no
- 367              		.file 29 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/std_msg
- 368              		.file 30 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/pu
- 369              		.file 31 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/std_msg
- 370              		.file 32 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/stdlib.h"
- 371              		.file 33 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/stdio.h"
- 372              		.file 34 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/string.h"
-ARM GAS  /tmp/ccFCAwmZ.s 			page 11
+ 240              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h"
+ 241              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 242              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 243              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+ 244              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 245              		.file 10 "Core/Inc/usart.h"
+ 246              		.file 11 "Core/Inc/tim.h"
+ 247              		.file 12 "../RMS-source/inc/dh052_internal.h"
+ 248              		.file 13 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcutils
+ 249              		.file 14 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/all
+ 250              		.file 15 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw/ret
+ 251              		.file 16 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcutils
+ 252              		.file 17 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw/typ
+ 253              		.file 18 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/typ
+ 254              		.file 19 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/ini
+ 255              		.file 20 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/con
+ 256              		.file 21 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/nod
+ 257              		.file 22 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/pub
+ 258              		.file 23 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/tim
+ 259              		.file 24 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw/qos
+ 260              		.file 25 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/ty
+ 261              		.file 26 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rosidl_
+ 262              		.file 27 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/std_msg
+ 263              		.file 28 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rmw_mic
+ 264              		.file 29 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/in
+ 265              		.file 30 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/no
+ 266              		.file 31 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/std_msg
+ 267              		.file 32 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rclc/pu
+ 268              		.file 33 "micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/std_msg
+ 269              		.file 34 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/stdlib.h"
+ 270              		.file 35 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/stdio.h"
+ 271              		.file 36 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/string.h"
+ 272              		.file 37 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+ARM GAS  /tmp/ccQAAZC5.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 rms_freertos.c
-     /tmp/ccFCAwmZ.s:20     .rodata.start_uros_task.str1.4:0000000000000000 $d
-     /tmp/ccFCAwmZ.s:36     .text.start_uros_task:0000000000000000 $t
-     /tmp/ccFCAwmZ.s:42     .text.start_uros_task:0000000000000000 start_uros_task
-     /tmp/ccFCAwmZ.s:194    .text.start_uros_task:00000000000000c4 $d
-     /tmp/ccFCAwmZ.s:213    .text.start_mtr_ctrl_task:0000000000000000 $t
-     /tmp/ccFCAwmZ.s:219    .text.start_mtr_ctrl_task:0000000000000000 start_mtr_ctrl_task
-     /tmp/ccFCAwmZ.s:265    .text.start_mtr_ctrl_task:0000000000000030 $d
-     /tmp/ccFCAwmZ.s:270    .text.unwrap_encoder:0000000000000000 $t
-     /tmp/ccFCAwmZ.s:276    .text.unwrap_encoder:0000000000000000 unwrap_encoder
-     /tmp/ccFCAwmZ.s:336    .bss.encPrev:0000000000000000 encPrev
-     /tmp/ccFCAwmZ.s:333    .bss.encPrev:0000000000000000 $d
+     /tmp/ccQAAZC5.s:20     .rodata.start_uros_task.str1.4:0000000000000000 $d
+     /tmp/ccQAAZC5.s:36     .text.start_uros_task:0000000000000000 $t
+     /tmp/ccQAAZC5.s:42     .text.start_uros_task:0000000000000000 start_uros_task
+     /tmp/ccQAAZC5.s:215    .text.start_uros_task:00000000000000e0 $d
 
 UNDEFINED SYMBOLS
 rmw_uros_set_custom_transport
@@ -586,9 +415,12 @@ rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__String
 rclc_publisher_init_default
 std_msgs__msg__String__init
 malloc
+servo_Init
+servo_encoder_count
 snprintf
 strlen
 rcl_publish
+osDelay
 printf
 cubemx_transport_read
 cubemx_transport_write
@@ -599,6 +431,5 @@ microros_allocate
 microros_deallocate
 microros_reallocate
 microros_zero_allocate
-Motor_Init
-Motor_disable
-Motor_turn_left
+htim3
+htim8

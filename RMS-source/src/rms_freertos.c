@@ -17,17 +17,10 @@
 #include <stdio.h>
 
 /******************************* Aliases **************************************/
-// 'ONE_PERIOD" is this val because im triggering both encoder inputs on both 
-// rising and falling edges, for greater accuracy, so encoder val in  4x. 
-// Thats why 65536 / 4 to get this 
-#define ONE_PERIOD 16384  
-#define HALF_PERIOD 8192
-#define BUF_SIZE 256
+#define BUF_SIZE 128
 
 
 /****************************** Global Variables ******************************/
-int32_t encPrev = 0;
-
 // uint16_t IC_Val1 = 0;
 // uint16_t IC_Val2 = 0;
 // uint16_t Difference = 0;
@@ -43,8 +36,14 @@ extern void microros_deallocate(void * pointer, void * state);
 extern void * microros_allocate(size_t size, void * state);
 extern void * microros_reallocate(void * pointer, size_t size, void * state);
 extern void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element, void * state);
+extern void servo_Init(Motor *handle,TIM_HandleTypeDef *pwm_tim_h , uint8_t lpwm_ch, uint8_t rpwm_ch, GPIO_TypeDef * port, uint16_t l_en, uint16_t r_en, TIM_HandleTypeDef *enc_tim_h);
+extern void servo_enable(Motor const * handle);
+extern void servo_disable(Motor const * handle);
+extern void servo_turn_left(Motor const * handle, uint16_t pwm);
+extern void servo_turn_right(Motor const * handle, uint16_t pwm);
+extern void servo_stop(Motor const * handle);
+extern int32_t servo_encoder_count(Motor const *handle);
 
-int32_t unwrap_encoder(uint16_t encCount, int32_t * prev);
 
 /* This task creates and handles the execution of ros node */ 
 void start_uros_task(void *argument)
@@ -81,27 +80,28 @@ void start_uros_task(void *argument)
   msg.data.data = malloc(BUF_SIZE);
   msg.data.capacity = BUF_SIZE;
   
+  Motor mtr1;
+  servo_Init(&mtr1, &htim8, TIM_CHANNEL_1, TIM_CHANNEL_2, GPIOA, MTR1_L_EN_Pin, MTR1_R_EN_Pin, &htim3);
+  
   for(;;)
   {
-    snprintf(msg.data.data, msg.data.capacity, "Enc Count: %ld", TIM3->CNT>>2);
+    snprintf(msg.data.data, msg.data.capacity, "Enc Count: %ld", servo_encoder_count(&mtr1));
     msg.data.size = strlen(msg.data.data);
     rcl_publish(&publisher, &msg, NULL);
-    // osDelay(500);
+    osDelay(500);
   }
 }
 
-void start_mtr_ctrl_task(void *argument)
-{
-  Motor mtr1;
+// void start_mtr_ctrl_task(void *argument)
+// {
 
-  Motor_Init(&mtr1, TIM_CHANNEL_1, TIM_CHANNEL_2, GPIOA, MTR1_L_EN_Pin, MTR1_R_EN_Pin);
-
-  Motor_disable(&mtr1);
-  while (1)
-  {
-    Motor_turn_left(&mtr1, 500);
-  }
-}
+//   servo_disable(&mtr1);
+//   while (1)
+//   {
+//     // servo_turn_left(&mtr1, 500);
+//     servo_stop(&mtr1);
+//   }
+// }
 
 
 // void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
@@ -134,18 +134,3 @@ void start_mtr_ctrl_task(void *argument)
 //     Is_First_Captured = 0; // set it back to false
 //   }
 // }
-
-int32_t unwrap_encoder(uint16_t encCount, int32_t * prev)
-{
-    int32_t c32 = (int32_t)encCount - HALF_PERIOD;
-    int32_t dif = c32 - *prev; 
-
-    int32_t mod_dif = ((dif + HALF_PERIOD) % ONE_PERIOD) - HALF_PERIOD;
-    if(dif < -HALF_PERIOD)
-        mod_dif += ONE_PERIOD; 
-
-    int32_t unwrapped = *prev + mod_dif;
-    *prev = unwrapped; //load previous value
-
-    return unwrapped + HALF_PERIOD;
-}

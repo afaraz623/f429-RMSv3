@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc57X2M3.s 			page 1
+ARM GAS  /tmp/cc0aoDka.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
   28:Core/Src/syscalls.c **** **   2. Redistributions in binary form must reproduce the above copyright notice,
   29:Core/Src/syscalls.c **** **      this list of conditions and the following disclaimer in the documentation
   30:Core/Src/syscalls.c **** **      and/or other materials provided with the distribution.
-ARM GAS  /tmp/cc57X2M3.s 			page 2
+ARM GAS  /tmp/cc0aoDka.s 			page 2
 
 
   31:Core/Src/syscalls.c **** **   3. Neither the name of STMicroelectronics nor the names of its contributors
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
   34              		.loc 1 79 1 view .LVU1
   35 0000 7047     		bx	lr
   36              		.cfi_endproc
-ARM GAS  /tmp/cc57X2M3.s 			page 3
+ARM GAS  /tmp/cc0aoDka.s 			page 3
 
 
   37              	.LFE25:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
   89:Core/Src/syscalls.c ****     return -1;
   86              		.loc 1 89 5 is_stmt 1 view .LVU9
   90:Core/Src/syscalls.c **** }
-ARM GAS  /tmp/cc57X2M3.s 			page 4
+ARM GAS  /tmp/cc0aoDka.s 			page 4
 
 
   87              		.loc 1 90 1 is_stmt 0 view .LVU10
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  136              		.loc 1 99 1 view -0
  137              		.cfi_startproc
  138              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/cc57X2M3.s 			page 5
+ARM GAS  /tmp/cc0aoDka.s 			page 5
 
 
  139              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  181              		.loc 1 107 1 is_stmt 1 view .LVU32
  108:Core/Src/syscalls.c **** }
  182              		.loc 1 108 1 is_stmt 0 view .LVU33
-ARM GAS  /tmp/cc57X2M3.s 			page 6
+ARM GAS  /tmp/cc0aoDka.s 			page 6
 
 
  183 001c 3046     		mov	r0, r6
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  114:Core/Src/syscalls.c ****     {
  230              		.loc 1 114 45 is_stmt 0 discriminator 3 view .LVU45
  231 0012 0135     		adds	r5, r5, #1
-ARM GAS  /tmp/cc57X2M3.s 			page 7
+ARM GAS  /tmp/cc0aoDka.s 			page 7
 
 
  232              	.LVL17:
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  276              	.L17:
  127:Core/Src/syscalls.c **** 
  128:Core/Src/syscalls.c ****     prev_heap_end = heap_end;
-ARM GAS  /tmp/cc57X2M3.s 			page 8
+ARM GAS  /tmp/cc0aoDka.s 			page 8
 
 
  277              		.loc 1 128 5 is_stmt 1 view .LVU59
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  316 002a 00BE     		BKPT #0
  317              	
  318              	@ 0 "" 2
-ARM GAS  /tmp/cc57X2M3.s 			page 9
+ARM GAS  /tmp/cc0aoDka.s 			page 9
 
 
  132:Core/Src/syscalls.c ****         return (caddr_t)-1;
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  367              		.global	_fstat
  368              		.syntax unified
  369              		.thumb
-ARM GAS  /tmp/cc57X2M3.s 			page 10
+ARM GAS  /tmp/cc0aoDka.s 			page 10
 
 
  370              		.thumb_func
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  415              	.LFE34:
  417              		.section	.text._lseek,"ax",%progbits
  418              		.align	1
-ARM GAS  /tmp/cc57X2M3.s 			page 11
+ARM GAS  /tmp/cc0aoDka.s 			page 11
 
 
  419              		.global	_lseek
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  465 0002 4FF0FF30 		mov	r0, #-1
  466              	.LVL34:
  467              		.loc 1 168 1 view .LVU98
-ARM GAS  /tmp/cc57X2M3.s 			page 12
+ARM GAS  /tmp/cc0aoDka.s 			page 12
 
 
  468 0006 03B0     		add	sp, sp, #12
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  520              	.LFB38:
  175:Core/Src/syscalls.c **** 
  176:Core/Src/syscalls.c **** int _unlink(char *name)
-ARM GAS  /tmp/cc57X2M3.s 			page 13
+ARM GAS  /tmp/cc0aoDka.s 			page 13
 
 
  177:Core/Src/syscalls.c **** {
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  569              		.align	1
  570              		.global	_stat
  571              		.syntax unified
-ARM GAS  /tmp/cc57X2M3.s 			page 14
+ARM GAS  /tmp/cc0aoDka.s 			page 14
 
 
  572              		.thumb
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  619              		.loc 1 195 11 is_stmt 0 view .LVU124
  620 0006 1F23     		movs	r3, #31
  621 0008 0360     		str	r3, [r0]
-ARM GAS  /tmp/cc57X2M3.s 			page 15
+ARM GAS  /tmp/cc0aoDka.s 			page 15
 
 
  196:Core/Src/syscalls.c ****     return -1;
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  206:Core/Src/syscalls.c **** {
  670              		.loc 1 206 1 is_stmt 1 view -0
  671              		.cfi_startproc
-ARM GAS  /tmp/cc57X2M3.s 			page 16
+ARM GAS  /tmp/cc0aoDka.s 			page 16
 
 
  672              		@ args = 0, pretend = 0, frame = 0
@@ -951,56 +951,56 @@ ARM GAS  /tmp/cc57X2M3.s 			page 1
  723              		.file 7 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/stat.h"
  724              		.file 8 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/times.h"
  725              		.file 9 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/errno.h"
-ARM GAS  /tmp/cc57X2M3.s 			page 17
+ARM GAS  /tmp/cc0aoDka.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 syscalls.c
-     /tmp/cc57X2M3.s:20     .text.initialise_monitor_handles:0000000000000000 $t
-     /tmp/cc57X2M3.s:26     .text.initialise_monitor_handles:0000000000000000 initialise_monitor_handles
-     /tmp/cc57X2M3.s:40     .text._getpid:0000000000000000 $t
-     /tmp/cc57X2M3.s:46     .text._getpid:0000000000000000 _getpid
-     /tmp/cc57X2M3.s:61     .text._kill:0000000000000000 $t
-     /tmp/cc57X2M3.s:67     .text._kill:0000000000000000 _kill
-     /tmp/cc57X2M3.s:94     .text._exit:0000000000000000 $t
-     /tmp/cc57X2M3.s:100    .text._exit:0000000000000000 _exit
-     /tmp/cc57X2M3.s:127    .text._read:0000000000000000 $t
-     /tmp/cc57X2M3.s:133    .text._read:0000000000000000 _read
-     /tmp/cc57X2M3.s:190    .text._write:0000000000000000 $t
-     /tmp/cc57X2M3.s:196    .text._write:0000000000000000 _write
-     /tmp/cc57X2M3.s:247    .text._sbrk:0000000000000000 $t
-     /tmp/cc57X2M3.s:253    .text._sbrk:0000000000000000 _sbrk
-     /tmp/cc57X2M3.s:334    .text._sbrk:000000000000003c $d
-     /tmp/cc57X2M3.s:342    .text._close:0000000000000000 $t
-     /tmp/cc57X2M3.s:348    .text._close:0000000000000000 _close
-     /tmp/cc57X2M3.s:366    .text._fstat:0000000000000000 $t
-     /tmp/cc57X2M3.s:372    .text._fstat:0000000000000000 _fstat
-     /tmp/cc57X2M3.s:394    .text._isatty:0000000000000000 $t
-     /tmp/cc57X2M3.s:400    .text._isatty:0000000000000000 _isatty
-     /tmp/cc57X2M3.s:418    .text._lseek:0000000000000000 $t
-     /tmp/cc57X2M3.s:424    .text._lseek:0000000000000000 _lseek
-     /tmp/cc57X2M3.s:442    .text._open:0000000000000000 $t
-     /tmp/cc57X2M3.s:448    .text._open:0000000000000000 _open
-     /tmp/cc57X2M3.s:479    .text._wait:0000000000000000 $t
-     /tmp/cc57X2M3.s:485    .text._wait:0000000000000000 _wait
-     /tmp/cc57X2M3.s:512    .text._unlink:0000000000000000 $t
-     /tmp/cc57X2M3.s:518    .text._unlink:0000000000000000 _unlink
-     /tmp/cc57X2M3.s:545    .text._times:0000000000000000 $t
-     /tmp/cc57X2M3.s:551    .text._times:0000000000000000 _times
-     /tmp/cc57X2M3.s:569    .text._stat:0000000000000000 $t
-     /tmp/cc57X2M3.s:575    .text._stat:0000000000000000 _stat
-     /tmp/cc57X2M3.s:597    .text._link:0000000000000000 $t
-     /tmp/cc57X2M3.s:603    .text._link:0000000000000000 _link
-     /tmp/cc57X2M3.s:630    .text._fork:0000000000000000 $t
-     /tmp/cc57X2M3.s:636    .text._fork:0000000000000000 _fork
-     /tmp/cc57X2M3.s:661    .text._execve:0000000000000000 $t
-     /tmp/cc57X2M3.s:667    .text._execve:0000000000000000 _execve
-     /tmp/cc57X2M3.s:712    .data.environ:0000000000000000 environ
-     /tmp/cc57X2M3.s:699    .bss.__env:0000000000000000 __env
-     /tmp/cc57X2M3.s:696    .bss.__env:0000000000000000 $d
-     /tmp/cc57X2M3.s:702    .bss.heap_end.0:0000000000000000 $d
-     /tmp/cc57X2M3.s:706    .bss.heap_end.0:0000000000000000 heap_end.0
-     /tmp/cc57X2M3.s:709    .data.environ:0000000000000000 $d
+     /tmp/cc0aoDka.s:20     .text.initialise_monitor_handles:0000000000000000 $t
+     /tmp/cc0aoDka.s:26     .text.initialise_monitor_handles:0000000000000000 initialise_monitor_handles
+     /tmp/cc0aoDka.s:40     .text._getpid:0000000000000000 $t
+     /tmp/cc0aoDka.s:46     .text._getpid:0000000000000000 _getpid
+     /tmp/cc0aoDka.s:61     .text._kill:0000000000000000 $t
+     /tmp/cc0aoDka.s:67     .text._kill:0000000000000000 _kill
+     /tmp/cc0aoDka.s:94     .text._exit:0000000000000000 $t
+     /tmp/cc0aoDka.s:100    .text._exit:0000000000000000 _exit
+     /tmp/cc0aoDka.s:127    .text._read:0000000000000000 $t
+     /tmp/cc0aoDka.s:133    .text._read:0000000000000000 _read
+     /tmp/cc0aoDka.s:190    .text._write:0000000000000000 $t
+     /tmp/cc0aoDka.s:196    .text._write:0000000000000000 _write
+     /tmp/cc0aoDka.s:247    .text._sbrk:0000000000000000 $t
+     /tmp/cc0aoDka.s:253    .text._sbrk:0000000000000000 _sbrk
+     /tmp/cc0aoDka.s:334    .text._sbrk:000000000000003c $d
+     /tmp/cc0aoDka.s:342    .text._close:0000000000000000 $t
+     /tmp/cc0aoDka.s:348    .text._close:0000000000000000 _close
+     /tmp/cc0aoDka.s:366    .text._fstat:0000000000000000 $t
+     /tmp/cc0aoDka.s:372    .text._fstat:0000000000000000 _fstat
+     /tmp/cc0aoDka.s:394    .text._isatty:0000000000000000 $t
+     /tmp/cc0aoDka.s:400    .text._isatty:0000000000000000 _isatty
+     /tmp/cc0aoDka.s:418    .text._lseek:0000000000000000 $t
+     /tmp/cc0aoDka.s:424    .text._lseek:0000000000000000 _lseek
+     /tmp/cc0aoDka.s:442    .text._open:0000000000000000 $t
+     /tmp/cc0aoDka.s:448    .text._open:0000000000000000 _open
+     /tmp/cc0aoDka.s:479    .text._wait:0000000000000000 $t
+     /tmp/cc0aoDka.s:485    .text._wait:0000000000000000 _wait
+     /tmp/cc0aoDka.s:512    .text._unlink:0000000000000000 $t
+     /tmp/cc0aoDka.s:518    .text._unlink:0000000000000000 _unlink
+     /tmp/cc0aoDka.s:545    .text._times:0000000000000000 $t
+     /tmp/cc0aoDka.s:551    .text._times:0000000000000000 _times
+     /tmp/cc0aoDka.s:569    .text._stat:0000000000000000 $t
+     /tmp/cc0aoDka.s:575    .text._stat:0000000000000000 _stat
+     /tmp/cc0aoDka.s:597    .text._link:0000000000000000 $t
+     /tmp/cc0aoDka.s:603    .text._link:0000000000000000 _link
+     /tmp/cc0aoDka.s:630    .text._fork:0000000000000000 $t
+     /tmp/cc0aoDka.s:636    .text._fork:0000000000000000 _fork
+     /tmp/cc0aoDka.s:661    .text._execve:0000000000000000 $t
+     /tmp/cc0aoDka.s:667    .text._execve:0000000000000000 _execve
+     /tmp/cc0aoDka.s:712    .data.environ:0000000000000000 environ
+     /tmp/cc0aoDka.s:699    .bss.__env:0000000000000000 __env
+     /tmp/cc0aoDka.s:696    .bss.__env:0000000000000000 $d
+     /tmp/cc0aoDka.s:702    .bss.heap_end.0:0000000000000000 $d
+     /tmp/cc0aoDka.s:706    .bss.heap_end.0:0000000000000000 heap_end.0
+     /tmp/cc0aoDka.s:709    .data.environ:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 __errno
