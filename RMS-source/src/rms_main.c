@@ -30,8 +30,7 @@ int main(void)
     // HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_1);
     HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_1);
     HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_2);
-
-
+    
     // Call init function for freertos objects (in freertos.c)
     osKernelInitialize();  
     MX_FREERTOS_Init();

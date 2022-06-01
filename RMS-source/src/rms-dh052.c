@@ -55,7 +55,7 @@ void servo_stop(Motor const *handle)
 
 int32_t servo_encoder_count(Motor const *handle)
 {
-    int32_t c32 =  (int32_t)handle->enc_tim_h->Instance->CNT - HALF_PERIOD;
+    int32_t c32 =  (volatile int32_t)handle->enc_tim_h->Instance->CNT - HALF_PERIOD;
     int32_t dif = c32 - g_prev; 
 
     int32_t mod_dif = ((dif + HALF_PERIOD) % ONE_PERIOD) - HALF_PERIOD;

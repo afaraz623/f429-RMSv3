@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccoycWTt.s 			page 1
+ARM GAS  /tmp/ccDcTJA1.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccoycWTt.s 			page 1
   16:../RMS-source/src/rms_main.c **** 
   17:../RMS-source/src/rms_main.c ****     // Configure the system clock
   18:../RMS-source/src/rms_main.c ****     SystemClock_Config();
-ARM GAS  /tmp/ccoycWTt.s 			page 2
+ARM GAS  /tmp/ccDcTJA1.s 			page 2
 
 
   41              		.loc 1 18 5 view .LVU2
@@ -109,28 +109,27 @@ ARM GAS  /tmp/ccoycWTt.s 			page 1
   72 0032 2046     		mov	r0, r4
   73 0034 FFF7FEFF 		bl	HAL_TIM_PWM_Start
   74              	.LVL9:
-  33:../RMS-source/src/rms_main.c **** 
-  34:../RMS-source/src/rms_main.c **** 
-  35:../RMS-source/src/rms_main.c ****     // Call init function for freertos objects (in freertos.c)
-  36:../RMS-source/src/rms_main.c ****     osKernelInitialize();  
-  75              		.loc 1 36 5 view .LVU11
+  33:../RMS-source/src/rms_main.c ****     
+  34:../RMS-source/src/rms_main.c ****     // Call init function for freertos objects (in freertos.c)
+  35:../RMS-source/src/rms_main.c ****     osKernelInitialize();  
+  75              		.loc 1 35 5 view .LVU11
   76 0038 FFF7FEFF 		bl	osKernelInitialize
   77              	.LVL10:
-  37:../RMS-source/src/rms_main.c ****     MX_FREERTOS_Init();
-  78              		.loc 1 37 5 view .LVU12
-ARM GAS  /tmp/ccoycWTt.s 			page 3
-
-
+  36:../RMS-source/src/rms_main.c ****     MX_FREERTOS_Init();
+  78              		.loc 1 36 5 view .LVU12
   79 003c FFF7FEFF 		bl	MX_FREERTOS_Init
+ARM GAS  /tmp/ccDcTJA1.s 			page 3
+
+
   80              	.LVL11:
-  38:../RMS-source/src/rms_main.c **** 
-  39:../RMS-source/src/rms_main.c ****     //Start scheduler
-  40:../RMS-source/src/rms_main.c ****     osKernelStart();    
-  81              		.loc 1 40 5 view .LVU13
+  37:../RMS-source/src/rms_main.c **** 
+  38:../RMS-source/src/rms_main.c ****     //Start scheduler
+  39:../RMS-source/src/rms_main.c ****     osKernelStart();    
+  81              		.loc 1 39 5 view .LVU13
   82 0040 FFF7FEFF 		bl	osKernelStart
   83              	.LVL12:
-  41:../RMS-source/src/rms_main.c **** }...
-  84              		.loc 1 41 1 is_stmt 0 view .LVU14
+  40:../RMS-source/src/rms_main.c **** }...
+  84              		.loc 1 40 1 is_stmt 0 view .LVU14
   85 0044 0020     		movs	r0, #0
   86 0046 10BD     		pop	{r4, pc}
   87              	.L4:
@@ -154,14 +153,14 @@ ARM GAS  /tmp/ccoycWTt.s 			page 1
  106              		.file 11 "Core/Inc/dma.h"
  107              		.file 12 "Core/Inc/usart.h"
  108              		.file 13 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
-ARM GAS  /tmp/ccoycWTt.s 			page 4
+ARM GAS  /tmp/ccDcTJA1.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 rms_main.c
-     /tmp/ccoycWTt.s:20     .text.main:0000000000000000 $t
-     /tmp/ccoycWTt.s:26     .text.main:0000000000000000 main
-     /tmp/ccoycWTt.s:90     .text.main:0000000000000048 $d
+     /tmp/ccDcTJA1.s:20     .text.main:0000000000000000 $t
+     /tmp/ccDcTJA1.s:26     .text.main:0000000000000000 main
+     /tmp/ccDcTJA1.s:90     .text.main:0000000000000048 $d
 
 UNDEFINED SYMBOLS
 HAL_Init

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccAPRKFb.s 			page 1
+ARM GAS  /tmp/ccVu5NwD.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccAPRKFb.s 			page 1
   38              		.loc 1 18 5 is_stmt 1 view .LVU3
   39              		.loc 1 18 18 is_stmt 0 view .LVU4
   40 0002 0099     		ldr	r1, [sp]
-ARM GAS  /tmp/ccAPRKFb.s 			page 2
+ARM GAS  /tmp/ccVu5NwD.s 			page 2
 
 
   41              	.LVL1:
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccAPRKFb.s 			page 1
   88              		.cfi_offset 14, -4
   89 0002 0446     		mov	r4, r0
   28:../RMS-source/src/rms-dh052.c ****     HAL_GPIO_WritePin(handle->port, handle->l_en, 1);
-ARM GAS  /tmp/ccAPRKFb.s 			page 3
+ARM GAS  /tmp/ccVu5NwD.s 			page 3
 
 
   90              		.loc 1 28 5 is_stmt 1 view .LVU20
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccAPRKFb.s 			page 1
  139              		.loc 1 35 5 is_stmt 1 view .LVU29
  140 000e 0022     		movs	r2, #0
  141 0010 E189     		ldrh	r1, [r4, #14]
-ARM GAS  /tmp/ccAPRKFb.s 			page 4
+ARM GAS  /tmp/ccVu5NwD.s 			page 4
 
 
  142 0012 A068     		ldr	r0, [r4, #8]
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccAPRKFb.s 			page 1
   40:../RMS-source/src/rms-dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->lpwm_ch, pwm);
  190              		.loc 1 40 5 discriminator 7 view .LVU39
  191 0020 0368     		ldr	r3, [r0]
-ARM GAS  /tmp/ccAPRKFb.s 			page 5
+ARM GAS  /tmp/ccVu5NwD.s 			page 5
 
 
  192 0022 1B68     		ldr	r3, [r3]
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccAPRKFb.s 			page 1
  242              		.thumb
  243              		.thumb_func
  245              	servo_turn_right:
-ARM GAS  /tmp/ccAPRKFb.s 			page 6
+ARM GAS  /tmp/ccVu5NwD.s 			page 6
 
 
  246              	.LVL12:
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccAPRKFb.s 			page 1
  290 0030 0368     		ldr	r3, [r0]
  291 0032 1B68     		ldr	r3, [r3]
  292 0034 D963     		str	r1, [r3, #60]
-ARM GAS  /tmp/ccAPRKFb.s 			page 7
+ARM GAS  /tmp/ccVu5NwD.s 			page 7
 
 
  293 0036 E8E7     		b	.L21
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccAPRKFb.s 			page 1
  342 0002 53B9     		cbnz	r3, .L33
  343              		.loc 1 52 5 is_stmt 0 discriminator 1 view .LVU66
  344 0004 0368     		ldr	r3, [r0]
-ARM GAS  /tmp/ccAPRKFb.s 			page 8
+ARM GAS  /tmp/ccVu5NwD.s 			page 8
 
 
  345 0006 1B68     		ldr	r3, [r3]
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccAPRKFb.s 			page 1
  393 0048 0368     		ldr	r3, [r0]
  394 004a 1B68     		ldr	r3, [r3]
  395 004c 0022     		movs	r2, #0
-ARM GAS  /tmp/ccAPRKFb.s 			page 9
+ARM GAS  /tmp/ccVu5NwD.s 			page 9
 
 
  396 004e 1A64     		str	r2, [r3, #64]
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccAPRKFb.s 			page 1
  444 000c 1868     		ldr	r0, [r3]
  445              	.LVL16:
  446              		.loc 1 59 13 view .LVU88
-ARM GAS  /tmp/ccAPRKFb.s 			page 10
+ARM GAS  /tmp/ccVu5NwD.s 			page 10
 
 
  447 000e 121A     		subs	r2, r2, r0
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccAPRKFb.s 			page 1
  492              		.align	2
  493              		.set	.LANCHOR0,. + 0
  496              	g_prev:
-ARM GAS  /tmp/ccAPRKFb.s 			page 11
+ARM GAS  /tmp/ccVu5NwD.s 			page 11
 
 
  497 0000 00000000 		.space	4
@@ -612,28 +612,28 @@ ARM GAS  /tmp/ccAPRKFb.s 			page 1
  505              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
  506              		.file 8 "../RMS-source/inc/dh052_internal.h"
  507              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
-ARM GAS  /tmp/ccAPRKFb.s 			page 12
+ARM GAS  /tmp/ccVu5NwD.s 			page 12
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 rms-dh052.c
-     /tmp/ccAPRKFb.s:20     .text.servo_Init:0000000000000000 $t
-     /tmp/ccAPRKFb.s:26     .text.servo_Init:0000000000000000 servo_Init
-     /tmp/ccAPRKFb.s:70     .text.servo_enable:0000000000000000 $t
-     /tmp/ccAPRKFb.s:76     .text.servo_enable:0000000000000000 servo_enable
-     /tmp/ccAPRKFb.s:111    .text.servo_disable:0000000000000000 $t
-     /tmp/ccAPRKFb.s:117    .text.servo_disable:0000000000000000 servo_disable
-     /tmp/ccAPRKFb.s:152    .text.servo_turn_left:0000000000000000 $t
-     /tmp/ccAPRKFb.s:158    .text.servo_turn_left:0000000000000000 servo_turn_left
-     /tmp/ccAPRKFb.s:239    .text.servo_turn_right:0000000000000000 $t
-     /tmp/ccAPRKFb.s:245    .text.servo_turn_right:0000000000000000 servo_turn_right
-     /tmp/ccAPRKFb.s:326    .text.servo_stop:0000000000000000 $t
-     /tmp/ccAPRKFb.s:332    .text.servo_stop:0000000000000000 servo_stop
-     /tmp/ccAPRKFb.s:417    .text.servo_encoder_count:0000000000000000 $t
-     /tmp/ccAPRKFb.s:423    .text.servo_encoder_count:0000000000000000 servo_encoder_count
-     /tmp/ccAPRKFb.s:487    .text.servo_encoder_count:000000000000003c $d
-     /tmp/ccAPRKFb.s:492    .bss.g_prev:0000000000000000 $d
-     /tmp/ccAPRKFb.s:496    .bss.g_prev:0000000000000000 g_prev
+     /tmp/ccVu5NwD.s:20     .text.servo_Init:0000000000000000 $t
+     /tmp/ccVu5NwD.s:26     .text.servo_Init:0000000000000000 servo_Init
+     /tmp/ccVu5NwD.s:70     .text.servo_enable:0000000000000000 $t
+     /tmp/ccVu5NwD.s:76     .text.servo_enable:0000000000000000 servo_enable
+     /tmp/ccVu5NwD.s:111    .text.servo_disable:0000000000000000 $t
+     /tmp/ccVu5NwD.s:117    .text.servo_disable:0000000000000000 servo_disable
+     /tmp/ccVu5NwD.s:152    .text.servo_turn_left:0000000000000000 $t
+     /tmp/ccVu5NwD.s:158    .text.servo_turn_left:0000000000000000 servo_turn_left
+     /tmp/ccVu5NwD.s:239    .text.servo_turn_right:0000000000000000 $t
+     /tmp/ccVu5NwD.s:245    .text.servo_turn_right:0000000000000000 servo_turn_right
+     /tmp/ccVu5NwD.s:326    .text.servo_stop:0000000000000000 $t
+     /tmp/ccVu5NwD.s:332    .text.servo_stop:0000000000000000 servo_stop
+     /tmp/ccVu5NwD.s:417    .text.servo_encoder_count:0000000000000000 $t
+     /tmp/ccVu5NwD.s:423    .text.servo_encoder_count:0000000000000000 servo_encoder_count
+     /tmp/ccVu5NwD.s:487    .text.servo_encoder_count:000000000000003c $d
+     /tmp/ccVu5NwD.s:492    .bss.g_prev:0000000000000000 $d
+     /tmp/ccVu5NwD.s:496    .bss.g_prev:0000000000000000 g_prev
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin
