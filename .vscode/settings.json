@@ -2,6 +2,9 @@
     "cortex-debug.gdbPath": "/usr/bin/arm-none-eabi-gdb",
     "cortex-debug.JLinkGDBServerPath": "/opt/jlink/JLinkGDBServer",
     "files.associations": {
-        "ranges": "c"
+        "ranges": "c",
+        "freertos.h": "c",
+        "cmsis_os.h": "c",
+        "cmsis_os2.h": "c"
     }
 }

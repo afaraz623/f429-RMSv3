@@ -1,4 +1,5 @@
 #include "FreeRTOS.h"
+#include "queue.h"
 #include "cmsis_os.h"
 #include "main.h"
 #include "usart.h"
@@ -19,8 +20,8 @@
 /******************************* Aliases **************************************/
 #define BUF_SIZE 128
 
-
 /****************************** Global Variables ******************************/
+  int32_t enc_val = 0;
 // uint16_t IC_Val1 = 0;
 // uint16_t IC_Val2 = 0;
 // uint16_t Difference = 0;
@@ -44,6 +45,7 @@ extern void servo_turn_right(Motor const * handle, uint16_t pwm);
 extern void servo_stop(Motor const * handle);
 extern int32_t servo_encoder_count(Motor const *handle);
 
+// QueueHandle_t queue;
 
 /* This task creates and handles the execution of ros node */ 
 void start_uros_task(void *argument)
@@ -80,28 +82,35 @@ void start_uros_task(void *argument)
   msg.data.data = malloc(BUF_SIZE);
   msg.data.capacity = BUF_SIZE;
   
-  Motor mtr1;
-  servo_Init(&mtr1, &htim8, TIM_CHANNEL_1, TIM_CHANNEL_2, GPIOA, MTR1_L_EN_Pin, MTR1_R_EN_Pin, &htim3);
-  
+  // int32_t rxbuf[5] = {0};
+
   for(;;)
   {
-    snprintf(msg.data.data, msg.data.capacity, "Enc Count: %ld", servo_encoder_count(&mtr1));
+    // xQueueReceive(queue, (void *)rxbuf, (TickType_t)5);
+    snprintf(msg.data.data, msg.data.capacity, "Enc Count: %ld", enc_val);
     msg.data.size = strlen(msg.data.data);
+    
     rcl_publish(&publisher, &msg, NULL);
-    osDelay(500);
+    
+    osDelay(100);
   }
 }
 
-// void start_mtr_ctrl_task(void *argument)
-// {
+void start_mtr_ctrl_task(void *argument)
+{
+  // queue = xQueueCreate(5, sizeof(int32_t));
+  
+  Motor mtr1;
+  servo_Init(&mtr1, &htim8, TIM_CHANNEL_1, TIM_CHANNEL_2, GPIOA, MTR1_L_EN_Pin, MTR1_R_EN_Pin, &htim3);
 
-//   servo_disable(&mtr1);
-//   while (1)
-//   {
-//     // servo_turn_left(&mtr1, 500);
-//     servo_stop(&mtr1);
-//   }
-// }
+  servo_enable(&mtr1);
+  while (1)
+  {
+    enc_val = servo_encoder_count(&mtr1);
+    servo_turn_left(&mtr1, 150);
+    // xQueueSend(queue, (void *)enc_val, (TickType_t)0);
+  }
+}
 
 
 // void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
