@@ -22,12 +22,12 @@ int main(void)
     MX_DMA_Init();
     MX_USART3_UART_Init();
     MX_TIM3_Init();
+    MX_TIM4_Init();
     MX_TIM8_Init();
 
     // Start peripherals 
     HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
-    // HAL_TIM_Base_Start_IT(&htim4);
-    // HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_1);
+    HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_1);
     HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_1);
     HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_2);
     

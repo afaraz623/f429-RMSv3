@@ -61,6 +61,8 @@ void Error_Handler(void);
 #define MTR1_ENC_A_GPIO_Port GPIOA
 #define MTR1_ENC_B_Pin GPIO_PIN_7
 #define MTR1_ENC_B_GPIO_Port GPIOA
+#define MTR1_ENC_Z_Pin GPIO_PIN_12
+#define MTR1_ENC_Z_GPIO_Port GPIOD
 #define MTR1_LPWM_Pin GPIO_PIN_6
 #define MTR1_LPWM_GPIO_Port GPIOC
 #define MTR1_RPWM_Pin GPIO_PIN_7

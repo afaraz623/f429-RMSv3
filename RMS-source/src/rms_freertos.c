@@ -22,11 +22,7 @@
 
 /****************************** Global Variables ******************************/
 static int32_t g_enc_val = 0;
-// uint16_t IC_Val1 = 0;
-// uint16_t IC_Val2 = 0;
-// uint16_t Difference = 0;
-// uint16_t rpm = 0;
-// int Is_First_Captured = 0;
+static uint16_t g_rpm = 0;
 
 /********************************* Prototypes ********************************/
 extern bool cubemx_transport_open(struct uxrCustomTransport * transport);
@@ -37,13 +33,14 @@ extern void microros_deallocate(void * pointer, void * state);
 extern void * microros_allocate(size_t size, void * state);
 extern void * microros_reallocate(void * pointer, size_t size, void * state);
 extern void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element, void * state);
-extern void servo_Init(Motor *handle,TIM_HandleTypeDef *pwm_tim_h , uint8_t lpwm_ch, uint8_t rpwm_ch, GPIO_TypeDef * port, uint16_t l_en, uint16_t r_en, TIM_HandleTypeDef *enc_tim_h);
+void servo_Init(Motor *handle,TIM_HandleTypeDef *pwm_tim_h , uint8_t lpwm_ch, uint8_t rpwm_ch, GPIO_TypeDef * port, uint16_t l_en, uint16_t r_en, TIM_HandleTypeDef *enc_tim_h, TIM_HandleTypeDef *enc_ic_tim_h);
 extern void servo_enable(Motor const * handle);
 extern void servo_disable(Motor const * handle);
 extern void servo_turn_left(Motor const * handle, uint16_t pwm);
 extern void servo_turn_right(Motor const * handle, uint16_t pwm);
 extern void servo_stop(Motor const * handle);
 extern int32_t servo_encoder_count(Motor const *handle);
+extern uint16_t servo_rpm(Motor *handle);
 
 
 /* This task creates and handles the execution of ros node */ 
@@ -83,53 +80,24 @@ void start_uros_task(void *argument)
   
   while(1)
   {
-    snprintf(msg.data.data, msg.data.capacity, "Enc Count: %ld", g_enc_val);
+    snprintf(msg.data.data, msg.data.capacity, "Enc Count: %ld, Rpm: %d", g_enc_val, g_rpm);
     msg.data.size = strlen(msg.data.data);
     rcl_publish(&publisher, &msg, NULL);
+    osDelay(100);
   }
 }
 
 void start_mtr_ctrl_task(void *argument)
 {
   Motor mtr1;
-  servo_Init(&mtr1, &htim8, TIM_CHANNEL_1, TIM_CHANNEL_2, GPIOA, MTR1_L_EN_Pin, MTR1_R_EN_Pin, &htim3);
+  servo_Init(&mtr1, &htim8, TIM_CHANNEL_1, TIM_CHANNEL_2, GPIOA, MTR1_L_EN_Pin, MTR1_R_EN_Pin, &htim3, &htim4);
 
   servo_enable(&mtr1);
   while (1)
   {
     g_enc_val = servo_encoder_count(&mtr1);
-    servo_turn_left(&mtr1, 150); 
+    g_rpm = servo_rpm(&mtr1);
+    servo_turn_left(&mtr1, 200); 
   }
 }
 
-
-// void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
-// {
-//   if (Is_First_Captured==0) // if the first rising edge is not captured
-//   {
-//     HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-//     IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1); // read the first value
-//     Is_First_Captured = 1;  // set the first captured as true
-//   }
-
-//   else   // If the first rising edge is captured, now we will capture the second edge
-//   {
-//     IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);  // read second value
-
-//     if (IC_Val2 > IC_Val1)
-//     {
-//       Difference = IC_Val2-IC_Val1;
-//     }
-
-//     else if (IC_Val1 > IC_Val2)
-//     {
-//       Difference = (0xffff - IC_Val1) + IC_Val2;
-//     }
-
-//     uint16_t enctoms = Difference * 0.5; // converting enc counts to ms
-//     rpm = 60000 / enctoms;
-
-//     __HAL_TIM_SET_COUNTER(htim, 0);  // reset the counter
-//     Is_First_Captured = 0; // set it back to false
-//   }
-// }
