@@ -57,10 +57,10 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
 Core/Src/system_stm32f4xx.c \
-../RMS-source/src/rms_main.c \
-../RMS-source/src/rms_freertos.c \
-../RMS-source/src/rms-dh052.c \
-../RMS-source/src/rms-debugger.c \
+../rms_self/src/rms_main.c \
+../rms_source/src/rms_freertos.c \
+../rms_source/src/rms_dh052.c \
+../rms_source/src/rms_debugger.c \
 Core/Src/freertos.c \
 Core/Src/dma.c \
 Core/Src/usart.c \
@@ -138,7 +138,7 @@ C_INCLUDES =  \
 -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
 -IDrivers/CMSIS/Include \
--I../RMS-source/inc \
+-I../rms_self/inc \
 -IMiddlewares/Third_Party/FreeRTOS/Source/include \
 -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 \
 -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccpEoHJx.s 			page 1
+ARM GAS  /tmp/ccvL0w4D.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
   29:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** /* Allocate the memory for the heap. */
   30:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** static uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
   31:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 
-ARM GAS  /tmp/ccpEoHJx.s 			page 2
+ARM GAS  /tmp/ccvL0w4D.s 			page 2
 
 
   32:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** /* Define the linked list structure.  This is used to link free blocks in order
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
   86:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 		initialisation to setup the list of free blocks. */
   87:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 		if( pxEnd == NULL )
   88:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 		{
-ARM GAS  /tmp/ccpEoHJx.s 			page 3
+ARM GAS  /tmp/ccvL0w4D.s 			page 3
 
 
   89:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 			prvHeapInit();
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  143:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 					BlockLink_t structure at its start. */
  144:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 					pvReturn = ( void * ) ( ( ( uint8_t * ) pxPreviousBlock->pxNextFreeBlock ) + xHeapStructSize )
  145:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 
-ARM GAS  /tmp/ccpEoHJx.s 			page 4
+ARM GAS  /tmp/ccvL0w4D.s 			page 4
 
 
  146:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 					/* This block is being returned for use so must be taken out
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  200:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 		else
  201:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 		{
  202:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 			mtCOVERAGE_TEST_MARKER();
-ARM GAS  /tmp/ccpEoHJx.s 			page 5
+ARM GAS  /tmp/ccvL0w4D.s 			page 5
 
 
  203:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 		}
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  257:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 					xFreeBytesRemaining += pxLink->xBlockSize;
  258:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 					traceFREE( pv, pxLink->xBlockSize );
  259:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 					prvInsertBlockIntoFreeList( ( ( BlockLink_t * ) pxLink ) );
-ARM GAS  /tmp/ccpEoHJx.s 			page 6
+ARM GAS  /tmp/ccvL0w4D.s 			page 6
 
 
  260:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 				}
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  314:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 
  315:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** void *pvPortCallocMicroROS( size_t num, size_t xWantedSize )
  316:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** {
-ARM GAS  /tmp/ccpEoHJx.s 			page 7
+ARM GAS  /tmp/ccvL0w4D.s 			page 7
 
 
  317:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 	vTaskSuspendAll();
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
   41              	.LVL1:
  358:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 
  359:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 	if( ( uxAddress & portBYTE_ALIGNMENT_MASK ) != 0 )
-ARM GAS  /tmp/ccpEoHJx.s 			page 8
+ARM GAS  /tmp/ccvL0w4D.s 			page 8
 
 
   42              		.loc 1 359 2 is_stmt 1 view .LVU7
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
   78 0020 083B     		subs	r3, r3, #8
   79              	.LVL7:
  377:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 	uxAddress &= ~( ( size_t ) portBYTE_ALIGNMENT_MASK );
-ARM GAS  /tmp/ccpEoHJx.s 			page 9
+ARM GAS  /tmp/ccvL0w4D.s 			page 9
 
 
   80              		.loc 1 377 2 is_stmt 1 view .LVU25
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  118              	.LVL11:
  119              		.loc 1 393 21 view .LVU46
  120 0042 1A60     		str	r2, [r3]
-ARM GAS  /tmp/ccpEoHJx.s 			page 10
+ARM GAS  /tmp/ccvL0w4D.s 			page 10
 
 
  394:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** }
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  165              	.LVL15:
  166              		.loc 1 404 2 discriminator 1 view .LVU56
  167 0006 8342     		cmp	r3, r0
-ARM GAS  /tmp/ccpEoHJx.s 			page 11
+ARM GAS  /tmp/ccvL0w4D.s 			page 11
 
 
  168 0008 FBD3     		bcc	.L7
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  436:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 		}
  437:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 	}
  438:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 	else
-ARM GAS  /tmp/ccpEoHJx.s 			page 12
+ARM GAS  /tmp/ccvL0w4D.s 			page 12
 
 
  439:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 	{
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  427:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 		{
  224              		.loc 1 427 3 is_stmt 1 view .LVU81
  427:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 		{
-ARM GAS  /tmp/ccpEoHJx.s 			page 13
+ARM GAS  /tmp/ccvL0w4D.s 			page 13
 
 
  225              		.loc 1 427 35 is_stmt 0 view .LVU82
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  264              		.loc 1 435 4 is_stmt 1 view .LVU97
  435:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 		}
  265              		.loc 1 435 37 is_stmt 0 view .LVU98
-ARM GAS  /tmp/ccpEoHJx.s 			page 14
+ARM GAS  /tmp/ccvL0w4D.s 			page 14
 
 
  266 0054 0460     		str	r4, [r0]
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  314 000a 1B68     		ldr	r3, [r3]
   87:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 		{
  315              		.loc 1 87 5 view .LVU107
-ARM GAS  /tmp/ccpEoHJx.s 			page 15
+ARM GAS  /tmp/ccvL0w4D.s 			page 15
 
 
  316 000c A3B1     		cbz	r3, .L41
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  352 002a 2E4B     		ldr	r3, .L42+8
  353 002c 1B68     		ldr	r3, [r3]
  126:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 			{
-ARM GAS  /tmp/ccpEoHJx.s 			page 16
+ARM GAS  /tmp/ccvL0w4D.s 			page 16
 
 
  354              		.loc 1 126 28 discriminator 1 view .LVU126
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  394              		.loc 1 140 5 is_stmt 1 view .LVU140
  140:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 				{
  395              		.loc 1 140 17 is_stmt 0 view .LVU141
-ARM GAS  /tmp/ccpEoHJx.s 			page 17
+ARM GAS  /tmp/ccvL0w4D.s 			page 17
 
 
  396 004e 234B     		ldr	r3, .L42
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
    5:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  * Permission is hereby granted, free of charge, to any person obtaining a copy of
    6:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  * this software and associated documentation files (the "Software"), to deal in
    7:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  * the Software without restriction, including without limitation the rights to
-ARM GAS  /tmp/ccpEoHJx.s 			page 18
+ARM GAS  /tmp/ccvL0w4D.s 			page 18
 
 
    8:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h ****  * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
   62:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** #else
   63:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	typedef uint32_t TickType_t;
   64:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	#define portMAX_DELAY ( TickType_t ) 0xffffffffUL
-ARM GAS  /tmp/ccpEoHJx.s 			page 19
+ARM GAS  /tmp/ccvL0w4D.s 			page 19
 
 
   65:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  119:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** #endif
  120:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** /*-----------------------------------------------------------*/
  121:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
-ARM GAS  /tmp/ccpEoHJx.s 			page 20
+ARM GAS  /tmp/ccvL0w4D.s 			page 20
 
 
  122:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** /* Architecture specific optimisations. */
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  176:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 
  177:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	if( ulCurrentInterrupt == 0 )
  178:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 	{
-ARM GAS  /tmp/ccpEoHJx.s 			page 21
+ARM GAS  /tmp/ccvL0w4D.s 			page 21
 
 
  179:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h **** 		xReturn = pdFALSE;
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  460              		.loc 1 164 27 is_stmt 0 discriminator 2 view .LVU168
  461 0082 6560     		str	r5, [r4, #4]
  167:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 					}
-ARM GAS  /tmp/ccpEoHJx.s 			page 22
+ARM GAS  /tmp/ccvL0w4D.s 			page 22
 
 
  462              		.loc 1 167 7 is_stmt 1 discriminator 2 view .LVU169
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  501              		.loc 1 81 7 view .LVU184
  502 00ac 0026     		movs	r6, #0
  503 00ae 00E0     		b	.L25
-ARM GAS  /tmp/ccpEoHJx.s 			page 23
+ARM GAS  /tmp/ccvL0w4D.s 			page 23
 
 
  504              	.L36:
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
   81:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 
  546              		.loc 1 81 7 is_stmt 0 view .LVU199
  547 00ce 0026     		movs	r6, #0
-ARM GAS  /tmp/ccpEoHJx.s 			page 24
+ARM GAS  /tmp/ccvL0w4D.s 			page 24
 
 
  548 00d0 EFE7     		b	.L25
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  595              		.cfi_offset 3, -16
  596              		.cfi_offset 4, -12
  597              		.cfi_offset 5, -8
-ARM GAS  /tmp/ccpEoHJx.s 			page 25
+ARM GAS  /tmp/ccvL0w4D.s 			page 25
 
 
  598              		.cfi_offset 14, -4
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  640 0028 50F8081C 		ldr	r1, [r0, #-8]
  641 002c 41B1     		cbz	r1, .L48
  244:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 
-ARM GAS  /tmp/ccpEoHJx.s 			page 26
+ARM GAS  /tmp/ccvL0w4D.s 			page 26
 
 
  642              		.loc 1 244 3 view .LVU223
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  682              		.loc 1 257 26 view .LVU239
  683 0050 064A     		ldr	r2, .L54+4
  684 0052 1368     		ldr	r3, [r2]
-ARM GAS  /tmp/ccpEoHJx.s 			page 27
+ARM GAS  /tmp/ccvL0w4D.s 			page 27
 
 
  685 0054 0B44     		add	r3, r3, r1
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  732              		.loc 1 280 2 view .LVU248
  281:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 
  733              		.loc 1 281 2 view .LVU249
-ARM GAS  /tmp/ccpEoHJx.s 			page 28
+ARM GAS  /tmp/ccvL0w4D.s 			page 28
 
 
  283:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 	pxLink = ( void * ) puc;
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  294:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 
  780              		.loc 1 294 2 is_stmt 1 view .LVU260
  781 0006 FFF7FEFF 		bl	vTaskSuspendAll
-ARM GAS  /tmp/ccpEoHJx.s 			page 29
+ARM GAS  /tmp/ccvL0w4D.s 			page 29
 
 
  782              	.LVL59:
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  822              	.LVL66:
  823              	.L60:
  306:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c **** 	}
-ARM GAS  /tmp/ccpEoHJx.s 			page 30
+ARM GAS  /tmp/ccvL0w4D.s 			page 30
 
 
  824              		.loc 1 306 3 is_stmt 0 view .LVU275
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  869              		.loc 1 320 2 is_stmt 1 view .LVU286
  320:micro_ros_stm32cubemx_utils/extra_sources/custom_memory_manager.c ****   	char *in_dest = (char*)mem;
  870              		.loc 1 320 15 is_stmt 0 view .LVU287
-ARM GAS  /tmp/ccpEoHJx.s 			page 31
+ARM GAS  /tmp/ccvL0w4D.s 			page 31
 
 
  871 000e 2046     		mov	r0, r4
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  910              	.LFE8:
  912              		.section	.text.xPortGetFreeHeapSizeMicroROS,"ax",%progbits
  913              		.align	1
-ARM GAS  /tmp/ccpEoHJx.s 			page 32
+ARM GAS  /tmp/ccvL0w4D.s 			page 32
 
 
  914              		.global	xPortGetFreeHeapSizeMicroROS
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  966              		.global	vPortInitialiseBlocksMicroROS
  967              		.syntax unified
  968              		.thumb
-ARM GAS  /tmp/ccpEoHJx.s 			page 33
+ARM GAS  /tmp/ccvL0w4D.s 			page 33
 
 
  969              		.thumb_func
@@ -1971,55 +1971,55 @@ ARM GAS  /tmp/ccpEoHJx.s 			page 1
  1023      00000000 
  1024              		.text
  1025              	.Letext0:
- 1026              		.file 3 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
- 1027              		.file 4 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_types.h"
- 1028              		.file 5 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ 1026              		.file 3 "/opt/arm-gcc/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
+ 1027              		.file 4 "/opt/arm-gcc/arm-none-eabi/include/machine/_default_types.h"
+ 1028              		.file 5 "/opt/arm-gcc/arm-none-eabi/include/sys/_stdint.h"
  1029              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
  1030              		.file 7 "<built-in>"
-ARM GAS  /tmp/ccpEoHJx.s 			page 34
+ARM GAS  /tmp/ccvL0w4D.s 			page 34
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 custom_memory_manager.c
-     /tmp/ccpEoHJx.s:20     .text.prvHeapInit:0000000000000000 $t
-     /tmp/ccpEoHJx.s:25     .text.prvHeapInit:0000000000000000 prvHeapInit
-     /tmp/ccpEoHJx.s:131    .text.prvHeapInit:000000000000004c $d
-     /tmp/ccpEoHJx.s:994    .bss.ucHeap:0000000000000000 ucHeap
-     /tmp/ccpEoHJx.s:141    .text.prvInsertBlockIntoFreeList:0000000000000000 $t
-     /tmp/ccpEoHJx.s:146    .text.prvInsertBlockIntoFreeList:0000000000000000 prvInsertBlockIntoFreeList
-     /tmp/ccpEoHJx.s:277    .text.prvInsertBlockIntoFreeList:000000000000005c $d
-     /tmp/ccpEoHJx.s:283    .text.pvPortMallocMicroROS:0000000000000000 $t
-     /tmp/ccpEoHJx.s:289    .text.pvPortMallocMicroROS:0000000000000000 pvPortMallocMicroROS
-     /tmp/ccpEoHJx.s:564    .text.pvPortMallocMicroROS:00000000000000dc $d
-     /tmp/ccpEoHJx.s:573    .text.vPortFreeMicroROS:0000000000000000 $t
-     /tmp/ccpEoHJx.s:579    .text.vPortFreeMicroROS:0000000000000000 vPortFreeMicroROS
-     /tmp/ccpEoHJx.s:712    .text.vPortFreeMicroROS:0000000000000068 $d
-     /tmp/ccpEoHJx.s:718    .text.getBlockSize:0000000000000000 $t
-     /tmp/ccpEoHJx.s:724    .text.getBlockSize:0000000000000000 getBlockSize
-     /tmp/ccpEoHJx.s:752    .text.getBlockSize:0000000000000010 $d
-     /tmp/ccpEoHJx.s:757    .text.pvPortReallocMicroROS:0000000000000000 $t
-     /tmp/ccpEoHJx.s:763    .text.pvPortReallocMicroROS:0000000000000000 pvPortReallocMicroROS
-     /tmp/ccpEoHJx.s:839    .text.pvPortCallocMicroROS:0000000000000000 $t
-     /tmp/ccpEoHJx.s:845    .text.pvPortCallocMicroROS:0000000000000000 pvPortCallocMicroROS
-     /tmp/ccpEoHJx.s:913    .text.xPortGetFreeHeapSizeMicroROS:0000000000000000 $t
-     /tmp/ccpEoHJx.s:919    .text.xPortGetFreeHeapSizeMicroROS:0000000000000000 xPortGetFreeHeapSizeMicroROS
-     /tmp/ccpEoHJx.s:934    .text.xPortGetFreeHeapSizeMicroROS:0000000000000008 $d
-     /tmp/ccpEoHJx.s:939    .text.xPortGetMinimumEverFreeHeapSizeMicroROS:0000000000000000 $t
-     /tmp/ccpEoHJx.s:945    .text.xPortGetMinimumEverFreeHeapSizeMicroROS:0000000000000000 xPortGetMinimumEverFreeHeapSizeMicroROS
-     /tmp/ccpEoHJx.s:960    .text.xPortGetMinimumEverFreeHeapSizeMicroROS:0000000000000008 $d
-     /tmp/ccpEoHJx.s:965    .text.vPortInitialiseBlocksMicroROS:0000000000000000 $t
-     /tmp/ccpEoHJx.s:971    .text.vPortInitialiseBlocksMicroROS:0000000000000000 vPortInitialiseBlocksMicroROS
-     /tmp/ccpEoHJx.s:984    .bss.pxEnd:0000000000000000 $d
-     /tmp/ccpEoHJx.s:988    .bss.pxEnd:0000000000000000 pxEnd
-     /tmp/ccpEoHJx.s:991    .bss.ucHeap:0000000000000000 $d
-     /tmp/ccpEoHJx.s:997    .bss.xBlockAllocatedBit:0000000000000000 $d
-     /tmp/ccpEoHJx.s:1001   .bss.xBlockAllocatedBit:0000000000000000 xBlockAllocatedBit
-     /tmp/ccpEoHJx.s:1004   .bss.xFreeBytesRemaining:0000000000000000 $d
-     /tmp/ccpEoHJx.s:1008   .bss.xFreeBytesRemaining:0000000000000000 xFreeBytesRemaining
-     /tmp/ccpEoHJx.s:1011   .bss.xMinimumEverFreeBytesRemaining:0000000000000000 $d
-     /tmp/ccpEoHJx.s:1015   .bss.xMinimumEverFreeBytesRemaining:0000000000000000 xMinimumEverFreeBytesRemaining
-     /tmp/ccpEoHJx.s:1018   .bss.xStart:0000000000000000 $d
-     /tmp/ccpEoHJx.s:1022   .bss.xStart:0000000000000000 xStart
+     /tmp/ccvL0w4D.s:20     .text.prvHeapInit:0000000000000000 $t
+     /tmp/ccvL0w4D.s:25     .text.prvHeapInit:0000000000000000 prvHeapInit
+     /tmp/ccvL0w4D.s:131    .text.prvHeapInit:000000000000004c $d
+     /tmp/ccvL0w4D.s:994    .bss.ucHeap:0000000000000000 ucHeap
+     /tmp/ccvL0w4D.s:141    .text.prvInsertBlockIntoFreeList:0000000000000000 $t
+     /tmp/ccvL0w4D.s:146    .text.prvInsertBlockIntoFreeList:0000000000000000 prvInsertBlockIntoFreeList
+     /tmp/ccvL0w4D.s:277    .text.prvInsertBlockIntoFreeList:000000000000005c $d
+     /tmp/ccvL0w4D.s:283    .text.pvPortMallocMicroROS:0000000000000000 $t
+     /tmp/ccvL0w4D.s:289    .text.pvPortMallocMicroROS:0000000000000000 pvPortMallocMicroROS
+     /tmp/ccvL0w4D.s:564    .text.pvPortMallocMicroROS:00000000000000dc $d
+     /tmp/ccvL0w4D.s:573    .text.vPortFreeMicroROS:0000000000000000 $t
+     /tmp/ccvL0w4D.s:579    .text.vPortFreeMicroROS:0000000000000000 vPortFreeMicroROS
+     /tmp/ccvL0w4D.s:712    .text.vPortFreeMicroROS:0000000000000068 $d
+     /tmp/ccvL0w4D.s:718    .text.getBlockSize:0000000000000000 $t
+     /tmp/ccvL0w4D.s:724    .text.getBlockSize:0000000000000000 getBlockSize
+     /tmp/ccvL0w4D.s:752    .text.getBlockSize:0000000000000010 $d
+     /tmp/ccvL0w4D.s:757    .text.pvPortReallocMicroROS:0000000000000000 $t
+     /tmp/ccvL0w4D.s:763    .text.pvPortReallocMicroROS:0000000000000000 pvPortReallocMicroROS
+     /tmp/ccvL0w4D.s:839    .text.pvPortCallocMicroROS:0000000000000000 $t
+     /tmp/ccvL0w4D.s:845    .text.pvPortCallocMicroROS:0000000000000000 pvPortCallocMicroROS
+     /tmp/ccvL0w4D.s:913    .text.xPortGetFreeHeapSizeMicroROS:0000000000000000 $t
+     /tmp/ccvL0w4D.s:919    .text.xPortGetFreeHeapSizeMicroROS:0000000000000000 xPortGetFreeHeapSizeMicroROS
+     /tmp/ccvL0w4D.s:934    .text.xPortGetFreeHeapSizeMicroROS:0000000000000008 $d
+     /tmp/ccvL0w4D.s:939    .text.xPortGetMinimumEverFreeHeapSizeMicroROS:0000000000000000 $t
+     /tmp/ccvL0w4D.s:945    .text.xPortGetMinimumEverFreeHeapSizeMicroROS:0000000000000000 xPortGetMinimumEverFreeHeapSizeMicroROS
+     /tmp/ccvL0w4D.s:960    .text.xPortGetMinimumEverFreeHeapSizeMicroROS:0000000000000008 $d
+     /tmp/ccvL0w4D.s:965    .text.vPortInitialiseBlocksMicroROS:0000000000000000 $t
+     /tmp/ccvL0w4D.s:971    .text.vPortInitialiseBlocksMicroROS:0000000000000000 vPortInitialiseBlocksMicroROS
+     /tmp/ccvL0w4D.s:984    .bss.pxEnd:0000000000000000 $d
+     /tmp/ccvL0w4D.s:988    .bss.pxEnd:0000000000000000 pxEnd
+     /tmp/ccvL0w4D.s:991    .bss.ucHeap:0000000000000000 $d
+     /tmp/ccvL0w4D.s:997    .bss.xBlockAllocatedBit:0000000000000000 $d
+     /tmp/ccvL0w4D.s:1001   .bss.xBlockAllocatedBit:0000000000000000 xBlockAllocatedBit
+     /tmp/ccvL0w4D.s:1004   .bss.xFreeBytesRemaining:0000000000000000 $d
+     /tmp/ccvL0w4D.s:1008   .bss.xFreeBytesRemaining:0000000000000000 xFreeBytesRemaining
+     /tmp/ccvL0w4D.s:1011   .bss.xMinimumEverFreeBytesRemaining:0000000000000000 $d
+     /tmp/ccvL0w4D.s:1015   .bss.xMinimumEverFreeBytesRemaining:0000000000000000 xMinimumEverFreeBytesRemaining
+     /tmp/ccvL0w4D.s:1018   .bss.xStart:0000000000000000 $d
+     /tmp/ccvL0w4D.s:1022   .bss.xStart:0000000000000000 xStart
 
 UNDEFINED SYMBOLS
 vTaskSuspendAll

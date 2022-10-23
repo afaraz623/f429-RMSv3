@@ -1,4 +1,4 @@
-build/rms_freertos.o: ../RMS-source/src/rms_freertos.c \
+build/rms_freertos.o: ../rms_self/src/rms_freertos.c \
  Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  Core/Inc/FreeRTOSConfig.h \
  Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h \
@@ -38,7 +38,7 @@ build/rms_freertos.o: ../RMS-source/src/rms_freertos.c \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h Core/Inc/usart.h \
- Core/Inc/main.h Core/Inc/tim.h ../RMS-source/inc/dh052_internal.h \
+ Core/Inc/main.h Core/Inc/tim.h ../rms_self/inc/dh052_internal.h \
  Core/Inc/gpio.h \
  micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/rcl.h \
  micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/init.h \
@@ -183,7 +183,7 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 Core/Inc/usart.h:
 Core/Inc/main.h:
 Core/Inc/tim.h:
-../RMS-source/inc/dh052_internal.h:
+../rms_self/inc/dh052_internal.h:
 Core/Inc/gpio.h:
 micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/rcl.h:
 micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include/rcl/init.h:

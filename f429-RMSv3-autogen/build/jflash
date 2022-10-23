@@ -1,7 +1,0 @@
-device STM32F429ZI
-si 1
-speed 4000
-loadbin build/f429-RMSv3-autogen.bin 0x8000000
-r
-g
-qc

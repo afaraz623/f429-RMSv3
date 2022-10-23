@@ -1,25 +1,26 @@
 {
     "configurations": [
         {
-            "name": "STM32",
+            "name": "STM32 F4",
             "includePath": [
-                "${workspaceFolder}/f429-RMSv3-autogen/Core/Inc",
-                "${workspaceFolder}/f429-RMSv3-autogen/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
-                "${workspaceFolder}/f429-RMSv3-autogen/Drivers/CMSIS/Include",
-                "${workspaceFolder}/f429-RMSv3-autogen/Drivers/STM32F4xx_HAL_Driver/Inc",
-                "${workspaceFolder}/f429-RMSv3-autogen/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
-                "${workspaceFolder}/f429-RMSv3-autogen/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
-                "${workspaceFolder}/f429-RMSv3-autogen/Middlewares/Third_Party/FreeRTOS/Source/include",
-                "${workspaceFolder}/f429-RMSv3-autogen/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F",
-                "${workspaceFolder}/f429-RMSv3-autogen/micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include",
-                "${workspaceFolder}/RMS-source/inc"
+                "${workspaceFolder}/**"
             ],
             "defines": [
-                "STM32F429xx",
-                "USE_HAL_DRIVER"
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "USE_HAL_DRIVER",
+                "STM32F429xx"
             ],
-            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
-            "configurationProvider": "ms-vscode.makefile-tools"
+            "intelliSenseMode": "gcc-arm",
+            "compilerPath": "/usr/local/bin/arm-none-eabi-gcc",
+            "compilerArgs": [
+                "-mcpu=cortex-m4",
+                "-mfpu=fpv4-sp-d16",
+                "-mfloat-abi=hard",
+                "-mthumb"
+            ],
+            "cStandard": "c99"
         }
     ],
     "version": 4
