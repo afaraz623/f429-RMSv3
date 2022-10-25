@@ -3,7 +3,16 @@
         {
             "name": "STM32 F4",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/f429-RMSv3-autogen/Core/Inc",
+                "${workspaceFolder}/f429-RMSv3-autogen/Drivers/STM32F4xx_HAL_Driver/Inc",
+                "${workspaceFolder}/f429-RMSv3-autogen/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+                "${workspaceFolder}/f429-RMSv3-autogen/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                "${workspaceFolder}/f429-RMSv3-autogen/Drivers/CMSIS/Include",
+                "${workspaceFolder}/rms_self/inc",
+                "${workspaceFolder}/f429-RMSv3-autogen/Middlewares/Third_Party/FreeRTOS/Source/include",
+                "${workspaceFolder}/f429-RMSv3-autogen/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
+                "${workspaceFolder}/f429-RMSv3-autogen/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F",
+                "${workspaceFolder}/f429-RMSv3-autogen/micro_ros_stm32cubemx_utils/microros_static_library/libmicroros/microros_include"
             ],
             "defines": [
                 "_DEBUG",

@@ -7,6 +7,8 @@
         "cmsis_os.h": "c",
         "cmsis_os2.h": "c",
         "error_handling.h": "c",
-        "queue.h": "c"
+        "queue.h": "c",
+        "portable.h": "c",
+        "portmacro.h": "c"
     }
 }

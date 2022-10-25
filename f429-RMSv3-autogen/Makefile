@@ -57,10 +57,6 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
 Core/Src/system_stm32f4xx.c \
-../rms_self/src/rms_main.c \
-../rms_source/src/rms_freertos.c \
-../rms_source/src/rms_dh052.c \
-../rms_source/src/rms_debugger.c \
 Core/Src/freertos.c \
 Core/Src/dma.c \
 Core/Src/usart.c \
@@ -81,7 +77,6 @@ Core/Src/tim.c
 # ASM sources
 ASM_SOURCES =  \
 startup_stm32f429xx.s
-
 
 #######################################
 # binaries
@@ -138,7 +133,6 @@ C_INCLUDES =  \
 -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
 -IDrivers/CMSIS/Include \
--I../rms_self/inc \
 -IMiddlewares/Third_Party/FreeRTOS/Source/include \
 -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 \
 -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
@@ -185,6 +179,19 @@ C_SOURCES += micro_ros_stm32cubemx_utils/extra_sources/microros_time.c
 
 # Set here the custom transport implementation
 C_SOURCES += micro_ros_stm32cubemx_utils/extra_sources/microros_transports/dma_transport.c
+
+#######################################
+# Self Written addons
+#######################################
+
+# rms_self source
+C_SOURCES += ../rms_self/src/rms_main.c 
+C_SOURCES += ../rms_self/src/rms_freertos.c 
+C_SOURCES += ../rms_self/src/rms_dh052.c 
+C_SOURCES += ../rms_self/src/rms_debugger.c 
+
+# rms_self includes
+C_INCLUDES += -I../rms_self/inc 
 
 print_cflags:
 	@echo $(CFLAGS)
