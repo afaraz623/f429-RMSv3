@@ -20,7 +20,8 @@
                 "-mfloat-abi=hard",
                 "-mthumb"
             ],
-            "cStandard": "c99"
+            "cStandard": "c99",
+            "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
     "version": 4

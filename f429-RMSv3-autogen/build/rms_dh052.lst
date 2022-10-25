@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cczxgOAQ.s 			page 1
+ARM GAS  /tmp/ccoWyqdl.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
   33              		@ frame_needed = 0, uses_anonymous_args = 0
   34              		@ link register save eliminated.
   24:../rms_self/src/rms_dh052.c ****     handle->pwm_tim_h = pwm_tim_h;
-ARM GAS  /tmp/cczxgOAQ.s 			page 2
+ARM GAS  /tmp/ccoWyqdl.s 			page 2
 
 
   35              		.loc 1 24 5 view .LVU1
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
   33:../rms_self/src/rms_dh052.c **** 
   34:../rms_self/src/rms_dh052.c **** void servo_enable(Motor const *handle)
   35:../rms_self/src/rms_dh052.c **** {   
-ARM GAS  /tmp/cczxgOAQ.s 			page 3
+ARM GAS  /tmp/ccoWyqdl.s 			page 3
 
 
   83              		.loc 1 35 1 is_stmt 1 view -0
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  133              		.cfi_offset 14, -4
  134 0002 0446     		mov	r4, r0
   42:../rms_self/src/rms_dh052.c ****     HAL_GPIO_WritePin(handle->port, handle->l_en, 0);
-ARM GAS  /tmp/cczxgOAQ.s 			page 4
+ARM GAS  /tmp/ccoWyqdl.s 			page 4
 
 
  135              		.loc 1 42 5 is_stmt 1 view .LVU29
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  184 0012 0022     		movs	r2, #0
  185 0014 5A63     		str	r2, [r3, #52]
  186 0016 7047     		bx	lr
-ARM GAS  /tmp/cczxgOAQ.s 			page 5
+ARM GAS  /tmp/ccoWyqdl.s 			page 5
 
 
  187              	.L7:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  233              		.loc 1 49 5 discriminator 6 view .LVU49
  234 0054 0368     		ldr	r3, [r0]
  235 0056 1B68     		ldr	r3, [r3]
-ARM GAS  /tmp/cczxgOAQ.s 			page 6
+ARM GAS  /tmp/ccoWyqdl.s 			page 6
 
 
  236 0058 0022     		movs	r2, #0
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  284 0024 1964     		str	r1, [r3, #64]
  285 0026 F0E7     		b	.L21
  286              	.L28:
-ARM GAS  /tmp/cczxgOAQ.s 			page 7
+ARM GAS  /tmp/ccoWyqdl.s 			page 7
 
 
   54:../rms_self/src/rms_dh052.c ****     __HAL_TIM_SET_COMPARE(handle->pwm_tim_h, handle->rpwm_ch, pwm);
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  338              	.LFB135:
   57:../rms_self/src/rms_dh052.c **** 
   58:../rms_self/src/rms_dh052.c **** void servo_stop(Motor const *handle)
-ARM GAS  /tmp/cczxgOAQ.s 			page 8
+ARM GAS  /tmp/ccoWyqdl.s 			page 8
 
 
   59:../rms_self/src/rms_dh052.c **** {
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  385 0038 1B68     		ldr	r3, [r3]
  386 003a 0022     		movs	r2, #0
  387 003c DA63     		str	r2, [r3, #60]
-ARM GAS  /tmp/cczxgOAQ.s 			page 9
+ARM GAS  /tmp/ccoWyqdl.s 			page 9
 
 
  388 003e E5E7     		b	.L34
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  437 0000 0369     		ldr	r3, [r0, #16]
  438              		.loc 1 66 56 view .LVU85
  439 0002 1B68     		ldr	r3, [r3]
-ARM GAS  /tmp/cczxgOAQ.s 			page 10
+ARM GAS  /tmp/ccoWyqdl.s 			page 10
 
 
  440              		.loc 1 66 66 view .LVU86
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  486 003a 034B     		ldr	r3, .L49
  487              	.LVL21:
  488              		.loc 1 74 12 view .LVU104
-ARM GAS  /tmp/cczxgOAQ.s 			page 11
+ARM GAS  /tmp/ccoWyqdl.s 			page 11
 
 
  489 003c 1860     		str	r0, [r3]
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  535              	.LFE137:
  537              		.section	.text.HAL_TIM_IC_CaptureCallback,"ax",%progbits
  538              		.align	1
-ARM GAS  /tmp/cczxgOAQ.s 			page 12
+ARM GAS  /tmp/ccoWyqdl.s 			page 12
 
 
  539              		.global	HAL_TIM_IC_CaptureCallback
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  105:../rms_self/src/rms_dh052.c ****             {
  106:../rms_self/src/rms_dh052.c ****                 g_dif = (0xffff - g_ts1) + g_ts2;
  107:../rms_self/src/rms_dh052.c ****             }
-ARM GAS  /tmp/cczxgOAQ.s 			page 13
+ARM GAS  /tmp/ccoWyqdl.s 			page 13
 
 
  108:../rms_self/src/rms_dh052.c **** 
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
   97:../rms_self/src/rms_dh052.c ****             HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, 0);
  608              		.loc 1 97 13 is_stmt 1 view .LVU130
  609 003c 0022     		movs	r2, #0
-ARM GAS  /tmp/cczxgOAQ.s 			page 14
+ARM GAS  /tmp/ccoWyqdl.s 			page 14
 
 
  610 003e 4FF40051 		mov	r1, #8192
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  652 0078 1B88     		ldrh	r3, [r3]
  653 007a 4FF47A72 		mov	r2, #1000
  654 007e 02FB03F3 		mul	r3, r2, r3
-ARM GAS  /tmp/cczxgOAQ.s 			page 15
+ARM GAS  /tmp/ccoWyqdl.s 			page 15
 
 
  655 0082 07EE903A 		vmov	s15, r3	@ int
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  698 00ce 9B1A     		subs	r3, r3, r2
  699 00d0 013B     		subs	r3, r3, #1
  106:../rms_self/src/rms_dh052.c ****                 g_dif = (0xffff - g_ts1) + g_ts2;
-ARM GAS  /tmp/cczxgOAQ.s 			page 16
+ARM GAS  /tmp/ccoWyqdl.s 			page 16
 
 
  700              		.loc 1 106 23 view .LVU155
@@ -958,48 +958,48 @@ ARM GAS  /tmp/cczxgOAQ.s 			page 1
  767              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
  768              		.file 8 "../rms_self/inc/dh052_internal.h"
  769              		.file 9 "Core/Inc/tim.h"
-ARM GAS  /tmp/cczxgOAQ.s 			page 17
+ARM GAS  /tmp/ccoWyqdl.s 			page 17
 
 
  770              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
-ARM GAS  /tmp/cczxgOAQ.s 			page 18
+ARM GAS  /tmp/ccoWyqdl.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 rms_dh052.c
-     /tmp/cczxgOAQ.s:20     .text.servo_Init:0000000000000000 $t
-     /tmp/cczxgOAQ.s:26     .text.servo_Init:0000000000000000 servo_Init
-     /tmp/cczxgOAQ.s:74     .text.servo_enable:0000000000000000 $t
-     /tmp/cczxgOAQ.s:80     .text.servo_enable:0000000000000000 servo_enable
-     /tmp/cczxgOAQ.s:115    .text.servo_disable:0000000000000000 $t
-     /tmp/cczxgOAQ.s:121    .text.servo_disable:0000000000000000 servo_disable
-     /tmp/cczxgOAQ.s:156    .text.servo_turn_left:0000000000000000 $t
-     /tmp/cczxgOAQ.s:162    .text.servo_turn_left:0000000000000000 servo_turn_left
-     /tmp/cczxgOAQ.s:243    .text.servo_turn_right:0000000000000000 $t
-     /tmp/cczxgOAQ.s:249    .text.servo_turn_right:0000000000000000 servo_turn_right
-     /tmp/cczxgOAQ.s:330    .text.servo_stop:0000000000000000 $t
-     /tmp/cczxgOAQ.s:336    .text.servo_stop:0000000000000000 servo_stop
-     /tmp/cczxgOAQ.s:421    .text.servo_encoder_count:0000000000000000 $t
-     /tmp/cczxgOAQ.s:427    .text.servo_encoder_count:0000000000000000 servo_encoder_count
-     /tmp/cczxgOAQ.s:504    .text.servo_encoder_count:0000000000000048 $d
-     /tmp/cczxgOAQ.s:509    .text.servo_rpm:0000000000000000 $t
-     /tmp/cczxgOAQ.s:515    .text.servo_rpm:0000000000000000 servo_rpm
-     /tmp/cczxgOAQ.s:533    .text.servo_rpm:0000000000000008 $d
-     /tmp/cczxgOAQ.s:538    .text.HAL_TIM_IC_CaptureCallback:0000000000000000 $t
-     /tmp/cczxgOAQ.s:544    .text.HAL_TIM_IC_CaptureCallback:0000000000000000 HAL_TIM_IC_CaptureCallback
-     /tmp/cczxgOAQ.s:707    .text.HAL_TIM_IC_CaptureCallback:00000000000000d8 $d
-     /tmp/cczxgOAQ.s:720    .bss.g_dif:0000000000000000 $d
-     /tmp/cczxgOAQ.s:724    .bss.g_dif:0000000000000000 g_dif
-     /tmp/cczxgOAQ.s:730    .bss.g_ic_state:0000000000000000 g_ic_state
-     /tmp/cczxgOAQ.s:731    .bss.g_ic_state:0000000000000000 $d
-     /tmp/cczxgOAQ.s:733    .bss.g_prev:0000000000000000 $d
-     /tmp/cczxgOAQ.s:737    .bss.g_prev:0000000000000000 g_prev
-     /tmp/cczxgOAQ.s:740    .bss.g_rpm:0000000000000000 $d
-     /tmp/cczxgOAQ.s:744    .bss.g_rpm:0000000000000000 g_rpm
-     /tmp/cczxgOAQ.s:747    .bss.g_ts1:0000000000000000 $d
-     /tmp/cczxgOAQ.s:751    .bss.g_ts1:0000000000000000 g_ts1
-     /tmp/cczxgOAQ.s:754    .bss.g_ts2:0000000000000000 $d
-     /tmp/cczxgOAQ.s:758    .bss.g_ts2:0000000000000000 g_ts2
+     /tmp/ccoWyqdl.s:20     .text.servo_Init:0000000000000000 $t
+     /tmp/ccoWyqdl.s:26     .text.servo_Init:0000000000000000 servo_Init
+     /tmp/ccoWyqdl.s:74     .text.servo_enable:0000000000000000 $t
+     /tmp/ccoWyqdl.s:80     .text.servo_enable:0000000000000000 servo_enable
+     /tmp/ccoWyqdl.s:115    .text.servo_disable:0000000000000000 $t
+     /tmp/ccoWyqdl.s:121    .text.servo_disable:0000000000000000 servo_disable
+     /tmp/ccoWyqdl.s:156    .text.servo_turn_left:0000000000000000 $t
+     /tmp/ccoWyqdl.s:162    .text.servo_turn_left:0000000000000000 servo_turn_left
+     /tmp/ccoWyqdl.s:243    .text.servo_turn_right:0000000000000000 $t
+     /tmp/ccoWyqdl.s:249    .text.servo_turn_right:0000000000000000 servo_turn_right
+     /tmp/ccoWyqdl.s:330    .text.servo_stop:0000000000000000 $t
+     /tmp/ccoWyqdl.s:336    .text.servo_stop:0000000000000000 servo_stop
+     /tmp/ccoWyqdl.s:421    .text.servo_encoder_count:0000000000000000 $t
+     /tmp/ccoWyqdl.s:427    .text.servo_encoder_count:0000000000000000 servo_encoder_count
+     /tmp/ccoWyqdl.s:504    .text.servo_encoder_count:0000000000000048 $d
+     /tmp/ccoWyqdl.s:509    .text.servo_rpm:0000000000000000 $t
+     /tmp/ccoWyqdl.s:515    .text.servo_rpm:0000000000000000 servo_rpm
+     /tmp/ccoWyqdl.s:533    .text.servo_rpm:0000000000000008 $d
+     /tmp/ccoWyqdl.s:538    .text.HAL_TIM_IC_CaptureCallback:0000000000000000 $t
+     /tmp/ccoWyqdl.s:544    .text.HAL_TIM_IC_CaptureCallback:0000000000000000 HAL_TIM_IC_CaptureCallback
+     /tmp/ccoWyqdl.s:707    .text.HAL_TIM_IC_CaptureCallback:00000000000000d8 $d
+     /tmp/ccoWyqdl.s:720    .bss.g_dif:0000000000000000 $d
+     /tmp/ccoWyqdl.s:724    .bss.g_dif:0000000000000000 g_dif
+     /tmp/ccoWyqdl.s:730    .bss.g_ic_state:0000000000000000 g_ic_state
+     /tmp/ccoWyqdl.s:731    .bss.g_ic_state:0000000000000000 $d
+     /tmp/ccoWyqdl.s:733    .bss.g_prev:0000000000000000 $d
+     /tmp/ccoWyqdl.s:737    .bss.g_prev:0000000000000000 g_prev
+     /tmp/ccoWyqdl.s:740    .bss.g_rpm:0000000000000000 $d
+     /tmp/ccoWyqdl.s:744    .bss.g_rpm:0000000000000000 g_rpm
+     /tmp/ccoWyqdl.s:747    .bss.g_ts1:0000000000000000 $d
+     /tmp/ccoWyqdl.s:751    .bss.g_ts1:0000000000000000 g_ts1
+     /tmp/ccoWyqdl.s:754    .bss.g_ts2:0000000000000000 $d
+     /tmp/ccoWyqdl.s:758    .bss.g_ts2:0000000000000000 g_ts2
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin
